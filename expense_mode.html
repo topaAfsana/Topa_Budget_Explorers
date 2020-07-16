@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<title>BUDGET EXPLORER-EXPENSE CHECK-DBMICROSERVICE</title>
+	<link rel="styleSheet" href="db_microservice.js">
+</head>
+<body>
+
+<div class="header">
+  <h1 id="tittleheader">EXPENSE CHECK</h1>
+  <form class="form-date">
+  <label for="date">DATE:</label>
+  <input type="text" id="date" placeholder="Enter date" name="date">
+   <ul>
+  <li><a id="home" href="../index.html">HOME</a></li>
+</ul>
+</div>
+
+
+
+<!-- <p>DOWN:INPUT COST AND INCOME</p> -->
+
+  
+
+<div id="budget_explorer"> 
+
+
+	<div id ="costCalcDiv">
+<h3>ENTER EXPENSE</h3>
+<form>
+  <strong>TABLE NAME</strong> <input type="text" placeholder="Ex: yourname_month "id="myTableId"></input>
+  <br></br>
+  <strong> DATE</strong> <input type="text" placeholder="Enter Expense date"id="dateId"></input><br></br>
+	<strong> TITLE</strong> <input type="text" placeholder="Enter Expense title"id="titleId"></input><br></br>
+	<strong>AMOUNT</strong> <input type="text" placeholder="Enter Expense amount"id="amountId"></input><br></br>
+	<br></br>
+  <button type="button" onclick="getCurrentDate()"><strong>GET CURRENT DATE</strong></button>
+  <button type="button" onclick="createTable()"><strong>ADD NEW EXPENSE TABLE</strong></button>
+  <button type="button" onclick="findTable()"><strong>SEARCH EXISTING EXPENSE TABLE</strong></button>
+	<button type="button" onclick="addAndLoad()"><strong>ADD EXPENSE ITEM</strong></button>
+  <button type="button" onclick="getCurrentDate()"><strong>CLEAR</strong></button>
+</form></div>
+
+
+
+
+</div>
+
+
+<div id="expense_block">
+
+
+ 
+</div>
+
+
+
+<div id="footer"><p id="footerText">copy_right@AfsanaKhanTopaCreation_2020</p></div>
+
+
+</body>
+
+<script src="db_microservice.js"></script>
+
+
+</html>

@@ -37,8 +37,22 @@ public class DBController {
     //4. url sample: http://localhost:8080/show_records?tableName=yourTable
     @RequestMapping("/show_records")
     public List<ResultHolder> showRecords(@RequestParam() String tableName) throws ClassNotFoundException, SQLException {
-        return dbService.showRecordsService(tableName);
+        return dbService.showRecordsService(tableName); }
 
-    }
+
+    //5. url sample: http://localhost:8080/update_on?tableName=yourTable&newdate=yourDate
+    @RequestMapping("/update_on")
+    public String updateOn(@RequestParam() String tableName,String  newdate) {
+        return dbService.updateOnService(tableName,newdate); }
+
+    //6. url sample: http://localhost:8080/get_updated_date?tableName=yourTable
+    @RequestMapping("/get_updated_date")
+    public String getUpdatedOnDate(@RequestParam() String tableName) throws ClassNotFoundException, SQLException {
+        return dbService.getUpdatedOnDateService(tableName); }
+
+
+
+
+
 
 }

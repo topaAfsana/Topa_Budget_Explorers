@@ -4,8 +4,6 @@ import com.topa.dbmicroservice.model.ResultHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.*;
@@ -56,6 +54,7 @@ public class DBService {
                 "  `amount` INT NOT NULL,\n" +
                 "  PRIMARY KEY (`id`),\n" +
                 "  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);\n");
+        addTableToUpdatedOnService(tableName);
         return "TABLE IS SUCCESSFULLY CREATED";
     }
 
@@ -90,7 +89,7 @@ public class DBService {
         jdbc.execute("INSERT INTO `TOPADB`.`" + tableName + "`(`id`,`date`,`title`,`amount`)VALUES(id,\"" + date + "\",\"" + title + "\"," + amount + ");");
         return "ROW/RECORD INSERTED IN THE TABLE"; }
 
-    //4. SERVICE: SHOW ALL RECORD IN A TABLE
+    //4. SERVICE: SHOW ALL RECORD OF A TABLE
      public List<ResultHolder> showRecordsService(String tableName) throws ClassNotFoundException, SQLException {
 
          Connection con=createDBConnection();
@@ -112,6 +111,34 @@ public class DBService {
             con.close();
             return  list;
         }
+
+     //5. SERVICE: CREATE ROW WITH NEW DATA TABLE IN UPDATEDON TABLE-NESTED IN CREATE NEW TABLE
+    public String addTableToUpdatedOnService(String tableName){
+    jdbc.execute("INSERT INTO TOPADB.UPDATED_ON (id,tableName,updated)VALUES(id,\""+tableName+"\",\"Default\");");
+    return "NEW TABLE ADDED TO UPDATED_ON";
+    }
+
+    //6. SERVICE: UPDATE THE UPDATED COLUMN WHEN NEW RECORD WILL BE ADDED
+    public String updateOnService(String tableName, String  newdate) {
+        jdbc.execute(" UPDATE TOPADB.UPDATED_ON SET updated = '"+newdate+"' WHERE tableName= '"+tableName+"';");
+        return "UPDATED ON: UP-TO-DATE"; }
+
+    //7. SERVICE: GET THE DATE WHEN THE DATABASE TABLE UPDATED
+    public String getUpdatedOnDateService(String tableName) throws ClassNotFoundException, SQLException {
+       List<String> myUpdateddateList= new ArrayList<>();
+        try{
+            Connection con=createDBConnection();
+            Statement stmt = con.createStatement();
+            String query = "SELECT * FROM TOPADB.UPDATED_ON WHERE tableName='"+tableName+"';";
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()){
+                String updated_on_date = rs.getString(3);
+                myUpdateddateList.add(updated_on_date);
+            }con.close(); }
+        catch (ClassNotFoundException | SQLException sqlEx) {System.out.println(sqlEx.getMessage());}
+        String updated_on_date=myUpdateddateList.get(0);
+        return updated_on_date;
+    }
 
 
 }
