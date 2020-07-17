@@ -70,6 +70,7 @@ a:hover{
 	width: 90%;
 	height: 100%;
 	border-radius: 10px;
+
 }
 
 
@@ -79,7 +80,9 @@ a:hover{
 	background-color: green;
 	padding: 2px;
 	color: white;
-border-radius: 10px;}
+	border: 3px solid blue;
+border-radius: 10px;
+margin-top: 10px;}
 
 #container{
 	padding: 20px;
