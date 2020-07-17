@@ -174,7 +174,7 @@ function showRecords() {
 				tbl=tbltop + main + tblbottom;
 				document.querySelector("#dbTableViewerblockId").innerHTML =tbl
 				document.querySelector("#dbTabletotalBottomId").innerHTML ="TOTAL:"+sum;
-				document.querySelector("#dbTableTitleId").innerHTML = "TABLE NAME: "+myTable
+				document.querySelector("#dbTableTitleId").innerHTML = "YOUR TABLE: "+myTable
 				document.querySelector("#dashboardText").innerHTML="Total Expense: "+ sum
 
 		}}; xmlhttp.send();

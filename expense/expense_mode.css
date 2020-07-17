@@ -154,12 +154,12 @@ margin-top: 10px;}
 
 }
 #dbTableTitleId{
-		width: 80%;
+	width: 80%;
 	text-align: center;
 	padding: 10px;
 	margin-left: 70px;
-	  margin-top: 10px; 
-	  color: teal;
+	/*margin-top: 10px; */
+	color: teal;
 	  /*background-color: teal;*/
 	  border: 5px solid teal;
 
@@ -216,6 +216,7 @@ footer{
 	top: -25px;
 	font-size: 20px;
 	text-align: center;
+	left: 100px;
 }
 
 
