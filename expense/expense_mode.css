@@ -22,9 +22,14 @@ input[type=text]:focus{
 
 ul {
   list-style-type: none;
+
   margin: 0;
   padding: 0;
   display: inline;
+}
+li{
+	  display: inline-block;
+
 }
 
 a{
