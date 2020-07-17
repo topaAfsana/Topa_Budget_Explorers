@@ -55,21 +55,28 @@ function findTable(){
 				//test purpose uncomment
 				// alert(response);
 				if (response === "TABLE FOUND"){
-					showRecords();}
+					showRecords();
+					getupdatedDate(myQuerytable);
+				}
 					else { 
 					clearTable();
-					alert("YOUR TABLE DOES NOT EXIST;PLEASE CRAETE A NEW ONE;")};
+					alert("TABLE DOES NOT EXIST.PLEASE CRAETE THE TABLE;")};
 				}}
 			xmlhttp_find.open("GET",findTableUrl+"?"+param,true);
 			xmlhttp_find.setRequestHeader('Content-Type', 'application/json');
 			xmlhttp_find.send(null);
-	 		getupdatedDate(myQuerytable);
+			
+	 		
 		}
 
 		// ===
 function clearTable(){
 	
 	document.querySelector("#dbTableViewerblockId").innerHTML = '';
+	document.querySelector("#dbTabletotalBottomId").innerHTML ='';
+	document.querySelector("#dbTableTitleId").innerHTML ='';
+	document.querySelector("#dashboardText").innerHTML='';
+	document.querySelector("#dashboardBody2").innerHTML ='';
 }
 
 
@@ -84,9 +91,9 @@ function clearTable(){
 	 			alert ("Please enter Table name");
         		return false;}
 
-	 		if (myDate == "") {
-	 			alert ("Please enter a date");
-        		return false;}
+	 		// if (myDate == "") {
+	 		// 	alert ("Please enter a date");
+    //     		return false;}
 	 	 	if (myItemTitle == "") {
 	 			alert ("Please enter a title of the item");
         		return false;}
@@ -236,7 +243,6 @@ function getupdatedDate(myTable){
 			  var updatedDateresponse=xmlhttp_getUpdatedDate.responseText;
 			  //test purpose uncomment
 				// alert(updatedDateresponse);
-				// document.querySelector("#updatedOnblockId").innerHTML = "LAST UPDATED: "+updatedDateresponse;
 				document.querySelector("#dashboardBody2").innerHTML = "LAST UPDATED: "+updatedDateresponse;
 			}}; xmlhttp_getUpdatedDate.send();
 		

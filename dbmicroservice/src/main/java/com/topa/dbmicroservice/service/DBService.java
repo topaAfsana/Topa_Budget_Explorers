@@ -50,7 +50,7 @@ public class DBService {
         if(findTableService(tableName)=="TABLE FOUND"){return "TABLE ALREADY EXISTED";}
         else{jdbc.execute(" CREATE TABLE `TOPADB`.`" + tableName + "` (\n" +
                 "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
-                "  `date` VARCHAR(45) NOT NULL,\n" +
+                "  `date` VARCHAR(45) NULL,\n" +
                 "  `title` VARCHAR(45) NOT NULL,\n" +
                 "  `amount` INT NOT NULL,\n" +
                 "  PRIMARY KEY (`id`),\n" +
