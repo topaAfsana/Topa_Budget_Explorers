@@ -1,5 +1,5 @@
-var tbltop=`<table class="ExpenseTable">
-				<tr><th>ITEM#</th><th>DATE</th><th>TITLE</th><th>AMOUNT</th></tr>`;
+var tbltop=`<table class="dbTable">
+				<tr><th>Item#</th><th>Date</th><th>Title</th><th>Amount</th></tr>`;
 var tbl;
 
 // var host="http://localhost:8080";
@@ -21,7 +21,6 @@ function createTable(){
 			var xmlhttp_create= new XMLHttpRequest();
 
 			var createTableUrl= host+'/create_table';
-			console.log(createTableUrl);
 			var param="tableName="+myCreatetable+"";
 			
 			xmlhttp_create.onreadystatechange = function() {
@@ -64,20 +63,21 @@ function findTable(){
 			xmlhttp_find.open("GET",findTableUrl+"?"+param,true);
 			xmlhttp_find.setRequestHeader('Content-Type', 'application/json');
 			xmlhttp_find.send(null);
+	 		getupdatedDate(myQuerytable);
 		}
 
 		// ===
 function clearTable(){
 	
-	document.querySelector("div").innerHTML = tbltop;
+	document.querySelector("#dbTableViewerblockId").innerHTML = '';
 }
 
 
 
 		function addRecord(){
 	 	 	var myTable= document.querySelector("#myTableId").value.toUpperCase();
-			var myDate=document.querySelector("#dateId").value;
-	 		var myItemTitle= document.querySelector("#titleId").value;
+			var myDate=document.querySelector("#dateId").value.toUpperCase();
+	 		var myItemTitle= document.querySelector("#titleId").value.toUpperCase();
 	 		var myamount= document.querySelector("#amountId").value;
 
 	 		if (myTable == "") {
@@ -101,7 +101,8 @@ function clearTable(){
 
 			xmlhttp1.onreadystatechange = function() {
 			if(xmlhttp1.readyState===4 & xmlhttp1.status===200){
-				alert(xmlhttp1.responseText);
+				//test purpose use
+				// alert(xmlhttp1.responseText);
 			}}
 			xmlhttp1.open("POST",addRecordUrl+"?"+param,true);
 			xmlhttp1.setRequestHeader('Content-Type', 'application/json');
@@ -164,7 +165,7 @@ function showRecords() {
 
 				var tblbottom= "</table>";
 				tbl=tbltop + main + tblbottom;
-				document.querySelector("#expense_block").innerHTML = "TABLE NAME: "+myTable+tbl+"TOTAL:"+sum;
+				document.querySelector("#dbTableViewerblockId").innerHTML = "TABLE NAME: "+myTable+tbl+"TOTAL:"+sum;
 		}}; xmlhttp.send();
 		// ====
 
@@ -231,7 +232,7 @@ function getupdatedDate(myTable){
 			  var updatedDateresponse=xmlhttp_getUpdatedDate.responseText;
 			  //test purpose uncomment
 				// alert(updatedDateresponse);
-				document.querySelector("#expense_block1").innerHTML = "LAST UPDATED: "+updatedDateresponse;
+				document.querySelector("#updatedOnblockId").innerHTML = "LAST UPDATED: "+updatedDateresponse;
 			}}; xmlhttp_getUpdatedDate.send();
 		
 		}

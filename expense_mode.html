@@ -4,62 +4,82 @@
 </head>
 
 <title>BUDGET EXPLORER-EXPENSE CHECK-DBMICROSERVICE</title>
-	<link rel="styleSheet" href="db_microservice.js">
+	<link rel="styleSheet" href="expense_mode.css">
 </head>
 <body>
 
-<div class="header">
-  <h1 id="tittleheader">EXPENSE CHECK</h1>
-  <li><a id="home" href="../index.html">HOME</a></li>
+
+<!-- 1. HEADER ZONE-->
+<div id="header">
+  <h1 id="headerTextId">Expense Check</h1>
+ <ul> <li><a id="homeLink" href="index.html">Home</a></li></ul>
 </div>
+<!-- 1. HEADER ZONE-->
 
 
 
-<!-- <p>DOWN:INPUT COST AND INCOME</p> -->
 
-  
-
-<div id="budget_explorer"> 
+<!-- 2. BODY-->
+<div id="container"> 
 
 
-	<div id ="costCalcDiv">
-<h3>ENTER EXPENSE</h3>
-<button type="button" onclick="getCurrentDate()"><strong>CLEAR</strong></button>
+
+<!-- 3. FORM ZONE-->
+<div id ="formZone">
+<h3>Expense Form</h3>
+<!-- <button type="button" onclick="getCurrentDate()"><label>CLEAR</label></button> -->
 <form>
-  <strong>TABLE NAME</strong> <input type="text" placeholder="Ex: yourname_month "id="myTableId"></input><button type="button" onclick="createTable()"><strong>CREATE NEW TABLE</strong></button>
-  <br></br>
-  <button type="button" onclick="findTable()"><strong>FIND EXISTING TABLE</strong></button><br></br>
-  <strong> DATE</strong> <input type="text" placeholder="Enter Expense date"id="dateId"></input><button type="button" onclick="setCurrentDate()"><strong>GET CURRENT DATE</strong></button>
+  <label>Table Name: </label> <input type="text" placeholder="Ex: yourname_month "id="myTableId"></input>
+   <button type="button" onclick="findTable()"><label>Find Table</label></button>
+  <button type="button" onclick="createTable()"><label>Create Table</label></button>
+ <br></br>
+  <label> Date: </label> <input type="text" placeholder="Enter Expense date"id="dateId"></input>
+  <button type="button" onclick="setCurrentDate()"><label>Today</label></button>
+	<br></br><label> Title: </label> <input type="text" placeholder="Enter Expense title"id="titleId"></input><br></br>
+	<label>Amount: </label> <input type="text" placeholder="Enter Expense amount"id="amountId"></input><br></br>
+	<button type="button" onclick="addAndLoad()"><label>Add Item</label></button>
+</form>
+</div>
+<!-- 3. FORM ZONE-->
+
+
+
+
+<!-- 6. DASHBOARD ZONE-->
+<div id="dashboardZone">
+  <h3 id="dashboardTextId">Dashboard</h3>
+  <div id='dashboardBody'>
+    <label>YOUR TOTAL EXPENSE:</label>
+  </div>
   
-	<br></br><strong> TITLE</strong> <input type="text" placeholder="Enter Expense title"id="titleId"></input><br></br>
-	<strong>AMOUNT</strong> <input type="text" placeholder="Enter Expense amount"id="amountId"></input><br></br>
-	<button type="button" onclick="addAndLoad()"><strong>ADD ITEM</strong></button>
-  
-</form></div>
+</div>
+<!-- 6. DASHBOARD ZONE-->
+
+
+<!-- 4. TABLE ZONE-->
+<div id="dbTableViewerZone">
+
+<div id="dbTableViewerblockId"></div>
+<div id="updatedOnblockId"></div> 
+
+</div>
+<!-- 4. TABLE ZONE-->
 
 
 
 
 </div>
-
-
-<div id="expense_block">
-
-
-
-</div>
-<div id="expense_block1"></div> 
+<!-- 2. BODY-->
 
 
 
 
+<!-- 5. FOOTER ZONE-->
+<footer id="footer"><p id="footerText">copy_right@AfsanaKhanTopaCreation_2020</p></footer>
+<!-- 5. FOOTER ZONE-->
 
-<div id="footer"><p id="footerText">copy_right@AfsanaKhanTopaCreation_2020</p></div>
 
 
 </body>
-
 <script src="db_microservice.js"></script>
-
-
 </html>
