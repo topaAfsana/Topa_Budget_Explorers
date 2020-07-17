@@ -133,6 +133,13 @@ margin-top: 10px;}
 	border: 10px solid teal;
 	margin: 20px;
 	width: 90%;
+	height: 50%;
+
+}
+
+#tableZoneTitle{
+	text-align: center;
+	margin-top: 2px;
 
 }
 
@@ -154,7 +161,7 @@ margin-top: 10px;}
 	  margin-top: 10px; 
 	  color: teal;
 	  /*background-color: teal;*/
-	  border: 3px solid teal;
+	  border: 5px solid teal;
 
 }
 
@@ -194,7 +201,7 @@ tbody{
 #dbTabletotalBottomId{
 	float: left;
 	margin-top: -80px;
-	margin-left: 570px;
+	margin-left: 580px;
 	color: black;
 	font-size: 20px;
 	border:1px solid teal;
