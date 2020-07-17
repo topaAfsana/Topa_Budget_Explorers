@@ -2,10 +2,10 @@ var tbltop=`<table class="ExpenseTable">
 				<tr><th>ITEM#</th><th>DATE</th><th>TITLE</th><th>AMOUNT</th></tr>`;
 var tbl;
 
-var host="http://localhost:8080";
+// var host="http://localhost:8080";
 // var host="https://192.168.0.14:8443";
 // var host="https://52.91.249.153:8443";
-// var host="http://52.91.249.153:8080";
+var host="http://52.91.249.153:8080";
 
 
 //DONE
