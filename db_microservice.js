@@ -1,5 +1,5 @@
 var tbltop=`<table class="ExpenseTable">
-				<tr><th>ID</th><th>DATE</th><th>TITLE</th><th>AMOUNT</th></tr>`;
+				<tr><th>ITEM#</th><th>DATE</th><th>TITLE</th><th>AMOUNT</th></tr>`;
 var tbl;
 
 var host="http://localhost:8080";
@@ -20,7 +20,6 @@ function createTable(){
 
 			var xmlhttp_create= new XMLHttpRequest();
 
-			//ADD RECORD
 			var createTableUrl= host+'/create_table';
 			console.log(createTableUrl);
 			var param="tableName="+myCreatetable+"";
@@ -32,13 +31,10 @@ function createTable(){
 				if (response === "TABLE IS SUCCESSFULLY CREATED"){
 					showRecords();
 				}
-
-				// console.log("RESPONSE IS"+resp);
 			}}
 			xmlhttp_create.open("POST",createTableUrl+"?"+param,true);
 			xmlhttp_create.setRequestHeader('Content-Type', 'application/json');
 			xmlhttp_create.send(null);
-			// var myCreatetable=document.querySelector("#createTableId").value= '';
 	 
 		}
 
@@ -57,12 +53,13 @@ function findTable(){
 			var tableDiv= document.querySelector("div").innerHTML;
 			if(xmlhttp_find.readyState===4 & xmlhttp_find.status===200){
 				var response=xmlhttp_find.responseText;
-				alert(response);
+				//test purpose uncomment
+				// alert(response);
 				if (response === "TABLE FOUND"){
 					showRecords();}
 					else { 
 					clearTable();
-					alert("YOUR EXPENSE LIST DOES NOT EXIST;PLEASE CRAETE ONE;")};
+					alert("YOUR TABLE DOES NOT EXIST;PLEASE CRAETE A NEW ONE;")};
 				}}
 			xmlhttp_find.open("GET",findTableUrl+"?"+param,true);
 			xmlhttp_find.setRequestHeader('Content-Type', 'application/json');
@@ -112,6 +109,17 @@ function clearTable(){
 			// var myDate=document.querySelector("#dateId").value='';
 	 		var myItemTitle= document.querySelector("#titleId").value='';
 	 		var myamount= document.querySelector("#amountId").value='';
+	 		// ====
+	 		//CURRENT DATE
+	 		var today = new Date();
+			var dd = String(today.getDate()).padStart(2, '0');
+			var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+			var yyyy = today.getFullYear();
+
+			var today = mm + '/' + dd + '/' + yyyy;
+	 		// ====
+	 		updateDateOn(myTable,today);
+	 		getupdatedDate(myTable);
 		}
 // =======
 
@@ -158,6 +166,14 @@ function showRecords() {
 				tbl=tbltop + main + tblbottom;
 				document.querySelector("#expense_block").innerHTML = "TABLE NAME: "+myTable+tbl+"TOTAL:"+sum;
 		}}; xmlhttp.send();
+		// ====
+
+	
+			
+
+			
+
+// ====
 	}
 
 
@@ -169,6 +185,15 @@ function showRecords() {
 
 	}
 
+	function setCurrentDate(){
+		var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+var today = mm + '/' + dd + '/' + yyyy;
+document.querySelector("#dateId").value=today;}
+
 	function getCurrentDate(){
 		var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
@@ -176,5 +201,39 @@ var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
 
 var today = mm + '/' + dd + '/' + yyyy;
-document.querySelector("#dateId").value=today;
 return today;}
+
+
+function updateDateOn(myTable,myUpdatedDate){
+var xmlhttp_updateDate= new XMLHttpRequest();
+			var updateDateUrl= host+'/update_on';
+			var param="tableName="+myTable+"&newdate="+myUpdatedDate+"";
+
+			xmlhttp_updateDate.onreadystatechange = function() {
+			if(xmlhttp_updateDate.readyState===4 & xmlhttp_updateDate.status===200){
+				//test purpose uncomment
+				// alert(xmlhttp_updateDate.responseText);
+			}}
+			xmlhttp_updateDate.open("POST",updateDateUrl+"?"+param,true);
+			xmlhttp_updateDate.setRequestHeader('Content-Type', 'application/json');
+			xmlhttp_updateDate.send(null);
+
+}
+
+function getupdatedDate(myTable){
+	var getUpdatedDateUrl= host+'/get_updated_date';
+	var xmlhttp_getUpdatedDate= new XMLHttpRequest();
+	var param="tableName="+myTable+"";
+	xmlhttp_getUpdatedDate.open("GET",getUpdatedDateUrl+"?"+param,true);
+	var updatedDateresponse1;
+		xmlhttp_getUpdatedDate.onreadystatechange = function() {
+			if(xmlhttp_getUpdatedDate.readyState===4 & xmlhttp_getUpdatedDate.status===200){
+			  var updatedDateresponse=xmlhttp_getUpdatedDate.responseText;
+			  //test purpose uncomment
+				// alert(updatedDateresponse);
+				document.querySelector("#expense_block1").innerHTML = "LAST UPDATED: "+updatedDateresponse;
+			}}; xmlhttp_getUpdatedDate.send();
+		
+		}
+
+

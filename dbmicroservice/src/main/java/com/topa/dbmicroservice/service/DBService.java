@@ -47,15 +47,16 @@ public class DBService {
     //1. SERVICE: CREATE TABLE
     public String createTableService(String tableName) {
         //THIS METHOD USED SPRING BOOT JDBC TEMPLATE
-        jdbc.execute(" CREATE TABLE `TOPADB`.`" + tableName + "` (\n" +
+        if(findTableService(tableName)=="TABLE FOUND"){return "TABLE ALREADY EXISTED";}
+        else{jdbc.execute(" CREATE TABLE `TOPADB`.`" + tableName + "` (\n" +
                 "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
                 "  `date` VARCHAR(45) NOT NULL,\n" +
                 "  `title` VARCHAR(45) NOT NULL,\n" +
                 "  `amount` INT NOT NULL,\n" +
                 "  PRIMARY KEY (`id`),\n" +
                 "  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);\n");
-        addTableToUpdatedOnService(tableName);
-        return "TABLE IS SUCCESSFULLY CREATED";
+            addTableToUpdatedOnService(tableName);
+            return "TABLE IS SUCCESSFULLY CREATED";}
     }
 
     //2. SERVICE: FIND TABLE
@@ -114,7 +115,7 @@ public class DBService {
 
      //5. SERVICE: CREATE ROW WITH NEW DATA TABLE IN UPDATEDON TABLE-NESTED IN CREATE NEW TABLE
     public String addTableToUpdatedOnService(String tableName){
-    jdbc.execute("INSERT INTO TOPADB.UPDATED_ON (id,tableName,updated)VALUES(id,\""+tableName+"\",\"Default\");");
+    jdbc.execute("INSERT INTO TOPADB.UPDATED_ON (id,tableName,updated)VALUES(id,\""+tableName+"\",\" \");");
     return "NEW TABLE ADDED TO UPDATED_ON";
     }
 
@@ -139,6 +140,4 @@ public class DBService {
         String updated_on_date=myUpdateddateList.get(0);
         return updated_on_date;
     }
-
-
 }

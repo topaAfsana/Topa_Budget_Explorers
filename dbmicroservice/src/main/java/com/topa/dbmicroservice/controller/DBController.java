@@ -41,7 +41,7 @@ public class DBController {
 
 
     //5. url sample: http://localhost:8080/update_on?tableName=yourTable&newdate=yourDate
-    @RequestMapping("/update_on")
+    @RequestMapping(value = "/update_on", method = RequestMethod.POST)
     public String updateOn(@RequestParam() String tableName,String  newdate) {
         return dbService.updateOnService(tableName,newdate); }
 
