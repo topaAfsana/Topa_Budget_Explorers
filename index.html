@@ -3,16 +3,39 @@
 <head>
 </head>
 
-<title>BUDGET EXPLORER-EXPENSE CHECK-DBMICROSERVICE</title>
-	<link rel="styleSheet" href="db_microservice.js">
+<title>BUDGET EXPLORER-HOME PAGE</title>
+	<link rel="styleSheet" href="index.css">
 </head>
 <body>
 
 <div class="header">
-  <h1 id="tittleheader">HOME PAGE</h1>
-  <li><a id="expense_mode" href="expense_mode.html">EXPENSE</a></li>
+  <h1 id="tittleheader">BUDGET EXPLORER</h1>
+
+</div>
+
+<div id="navigation">
+	
+ <ul><h1>OPTIONS</h1>
+  <li><a id="expense" href="expense/expense_mode.html">EXPENSE CHECK MODE</a></li>
+  <li><a id="balance" href="balance/balance_check.html">BALANCE CHECK MODE</a></li>
+  <li><a id="savings" href="savings/savings.html">ASSET CHECK MODE</a></li>
+</ul>
+
+
+</div>
+
+
+<div id="aboutZone">
+	<h2>ABOUT THIS APPLICATION</h2>
+	<p> <strong>EXPENSE MODE</strong> ALLOWS YOU TO SORT THE EXPENSE ITEMS AND THE TOTAL AMOUNT SPENT.</p>
+<p> <strong>BALANCE MODE</strong> ALLOWS YOU TO SORT THE BALANCE AND EXPENSE ITEMS AND THE TOTAL AMOUNT ON BOTH LIST AND PROVIDE THE TOTAL RESIDUE. </p>
+<p> <strong>ASSET MODE</strong> ALLOWS YOU TO SORT THE ASSET ITEMS AND THE TOTAL AMOUNT YOU HAVE AS ASSET</p>
 </div>
 
 
 </body>
+
+<script src="balance/phone_js.js"></script>
+
+
 </html>

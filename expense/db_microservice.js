@@ -165,7 +165,11 @@ function showRecords() {
 
 				var tblbottom= "</table>";
 				tbl=tbltop + main + tblbottom;
-				document.querySelector("#dbTableViewerblockId").innerHTML = "TABLE NAME: "+myTable+tbl+"TOTAL:"+sum;
+				document.querySelector("#dbTableViewerblockId").innerHTML =tbl
+				document.querySelector("#dbTabletotalBottomId").innerHTML ="TOTAL:"+sum;
+				document.querySelector("#dbTableTitleId").innerHTML = "TABLE NAME: "+myTable
+				document.querySelector("#dashboardText").innerHTML="Total Expense: "+ sum
+
 		}}; xmlhttp.send();
 		// ====
 
@@ -232,7 +236,8 @@ function getupdatedDate(myTable){
 			  var updatedDateresponse=xmlhttp_getUpdatedDate.responseText;
 			  //test purpose uncomment
 				// alert(updatedDateresponse);
-				document.querySelector("#updatedOnblockId").innerHTML = "LAST UPDATED: "+updatedDateresponse;
+				// document.querySelector("#updatedOnblockId").innerHTML = "LAST UPDATED: "+updatedDateresponse;
+				document.querySelector("#dashboardBody2").innerHTML = "LAST UPDATED: "+updatedDateresponse;
 			}}; xmlhttp_getUpdatedDate.send();
 		
 		}

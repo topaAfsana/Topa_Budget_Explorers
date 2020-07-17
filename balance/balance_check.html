@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<title>BUDGET EXPLORER-BALANCE CHECK</title>
+	<link rel="styleSheet" href="phone_css.css">
+</head>
+<body>
+
+<div class="header">
+  <h1 id="tittleheader">BALANCE CHECK</h1>
+  <form class="form-date">
+  <label for="date">DATE:</label>
+  <input type="text" id="date" placeholder="Enter date" name="date">
+     <ul>
+  <li><a id="home" href="../index.html">HOME</a></li>
+</ul>
+</div>
+
+
+
+<!-- <p>DOWN:INPUT COST AND INCOME</p> -->
+
+<div class="cost_explorer"> 
+
+
+
+	<div id ="incomeCalcDiv">
+<h3>ENTER BALANCE</h3>
+<form>
+	<strong>TITLE</strong> <input type="text" id="incomeSourceId"></input><br></br>
+	<strong>AMOUNT</strong> <input type="text" id="salaryId"></input><br></br>
+	<br></br>
+	<button type="button" onclick="calculateIncome()"><strong>ADD CREDIT</strong></button>
+</form>
+</div>
+
+
+
+	<div id ="costCalcDiv">
+<h3>ENTER EXPENSE</h3>
+<form>
+	<strong> TITLE</strong> <input type="text" id="itemId"></input><br></br>
+	<strong>AMOUNT</strong> <input type="text" id="costId"></input><br></br>
+	<br></br>
+	<button type="button" onclick="calculateCost()"><strong>ADD EXPENSE</strong></button>
+</form></div>
+
+
+<!-- <button class="button" onclick="clearItems()">CLEAR ALL</button> -->
+
+</div>
+
+<!-- <p>UP:INPUT COST AND INCOME</p> -->
+
+<div class="runtime_calculation">
+  <h1 id="dashboardTitle"> RUN-TIME ECONOMY DASHBOARD</h1> <div id="dateDisplay"></div>
+  		<div class="dashboardText" id= "displayIncomeResultId1"></div>
+   		<div class="dashboardText" id="displayCostResultId1"> </div>
+		<div class="dashboardText" id ="displayCurrentTotalResidueId"></div>
+
+</div>
+
+
+
+<div class="list_tables">
+	<div id="tableZoneTitle"><h1>COST EXPLORER</h1> </div>
+
+<div class="expense_block">
+  <h2 class="tableTitles">EXPENSE LIST</h2> 
+     		<div class="totalHeader" class="dashboardText" id="displayCostResultId2"> </div>
+
+  <table id="costTable">
+ 			<thead>
+ 				<tr>
+ 					<th> Expenses</th>
+ 					<th> Amount</th>
+ 				</tr>
+ 			</thead>
+ 			<tbody></tbody>
+ 			
+ 		</table>
+</div>
+
+
+
+<div class='income_block'>
+	<h2 class="tableTitles">BALANCE LIST</h2>  
+	  		<div class="totalHeader" class="dashboardText" id= "displayIncomeResultId2"></div>
+
+		<table id="incomeTable">
+ 			<thead>
+ 				<tr>
+ 					<th>Sources</th>
+ 					<th>Amount</th>
+ 				</tr>
+ 			</thead>
+ 			<tbody></tbody>
+ 		</table>
+</div>
+
+<!-- <div class='final_calculation'>
+	<p>TOTAL SAVINGS</p>
+</div>
+</div> -->
+
+<div id="footer"><p id="footerText">copy_right@AfsanaKhanTopaCreation_2020</p></div>
+
+
+</body>
+
+<script src="phone_js.js"></script>
+
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<title>BUDGET EXPLORER-ASSET CHECK</title>
+	<link rel="styleSheet" href="saving_css.css">
+</head>
+<body>
+
+<div class="header">
+  <h1 id="tittleheader">ASSET CHECK</h1>
+  <form class="form-date">
+  <label for="date">DATE:</label>
+  <input type="text" id="date" placeholder="Enter date" name="date">
+
+  <ul>
+  <li><a id="home" href="../index.html">HOME</a></li>
+</ul>
+</div>
+
+
+
+<!-- <p>DOWN:INPUT COST AND INCOME</p> -->
+
+<div class="cost_explorer"> 
+
+
+
+	<div id ="incomeCalcDiv">
+<h3>ENTER ASSETS/SAVINGS</h3>
+<form>
+	<strong>TITLE</strong> <input type="text" id="incomeSourceId"></input><br></br>
+	<strong>AMOUNT</strong> <input type="text" id="salaryId"></input><br></br>
+	<br></br>
+	<button type="button" onclick="calculateIncome()"><strong>ADD ASSET</strong></button>
+</form>
+</div>
+
+
+
+
+</div>
+
+<!-- <p>UP:INPUT COST AND INCOME</p> -->
+
+
+
+
+<div class="runtime_calculation">
+  <h1 id="dashboardTitle"> RUN-TIME ASSET DASHBOARD</h1> <div id="dateDisplay"></div>
+  		<div class="dashboardText" id= "displayIncomeResultId1"></div>
+</div>
+
+
+
+<div class="list_tables">
+	<div id="tableZoneTitle"><h1>ASSET EXPLORER</h1> </div>
+ 
+     		
+
+<div class='income_block'>
+	<h2 class="tableTitles">ASSET LIST</h2>  
+	  		<div class="totalHeader" class="dashboardText" id= "displayIncomeResultId2"></div>
+
+		<table id="incomeTable">
+ 			<thead>
+ 				<tr>
+ 					<th>Sources</th>
+ 					<th>Amount</th>
+ 				</tr>
+ 			</thead>
+ 			<tbody></tbody>
+ 		</table>
+</div>
+
+
+
+<div id="footer"><p id="footerText">copy_right@AfsanaKhanTopaCreation_2020</p></div>
+
+
+</body>
+
+<script src="saving.js"></script>
+
+
+</html>

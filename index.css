@@ -1,0 +1,88 @@
+body{
+  height: 200px;
+}
+.header{
+	 width: 80%;
+  height: 100px;
+  border: 15px solid teal;
+  padding: 50px;
+  margin: 20px;
+}
+
+#tittleheader{
+  background-color: green;
+  color: white;
+  margin: -30px;
+  margin-top: -40px;
+  border: 2px solid blue;
+  border-radius: 10px;
+  text-align: center;
+
+}
+
+
+#navigation{
+  width: 80%;
+  margin: 20px;
+  padding: 50px;
+  border: 15px solid teal;
+}
+
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+
+a{
+    padding: 10px;
+  font-size: 30px;
+  color: white;
+  font-family: arial;  
+  
+  text-decoration: none;
+  height: 300px;
+}
+
+a:hover{
+  color: red;
+/*  background-color: white;
+*/}
+li:hover{
+  background-color: green;
+
+}
+
+
+li{
+  background-color: teal;
+  width: 50%;
+margin: 50px;
+border: 2px solid blue;
+border-radius: 10px;
+padding: 20px;
+
+}
+#aboutZone{
+  width: 80%;
+  height: 500px;
+  border: 15px solid teal;
+  padding: 50px;
+  margin: 20px;
+}
+
+h2{
+  color: teal;
+  font-family: arial;
+  border: 2px solid teal;
+  padding: 10px;
+}
+
+P{
+  font-family: arial;
+  font-size: 24px;
+}
+
+
