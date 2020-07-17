@@ -31,14 +31,14 @@
 <!-- <button type="button" onclick="getCurrentDate()"><label>CLEAR</label></button> -->
 <form>
   <label>Table Name: </label> <input type="text" placeholder="Ex: yourname_month "id="myTableId"></input>
-   <button type="button" onclick="findTable()"><label>Find Table</label></button>
-  <button type="button" onclick="createTable()"><label>Create Table</label></button>
+   <button type="button" onclick="findTable()"><label class='formButtons'>Find Table</label></button>
+  <button type="button" onclick="createTable()"><label class='formButtons'>Create Table</label></button>
  <br></br>
   <label> Date: </label> <input type="text" placeholder="Enter Expense date"id="dateId"></input>
-  <button type="button" onclick="setCurrentDate()"><label>Today</label></button>
+  <button type="button" onclick="setCurrentDate()"><label class='formButtons'>Today</label></button>
 	<br></br><label> Title: </label> <input type="text" placeholder="Enter Expense title"id="titleId"></input><br></br>
 	<label>Amount: </label> <input type="text" placeholder="Enter Expense amount"id="amountId"></input><br></br>
-	<button type="button" onclick="addAndLoad()"><label>Add Item</label></button>
+	<button type="button"  onclick="addAndLoad()"><label class='formButtons'>Add Item</label></button>
 </form>
 </div>
 <!-- 3. FORM ZONE-->
@@ -71,6 +71,8 @@
 <div id='dbTabletotalBottomId'></div>
 
 </div>
+
+
 <!-- 4. TABLE ZONE-->
 
 

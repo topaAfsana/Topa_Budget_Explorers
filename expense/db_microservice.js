@@ -177,16 +177,7 @@ function showRecords() {
 				document.querySelector("#dbTableTitleId").innerHTML = "YOUR TABLE: "+myTable
 				document.querySelector("#dashboardText").innerHTML="Total Expense: "+ sum
 
-		}}; xmlhttp.send();
-		// ====
-
-	
-			
-
-			
-
-// ====
-	}
+		}}; xmlhttp.send();}
 
 
 	function clear(){
@@ -242,10 +233,31 @@ function getupdatedDate(myTable){
 			if(xmlhttp_getUpdatedDate.readyState===4 & xmlhttp_getUpdatedDate.status===200){
 			  var updatedDateresponse=xmlhttp_getUpdatedDate.responseText;
 			  //test purpose uncomment
-				// alert(updatedDateresponse);
+				alert(updatedDateresponse);
 				document.querySelector("#dashboardBody2").innerHTML = "LAST UPDATED: "+updatedDateresponse;
 			}}; xmlhttp_getUpdatedDate.send();
+}
+
+
+
+
+
+
+
+function showTables() {
+		var showTablesUrl= host+'/show_tables';
+		var xmlhttp_showTables= new XMLHttpRequest();
+		xmlhttp_showTables.open("GET",showTablesUrl,true);
+
+		xmlhttp_showTables.onreadystatechange = function() {
+			if(xmlhttp_showTables.readyState===4 & xmlhttp_showTables.status===200){
+
+				var records = xmlhttp_showTables.responseText;	
 		
-		}
+				console.log("TOPA TEST IS "+records);
+		
+				document.querySelector("#dbTablesZone").innerHTML=records;
+}};xmlhttp_showTables.send();
+}
 
 

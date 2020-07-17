@@ -140,4 +140,29 @@ public class DBService {
         String updated_on_date=myUpdateddateList.get(0);
         return updated_on_date;
     }
+
+
+    //8. SERVICE: DISPLAY ALL THE DATA TABLE
+    public List<String> getAllDataTableListService() throws ClassNotFoundException, SQLException {
+        List<String> list= new ArrayList<>();
+        try{
+            Connection con=createDBConnection();
+            Statement stmt = con.createStatement();
+            //Query to Execute
+            String query = "show tables";
+            ResultSet rs = stmt.executeQuery(query);
+
+            // While Loop to iterate through all data and print results
+            while (rs.next()) {
+                String table = rs.getString(1);
+                list.add(table); }
+            con.close();
+        }
+        catch (ClassNotFoundException | SQLException sqlEx)
+        {System.out.println(sqlEx.getMessage());}
+
+        return  list;
+    }
+
+
 }

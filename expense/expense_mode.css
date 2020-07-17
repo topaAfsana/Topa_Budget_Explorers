@@ -15,6 +15,9 @@ button{
 	border: 5px solid green;
 
 }
+.formButtons{
+	text-align: center;
+}
 
 /*button:hover{
 	width: 230px;

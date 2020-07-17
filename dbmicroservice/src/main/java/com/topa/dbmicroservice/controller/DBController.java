@@ -52,6 +52,12 @@ public class DBController {
         return dbService.getUpdatedOnDateService(tableName); }
 
 
+    //7. url sample: http://localhost:8080/show_tables
+    @RequestMapping("/show_tables")
+    public List<String> getAllDataTable() throws ClassNotFoundException, SQLException {
+        return dbService.getAllDataTableListService(); }
+
+
 
 
 

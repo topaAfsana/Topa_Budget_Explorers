@@ -80,9 +80,14 @@ h2{
   padding: 10px;
 }
 
-P{
+p{
   font-family: arial;
   font-size: 24px;
 }
 
+
+#dbTablesZone{
+  font-size: 20px;
+  background-color: white;
+}
 
