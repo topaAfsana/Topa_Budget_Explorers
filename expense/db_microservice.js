@@ -175,7 +175,7 @@ function showRecords() {
 				tbl=tbltop + main + tblbottom;
 				document.querySelector("#dbTableViewerblockId").innerHTML =tbl
 				document.querySelector("#dbTabletotalBottomId").innerHTML ="TOTAL:"+sum;
-				document.querySelector("#dbTableTitleId").innerHTML = "YOUR TABLE: "+myTable
+				document.querySelector("#dbTableTitleId").innerHTML = "TABLE: "+myTable
 				document.querySelector("#dashboardTextTotal").innerHTML="Total Expense: "+ sum
 
 		}}; xmlhttp.send();}
@@ -235,7 +235,7 @@ function getupdatedDate(myTable){
 			  var updatedDateresponse=xmlhttp_getUpdatedDate.responseText;
 			  //test purpose uncomment
 				// alert(updatedDateresponse);
-				document.querySelector("#dashboardBodylastUpdate").innerHTML = "LAST UPDATED: "+updatedDateresponse;
+				document.querySelector("#dashboardBodylastUpdate").innerHTML = "This table Last Updated: "+updatedDateresponse;
 			}}; xmlhttp_getUpdatedDate.send();
 }
 
