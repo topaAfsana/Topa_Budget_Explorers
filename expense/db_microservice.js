@@ -235,7 +235,7 @@ function getupdatedDate(myTable){
 			  var updatedDateresponse=xmlhttp_getUpdatedDate.responseText;
 			  //test purpose uncomment
 				// alert(updatedDateresponse);
-				document.querySelector("#dashboardBodylastUpdate").innerHTML = "This table Last Updated: "+updatedDateresponse;
+				document.querySelector("#dashboardBodylastUpdate").innerHTML = "Table Last Updated: "+updatedDateresponse;
 			}}; xmlhttp_getUpdatedDate.send();
 }
 
