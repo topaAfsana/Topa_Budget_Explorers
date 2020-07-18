@@ -8,7 +8,7 @@ var tbl;
 var host="http://52.91.249.153:8080";
 
 
-//DONE
+//1.
 function createTable(){
 
 			var myCreatetable=document.querySelector("#myTableId").value.toUpperCase();
@@ -39,6 +39,8 @@ function createTable(){
 
 //=======
 
+
+// 2.
 function findTable(){
 	var myQuerytable=document.querySelector("#myTableId").value.toUpperCase();
 			 if (myQuerytable == "") {
@@ -70,55 +72,61 @@ function findTable(){
 		}
 
 		// ===
-function clearTable(){
+
+	// 3.
+	function clearTable(){
 	
 	document.querySelector("#dbTableViewerblockId").innerHTML = '';
 	document.querySelector("#dbTabletotalBottomId").innerHTML ='';
 	document.querySelector("#dbTableTitleId").innerHTML ='';
 	document.querySelector("#dashboardTextTotal").innerHTML='';
 	document.querySelector("#dashboardBodylastUpdate").innerHTML ='';
-}
+	}
 
 
+	// 4.
 
-		function addRecord(){
-	 	 	var myTable= document.querySelector("#myTableId").value.toUpperCase();
-			var myDate=document.querySelector("#dateId").value.toUpperCase();
-	 		var myItemTitle= document.querySelector("#titleId").value.toUpperCase();
-	 		var myamount= document.querySelector("#amountId").value;
+	function addRecord(){
+	 	var myTable= document.querySelector("#myTableId").value.toUpperCase();
+		var myDate=document.querySelector("#dateId").value.toUpperCase();
+	 	var myItemTitle= document.querySelector("#titleId").value.toUpperCase();
+	 	var myamount= document.querySelector("#amountId").value;
 
-	 		if (myTable == "") {
+	 			if (myTable == "") {
 	 			alert ("Please enter Table name");
         		return false;}
 
-	 		// if (myDate == "") {
-	 		// 	alert ("Please enter a date");
-    //     		return false;}
-	 	 	if (myItemTitle == "") {
+	 
+	 	 		if (myItemTitle == "") {
 	 			alert ("Please enter a title of the item");
         		return false;}
+        		
+        		if ( myamount == ""){
+        		alert("Please enter a amount of the item");
+        		return false;}
+
         		if (isNaN(myamount)){
         		alert("Amount must be numbers!");
         		return false;}
+        		
 
-	
-			var xmlhttp1= new XMLHttpRequest();
+        if (!(myTable == "") && !(myItemTitle == "") && (Number(myamount)) ) {
+        			var xmlhttp1= new XMLHttpRequest();
 			var addRecordUrl= host+'/add_record';
 			var param="tableName="+myTable+"&date="+myDate+"&title="+myItemTitle+"&amount="+myamount+"";
 
 			xmlhttp1.onreadystatechange = function() {
-			if(xmlhttp1.readyState===4 & xmlhttp1.status===200){
-				//test purpose use
-				// alert(xmlhttp1.responseText);
+				if(xmlhttp1.readyState===4 & xmlhttp1.status===200){
+				// test purpose use
+				alert(xmlhttp1.responseText);
 			}}
-			xmlhttp1.open("POST",addRecordUrl+"?"+param,true);
+
+	 		xmlhttp1.open("POST",addRecordUrl+"?"+param,true);
 			xmlhttp1.setRequestHeader('Content-Type', 'application/json');
 			xmlhttp1.send(null);
-			// var myDate=document.querySelector("#dateId").value='';
-	 		var myItemTitle= document.querySelector("#titleId").value='';
-	 		var myamount= document.querySelector("#amountId").value='';
-	 		// ====
-	 		//CURRENT DATE
+
+
+			//CURRENT DATE TO UPDATE DATE
 	 		var today = new Date();
 			var dd = String(today.getDate()).padStart(2, '0');
 			var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -128,25 +136,31 @@ function clearTable(){
 	 		// ====
 	 		updateDateOn(myTable,today);
 	 		getupdatedDate(myTable);
-		}
+	 		// ===
+	 		
+	 		
+	 		
+	 	}
+	 	else{alert("Failed to add Item,please enter all required value")}
+
+			var myItemTitle= document.querySelector("#titleId").value='';
+	 		var myamount= document.querySelector("#amountId").value='';
+	 	}
 // =======
 
 
 //=======
-		// 2.
-		
-	//=======
-	function addAndLoad(){
+	
+	// 5.
+		function addAndLoad(){
 		addRecord();
-		showRecords();
+		findTable();
 
 	}
 
-
-
-	
-
 //=======
+
+// 6.
 function showRecords() {
 
 			var myTable=document.querySelector("#myTableId").value.toUpperCase();
@@ -180,7 +194,7 @@ function showRecords() {
 
 		}}; xmlhttp.send();}
 
-
+		// 7.
 	function clear(){
 			var myTable= document.querySelector("#myTableId").value='';
 			var myDate=document.querySelector("#dateId").value='';
@@ -188,26 +202,28 @@ function showRecords() {
 	 		var myamount= document.querySelector("#amountId").value='';
 
 	}
-
+	// 8.
 	function setCurrentDate(){
 		var today = new Date();
-var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-var yyyy = today.getFullYear();
+		var dd = String(today.getDate()).padStart(2, '0');
+		var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+		var yyyy = today.getFullYear();
 
-var today = mm + '/' + dd + '/' + yyyy;
-document.querySelector("#dateId").value=today;}
+		var today = mm + '/' + dd + '/' + yyyy;
+		document.querySelector("#dateId").value=today;}
 
+	// 9.
 	function getCurrentDate(){
 		var today = new Date();
-var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-var yyyy = today.getFullYear();
+		var dd = String(today.getDate()).padStart(2, '0');
+		var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+		var yyyy = today.getFullYear();
 
-var today = mm + '/' + dd + '/' + yyyy;
-return today;}
+		var today = mm + '/' + dd + '/' + yyyy;
+			return today;}
 
 
+// 10.
 function updateDateOn(myTable,myUpdatedDate){
 var xmlhttp_updateDate= new XMLHttpRequest();
 			var updateDateUrl= host+'/update_on';
@@ -224,6 +240,8 @@ var xmlhttp_updateDate= new XMLHttpRequest();
 
 }
 
+
+// 11.
 function getupdatedDate(myTable){
 	var getUpdatedDateUrl= host+'/get_updated_date';
 	var xmlhttp_getUpdatedDate= new XMLHttpRequest();
@@ -234,7 +252,7 @@ function getupdatedDate(myTable){
 			if(xmlhttp_getUpdatedDate.readyState===4 & xmlhttp_getUpdatedDate.status===200){
 			  var updatedDateresponse=xmlhttp_getUpdatedDate.responseText;
 			  //test purpose uncomment
-				// alert(updatedDateresponse);
+			  // alert(updatedDateresponse);
 				document.querySelector("#dashboardBodylastUpdate").innerHTML = "Table Last Updated: "+updatedDateresponse;
 			}}; xmlhttp_getUpdatedDate.send();
 }
@@ -242,9 +260,7 @@ function getupdatedDate(myTable){
 
 
 
-
-
-
+// 
 function showTables() {
 		var showTablesUrl= host+'/show_tables';
 		var xmlhttp_showTables= new XMLHttpRequest();
