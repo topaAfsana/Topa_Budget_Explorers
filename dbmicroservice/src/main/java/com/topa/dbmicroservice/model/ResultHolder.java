@@ -4,7 +4,7 @@ public class ResultHolder {
     private int id;
     private String date;
     private String title;
-    private int amount;
+    private float amount;
 
 
     //DEFAULT CONSTRUCTOR
@@ -37,11 +37,11 @@ public class ResultHolder {
         this.title = title;
     }
 
-    public int getAmount() {
+    public float getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(float amount) {
         this.amount = amount;
     }
 }

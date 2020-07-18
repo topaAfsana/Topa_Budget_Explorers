@@ -164,11 +164,12 @@ function showRecords() {
 				var records = JSON.parse(xmlhttp.responseText);	
 			
 				var main= "";
-				var sum=0;
+				var fetch_sum=0;
 
 				for (i=0;i<records.length;i++){
 				main += "<tr><td>"+records[i].id+"</td><td>"+records[i].date+"</td><td>"+records[i].title+"</td><td>"+records[i].amount+"</td></tr>";
-				sum+=records[i].amount;}
+				fetch_sum+=records[i].amount;}
+				var sum=Number(fetch_sum).toFixed(2);
 
 				var tblbottom= "</table>";
 				tbl=tbltop + main + tblbottom;

@@ -52,7 +52,7 @@ public class DBService {
                 "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
                 "  `date` VARCHAR(45) NULL,\n" +
                 "  `title` VARCHAR(45) NOT NULL,\n" +
-                "  `amount` INT NOT NULL,\n" +
+                "  `amount` FLOAT(100,2) NOT NULL,\n" +
                 "  PRIMARY KEY (`id`),\n" +
                 "  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);\n");
             addTableToUpdatedOnService(tableName);
@@ -86,7 +86,7 @@ public class DBService {
 
 
     // 3. SERVICE: INSERT ROW IN THE TABLE
-    public String addRecordService(String tableName, String date,String title, int amount) {
+    public String addRecordService(String tableName, String date,String title, float amount) {
         jdbc.execute("INSERT INTO `TOPADB`.`" + tableName + "`(`id`,`date`,`title`,`amount`)VALUES(id,\"" + date + "\",\"" + title + "\"," + amount + ");");
         return "ROW/RECORD INSERTED IN THE TABLE"; }
 
@@ -107,7 +107,7 @@ public class DBService {
                 resultHolder.setId(rs.getInt(1));
                 resultHolder.setDate(rs.getString(2));
                 resultHolder.setTitle(rs.getString(3));
-                resultHolder.setAmount(rs.getInt(4));
+                resultHolder.setAmount(rs.getFloat(4));
                 list.add(resultHolder); }
             con.close();
             return  list;

@@ -31,7 +31,7 @@ public class DBController {
 
     //3. url sample: http://localhost:8080/add_record?tableName=table1&date=24 may&expense=lotte&amount=340
     @RequestMapping(value = "/add_record", method = RequestMethod.POST)
-    public String addRecord(@RequestParam() String tableName, String date,String title, int amount) {
+    public String addRecord(@RequestParam() String tableName, String date,String title, float amount) {
         return dbService.addRecordService(tableName,date,title,amount); }
 
 
