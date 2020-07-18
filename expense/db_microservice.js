@@ -75,8 +75,8 @@ function clearTable(){
 	document.querySelector("#dbTableViewerblockId").innerHTML = '';
 	document.querySelector("#dbTabletotalBottomId").innerHTML ='';
 	document.querySelector("#dbTableTitleId").innerHTML ='';
-	document.querySelector("#dashboardText").innerHTML='';
-	document.querySelector("#dashboardBody2").innerHTML ='';
+	document.querySelector("#dashboardTextTotal").innerHTML='';
+	document.querySelector("#dashboardBodylastUpdate").innerHTML ='';
 }
 
 
@@ -176,7 +176,7 @@ function showRecords() {
 				document.querySelector("#dbTableViewerblockId").innerHTML =tbl
 				document.querySelector("#dbTabletotalBottomId").innerHTML ="TOTAL:"+sum;
 				document.querySelector("#dbTableTitleId").innerHTML = "YOUR TABLE: "+myTable
-				document.querySelector("#dashboardText").innerHTML="Total Expense: "+ sum
+				document.querySelector("#dashboardTextTotal").innerHTML="Total Expense: "+ sum
 
 		}}; xmlhttp.send();}
 
@@ -235,7 +235,7 @@ function getupdatedDate(myTable){
 			  var updatedDateresponse=xmlhttp_getUpdatedDate.responseText;
 			  //test purpose uncomment
 				// alert(updatedDateresponse);
-				document.querySelector("#dashboardBody2").innerHTML = "LAST UPDATED: "+updatedDateresponse;
+				document.querySelector("#dashboardBodylastUpdate").innerHTML = "LAST UPDATED: "+updatedDateresponse;
 			}}; xmlhttp_getUpdatedDate.send();
 }
 
