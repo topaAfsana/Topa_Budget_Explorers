@@ -2,6 +2,7 @@ package com.topa.dbmicroservice.controller;
 
 
 import com.topa.dbmicroservice.model.ResultHolder;
+import com.topa.dbmicroservice.model.UserTable;
 import com.topa.dbmicroservice.service.DBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -56,6 +57,38 @@ public class DBController {
     @RequestMapping("/show_tables")
     public List<String> getAllDataTable() throws ClassNotFoundException, SQLException {
         return dbService.getAllDataTableListService(); }
+
+
+    //8. url sample: http://localhost:8080/create_profile?profileName=yourName&pass=yourPass
+    @RequestMapping(value = "/create_profile", method = RequestMethod.POST)
+    public String createProfile(@RequestParam() String profileName,String  pass) {
+        return dbService.createProfileService(profileName,pass); }
+
+
+    //9. url sample: http://localhost:8080/validate_profile?profileName=yourName&pass=yourPass
+    @RequestMapping(value = "/validate_profile", method = RequestMethod.GET)
+    public List<UserTable> validateProfile(@RequestParam() String profileName, String  pass)throws ClassNotFoundException, SQLException{
+        return dbService.validateProfileService(profileName,pass); }
+
+
+    //10. url sample: http://localhost:8080/authenticate_profile?profileName=yourName&pass=yourPass
+    @RequestMapping(value = "/authenticate_profile", method = RequestMethod.GET)
+    public String authenticateProfile(@RequestParam() String profileName, String  pass)throws ClassNotFoundException, SQLException{
+        return dbService.authenticateProfileService(profileName,pass); }
+
+
+//    //11. url sample: http://localhost:8080/get_profile_tables?profileName=yourName
+//    @RequestMapping(value = "/get_profile_tables", method = RequestMethod.GET)
+//    public Object getProfileTables(@RequestParam() String profileName)throws ClassNotFoundException, SQLException{
+//        return dbService.getProfileTablesService(profileName); }
+
+
+
+
+
+
+
+
 
 
 

@@ -1,6 +1,11 @@
 package com.topa.dbmicroservice.service;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.topa.dbmicroservice.model.ResultHolder;
+import com.topa.dbmicroservice.model.UserTable;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -24,13 +29,13 @@ public class DBService {
         //Database Username
         String username = "root";
 
-//        RDS DB INFO
-        String dbUrl = "jdbc:mysql://budget-explorer-db.ckult7yatbtp.us-east-1.rds.amazonaws.com:3306/TOPADB?serverTimezone=UTC";
-        String password = "TOPADBRDS";
+//        1.RDS DB INFO
+//        String dbUrl = "jdbc:mysql://budget-explorer-db.ckult7yatbtp.us-east-1.rds.amazonaws.com:3306/TOPADB?serverTimezone=UTC";
+//        String password = "TOPADBRDS";
 
-        //LOCAL DB INFO TO TEST
-//         String dbUrl = "jdbc:mysql://192.168.0.14:3306/TOPADB?serverTimezone=UTC";
-//         String password = "Tishan@2016";
+        //2.LOCAL DB INFO TO TEST
+         String dbUrl = "jdbc:mysql://192.168.0.14:3306/TOPADB?serverTimezone=UTC";
+         String password = "Tishan@2016";
 
 
         //LOAD MYSQL JDBC DRIVER
@@ -56,6 +61,24 @@ public class DBService {
                 "  PRIMARY KEY (`id`),\n" +
                 "  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);\n");
             addTableToUpdatedOnService(tableName);
+            return "TABLE IS SUCCESSFULLY CREATED";}
+    }
+
+
+    //1. SERVICE: CREATE TABLE WITH PROFILE
+    public String createTableService(String profileName,String tableName) {
+        //THIS METHOD USED SPRING BOOT JDBC TEMPLATE
+        if(findTableService(tableName)=="TABLE FOUND"){return "TABLE ALREADY EXISTED";}
+        else{jdbc.execute(" CREATE TABLE `TOPADB`.`" + tableName + "` (\n" +
+                "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
+                "  `date` VARCHAR(45) NULL,\n" +
+                "  `title` VARCHAR(45) NOT NULL,\n" +
+                "  `amount` FLOAT(100,2) NOT NULL,\n" +
+                "  PRIMARY KEY (`id`),\n" +
+                "  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);\n");
+            addTableToUpdatedOnService(tableName);
+
+
             return "TABLE IS SUCCESSFULLY CREATED";}
     }
 
@@ -163,6 +186,62 @@ public class DBService {
 
         return  list;
     }
+
+    //9. SERVICE: CREATE PROFILE
+    public String createProfileService(String profileName,String pass){
+        jdbc.execute("INSERT INTO `TOPADB`.`USERS_TABLE`(`id`,`profileName`,`pass`)\n" +
+                "VALUES(id,\""+profileName+"\",\""+pass+"\");");
+        return "PROFILE IS SUCCESSFULLY CREATED";
+    }
+
+    //10. SERVICE: VALIDATE PROFILE
+    public List<UserTable> validateProfileService(String profileName,String pass) throws ClassNotFoundException, SQLException{
+            Connection con=createDBConnection();
+            //Create Statement Object
+            Statement stmt = con.createStatement();
+            //Query to Execute
+            String query = "SELECT * FROM `TOPADB`.`USERS_TABLE`";
+            // Execute the SQL Query. Store results in ResultSet
+            ResultSet rs = stmt.executeQuery(query);
+            // While Loop to iterate through all data and print results
+            List<UserTable> list = new ArrayList<>();
+            while (rs.next()) {
+                UserTable userTable = new UserTable();
+                userTable.setId(rs.getInt(1));
+                userTable.setProfileName(rs.getString(2));
+                userTable.setPass(rs.getString(3));
+                list.add(userTable);
+
+
+            }
+            con.close();
+            return  list;
+    }
+
+
+    //11. SERVICE: AUTHENTICATE PROFILE
+    public String authenticateProfileService(String profileName,String pass) throws ClassNotFoundException, SQLException{
+        Connection con=createDBConnection();
+        Statement stmt = con.createStatement();
+        String query = "SELECT count(id) FROM `TOPADB`.`USERS_TABLE` where profileName=\""+profileName+"\" And pass=\""+pass+"\"";
+        ResultSet rs = stmt.executeQuery(query);
+
+
+        while (rs.next()) {
+       int rowNum=rs.getInt(1);
+       System.out.println("MY ROWS "+rowNum);
+       if (rowNum == 1){
+           return  "PROFILE FOUND";
+       }
+        else if (rowNum == 0){
+           return  "PROFILE NOT FOUND";
+        }
+        }
+        con.close();
+        return null;
+    }
+
+
 
 
 }

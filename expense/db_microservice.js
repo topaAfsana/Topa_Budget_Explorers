@@ -2,10 +2,10 @@ var tbltop=`<table class="dbTable">
 				<tr><th>Item#</th><th>Date</th><th>Title</th><th>Amount</th></tr>`;
 var tbl;
 
-// var host="http://localhost:8080";
+var host="http://localhost:8080";
 // var host="https://192.168.0.14:8443";
 // var host="https://52.91.249.153:8443";
-var host="http://52.91.249.153:8080";
+// var host="http://52.91.249.153:8080";
 
 
 //1.
@@ -260,7 +260,7 @@ function getupdatedDate(myTable){
 
 
 
-// 
+// 12.
 function showTables() {
 		var showTablesUrl= host+'/show_tables';
 		var xmlhttp_showTables= new XMLHttpRequest();
@@ -276,5 +276,105 @@ function showTables() {
 				document.querySelector("#dbTablesZone").innerHTML=records;
 }};xmlhttp_showTables.send();
 }
+
+// 13.
+function createProfile(){
+	var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+	var myPass=document.querySelector("#myPassId").value;
+
+					if (myProfName == "") {
+	 					alert ("Please enter Profile name");
+        				return false; }
+        		 	if (myPass == "") {
+	 					alert ("Please enter Password");
+        				return false;
+    							}	
+	 
+
+			var xmlhttp_createProf= new XMLHttpRequest();
+
+			var createProfileTableUrl= host+'/create_profile';
+
+			var param="profileName="+myProfName+"&pass="+myPass+"";
+			
+			xmlhttp_createProf.onreadystatechange = function() {
+			if(xmlhttp_createProf.readyState===4 & xmlhttp_createProf.status===200){
+				var response = xmlhttp_createProf.responseText;	
+				alert(response);
+			}}
+			xmlhttp_createProf.open("POST",createProfileTableUrl+"?"+param,true);
+			xmlhttp_createProf.setRequestHeader('Content-Type', 'application/json');
+			xmlhttp_createProf.send(null);
+}
+
+
+//14.
+function validateProfile(){
+	var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+	var myPass=document.querySelector("#myPassId").value;
+
+
+
+					if (myProfName == "") {
+	 					alert ("Please enter Profile name");
+        				return false; }
+        		 	if (myPass == "") {
+	 					alert ("Please enter Password");
+        				return false;
+    							}	
+localStorage.setItem("storageProf",myProfName);
+    				
+        		
+			
+        
+        	var xmlhttp_validateProfile= new XMLHttpRequest();
+			var validateProfileUrl= host+'/authenticate_profile';
+
+			var param="profileName="+myProfName+"&pass="+myPass+"";
+
+			xmlhttp_validateProfile.onreadystatechange = function() {
+				if(xmlhttp_validateProfile.readyState===4 & xmlhttp_validateProfile.status===200){
+				
+				var response=xmlhttp_validateProfile.responseText;
+
+				alert(response);
+				if(response==="PROFILE FOUND"){
+
+				document.getElementById("expense").click();
+
+				// checkProfile(prof);				
+			}
+				else{alert("Unable to Log in,Please Register First to Log in");}
+			}}
+			inner();
+
+	 		xmlhttp_validateProfile.open("GET",validateProfileUrl+"?"+param,true);
+			xmlhttp_validateProfile.setRequestHeader('Content-Type', 'application/json');
+			xmlhttp_validateProfile.send(null);
+			return myProfName;
+}
+
+
+
+function checkProfile(prof){
+	prof=localStorage.getItem("storageProf");
+	console.log(prof);
+	alert(prof);
+
+	console.log("MY PROFILE"+prof);
+	document.querySelector("#userId").innerHTML="MY PROFILE "+ prof;
+}
+
+
+function inner(){
+	var a="ILOVE YOU";
+	document.querySelector("#userId").innerHTML=a;
+}
+
+
+
+
+
+
 
 
