@@ -1,11 +1,11 @@
 var tbltop=`<table class="dbTable">
-				<tr><th>Item#</th><th>Date</th><th>Title</th><th>Amount</th></tr>`;
+				<tr><th>Item#</th><th>Date</th><th>Title</th><th>Amount</th><th>Options</th></tr>`;
 var tbl;
 
-// var host="http://localhost:8080";
+var host="http://localhost:8080";
 // var host="https://192.168.0.14:8443";
 // var host="https://52.91.249.153:8443";
-var host="http://52.91.249.153:8080";
+// var host="http://52.91.249.153:8080";
 
 
 //1.
@@ -160,6 +160,8 @@ function findTable(){
 
 //=======
 
+
+var trId;
 // 6.
 function showRecords() {
 
@@ -179,9 +181,16 @@ function showRecords() {
 			
 				var main= "";
 				var fetch_sum=0;
+				
 
 				for (i=0;i<records.length;i++){
-				main += "<tr><td>"+records[i].id+"</td><td>"+records[i].date+"</td><td>"+records[i].title+"</td><td>"+records[i].amount+"</td></tr>";
+
+				 trId=records[i].id;
+				 alert("MY ALLERT"+trId);
+				 var editButton="<input type='button' id='edit-"+trId+"' value='Edit' class='edit' onclick="+edit_row(""+trId+"")+">";
+
+				main += "<tr id="+"row-"+trId+"><td>"+records[i].id+"</td><td>"+records[i].date+"</td><td>"+records[i].title+"</td><td id='amount_col_row"+trId+"'>"+records[i].amount+"</td><td>"
+				+editButton+"</td></tr>";
 				fetch_sum+=records[i].amount;}
 				var sum=Number(fetch_sum).toFixed(2);
 
@@ -276,5 +285,14 @@ function showTables() {
 				document.querySelector("#dbTablesZone").innerHTML=records;
 }};xmlhttp_showTables.send();
 }
+
+
+function edit_row(no){
+	var amount=document.getElementById("amount_col_row"+no+"").value;
+	var amount_new=amount.innerHTML;
+	amount.innerHTML="<input type='text' id='amount_col_row"+no+"' value='"+amount_new+"'>";
+}
+
+
 
 
