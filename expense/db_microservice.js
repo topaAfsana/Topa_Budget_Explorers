@@ -187,10 +187,12 @@ function showRecords() {
 
 				 trId=records[i].id;
 				 alert("MY ALLERT"+trId);
-				 var editButton="<input type='button' id='edit-"+trId+"' value='Edit' class='edit' onclick="+edit_row(""+trId+"")+">";
+				 // <input type='button' id='edit-"+trId+"' value='Edit' class='edit' onclick="+edit_row(""+trId+"")+">
+				 var chkButton="<input type='checkbox' id='"+trId+"' class='chk' >";
+				 
 
 				main += "<tr id="+"row-"+trId+"><td>"+records[i].id+"</td><td>"+records[i].date+"</td><td>"+records[i].title+"</td><td id='amount_col_row"+trId+"'>"+records[i].amount+"</td><td>"
-				+editButton+"</td></tr>";
+				+chkButton+"</td></tr>";
 				fetch_sum+=records[i].amount;}
 				var sum=Number(fetch_sum).toFixed(2);
 
@@ -287,11 +289,47 @@ function showTables() {
 }
 
 
+// function edit_row(no){
+// 	var amount=document.getElementById("amount_col_row"+no+"").value;
+// 	var amount_new=amount.innerHTML;
+// 	amount.innerHTML="<input type='text' id='amount_col_row"+no+"' value='"+amount_new+"'>";
+// }
+
 function edit_row(no){
 	var amount=document.getElementById("amount_col_row"+no+"").value;
-	var amount_new=amount.innerHTML;
+	alert(amount);
+	// var amount_new=amount.innerHTML;
+	var amount_new="TEST";
 	amount.innerHTML="<input type='text' id='amount_col_row"+no+"' value='"+amount_new+"'>";
 }
+
+// function getCheckedId(){
+// 	var element=document.querySelectorAll('input[class="chk"]:checked')
+// 	var chkId=element.getAttribute;
+// 	return chkId;
+// }
+
+function getSelectedCheckboxId() {
+    const checkboxes = document.querySelectorAll('input[class="chk"]:checked');
+    let ids = [];
+    checkboxes.forEach((checkbox) => {
+        ids.push(checkbox.getAttribute("id"));
+    });
+    alert(ids);
+    return ids;
+}
+
+
+function test(){
+	var no=getSelectedCheckboxId();
+	edit_row(no);
+}
+
+
+
+
+
+
 
 
 
