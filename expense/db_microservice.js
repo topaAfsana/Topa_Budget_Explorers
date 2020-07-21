@@ -94,6 +94,8 @@ function findTable(){
 	 	var myItemTitle= document.querySelector("#titleId").value;
 	 	var myamount= document.querySelector("#amountId").value;
 
+	 	alert(myTable);
+
 	 			if (myTable == "") {
 	 			alert ("Please enter Table name");
         		return false;}
@@ -363,7 +365,7 @@ function editRecord(){
 var id=getSelectedCheckboxId();
 if(getSelectedCheckboxIdLength()===1){
 	editRow(id);}
-else{alert("SELECT SPECIFIC ITEM CHECKBOX TO EDIT");}}
+else{alert("SELECT SPECIFIC ITEM CHECKBOX AND THEN CLICK EDIT TO UPDATE");}}
 
 
 
@@ -481,7 +483,7 @@ function deleteRow(){
 function deleteRecord(){
 	 		if(getSelectedCheckboxIdLength()===1){
 			deleteRow();}
-			else{alert("SELECT SPECIFIC ITEM CHECKBOX TO DELETE");}
+			else{alert("SELECT SPECIFIC ITEM CHECKBOX AND THEN CLICK EDIT TO DELETE");}
 	 	}
 
 	function cancelEdit(){
