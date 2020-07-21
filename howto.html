@@ -7,15 +7,18 @@
 
 	<link rel="styleSheet" href="expense/expense_mode.css">
 <!-- 7. HOW TO ZONE-->
-<ul> <li><a id="homeLink" href="index.html">Home</a></li></ul>
-<ul> <li><a id="expense" href="expense/expense_mode.html">Expense Check Mode</a></li></ul>
+
 </head>
 <body>
-<div id='howToBlock'>
+    <div id="header">
+  <h4 id="headerTextId">HOW TO</h4>
+  <ul> <li><a id="homeLink" href="index.html">Home</a></li></ul>
+<ul> <li><a id="expense" href="expense/expense_mode.html">Expense Check Mode</a></li></ul>
+<div id="howToBlock">
   <h3>INSTRUCTIONS TO USE EXPENSE CHECK FEATURE<h1>
     <h4>STEP 1:</h4>
     <P>YOU NEED TO CREATE A TABLE AS LIST-HOLDER TO STORE YOUR MONTHLY EXPENSE DATA.YOU CAN CREATE MULTIPLE TABLE FOR DIFFERENT MONTHS.ITS IMPORTANT TO REMEBRE YOUR TABLE NAME,IT WILL BE REQUIRED LATER TIME YOU WOULD WANT TO ADD MORE ITEM TO THAT TABLE/LIST.
-	NAMING CONVENTION IS AS, USE YOURNAME_MONTH OR ANYTHING MEANINGFUL TO REMEMBER AND FIND OF YOURS ONE FOR LATER TIME.</P>
+    NAMING CONVENTION IS AS, USE YOURNAME_MONTH OR ANYTHING MEANINGFUL TO REMEMBER AND FIND OF YOURS ONE FOR LATER TIME.</P>
     <h4>STEP 2:</h4>
     <P>ONCE YOU CRETAED YOUR DATA BASE TABLE,IT CREATES A EMPTY LIST HOLDER IN THE DATABASE,THE TOTAL AMOUNT WILL BE SHOWN AS ZERO INITIALLY. </P>
 <h4>STEP 3:</h4>
@@ -26,9 +29,16 @@
     <p>YOU CAN USE THIS FEATURE AS MUCH AS YOU WANT ,AS MANY ITEM YOU WANT ,IN ORDER TO STORE AND KEEP TRACK OF YOUR MONTHLY EXPENSE.</p>
 </div>
 
-<p onclick="showTables()">#devtool</p>
+</div>
+
+ <div id="header">
+    <p onclick="showTables()">devtool</p>
  <div id='dbTablesZone'></div>
 
-<!-- 7. HOW TO ZONE-->
+ </div>
+
+
+
+<!-- 7 HOW TO ZONE-->
 
 <script src="expense/db_microservice.js"></script>
