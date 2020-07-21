@@ -58,6 +58,17 @@ public class DBController {
         return dbService.getAllDataTableListService(); }
 
 
+    //8. url sample: http://localhost:8080/update_record?tableName=table1&date=24may&expense=lotte&amount=340&id=1
+    @RequestMapping(value = "/update_record", method = RequestMethod.POST)
+    public String updateRecord(@RequestParam() String tableName, String date,String title, float amount,int id) {
+        return dbService.updateRecordService(tableName,date,title,amount,id); }
+
+
+    //9. url sample: http://localhost:8080/dlete_record?id=1
+    @RequestMapping(value = "/delete_record", method = RequestMethod.POST)
+    public String deleteRecord(@RequestParam() String tableName, int id) {
+        return dbService.deleteRecordService(tableName,id); }
+
 
 
 

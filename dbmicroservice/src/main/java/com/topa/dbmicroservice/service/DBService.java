@@ -165,4 +165,21 @@ public class DBService {
     }
 
 
+
+
+    //9. SERVICE: UPDATE RECORD IN A TABLE
+    public String updateRecordService(String tableName, String date,String title, float amount, int id) {
+        jdbc.execute("UPDATE `TOPADB`.`"+tableName+"` SET\n" +
+                " `date` = \""+date+"\", `title` = \""+title+"\",`amount` = "+amount+" WHERE `id` = "+id+";");
+        return "ROW/RECORD UPDATED IN THE TABLE"; }
+
+
+
+
+    //9. SERVICE: DELETE RECORD IN A TABLE
+    public String deleteRecordService(String tableNmae,int id) {
+        jdbc.execute("DELETE FROM `TOPADB`.`"+tableNmae+"` WHERE `id` = "+id+";");
+        return "ROW/RECORD DELETED FROM THE TABLE"; }
+
+
 }
