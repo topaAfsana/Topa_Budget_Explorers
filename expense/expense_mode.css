@@ -2,22 +2,27 @@ body{
 	font-family: arial;
 	margin: 2%;
 	font-size: 30px;
+	height: 100%;
 
 
 }
 button{
-	width: 230px;
-	padding: 10px;
+	width: 185px;
+	padding: 8px;
 	text-align: center;
 	background-color: teal;
-	border-radius: 20px;
+	border-radius: 10px;
 	color: white;
 	border: 5px solid green;
 
 }
 .formButtons{
 	text-align: center;
+		font-size: 28px;
+
 }
+
+
 
 /*button:hover{
 	width: 230px;
@@ -41,11 +46,9 @@ input[type=text]:focus{
 
 ul {
   list-style-type: none;
-
   margin: 0;
   padding: 0;
-  display: inline;
-}
+  display: inline;}
 li{
 	  display: inline-block;
 
@@ -114,11 +117,18 @@ margin-top: 10px;}
 
 
 }
+#dashboardBodyTableName{
+	color: black;
+	text-decoration: underline;
+	font-size: 28px;
+	color: teal;
+	font-weight: bolder;
+}
 
 
 #dashboardTextId{
 	text-align: center;
-	margin-top: 2px;
+	margin-top: 0px;
 }
 
 #dashboardBody{
@@ -127,9 +137,9 @@ margin-top: 10px;}
 */	border-radius: 5px;
 	margin: 20px;
 	width: 90%;
-	font-size: 35px;
-
-}
+	font-size: 28px;
+	color: black;
+	font-family: sans-serif;}
 
 #dbTableViewerZone{
 	padding: 20px;
@@ -157,10 +167,10 @@ margin-top: 10px;}
 
 }
 #dbTableTitleId{
-	width: 80%;
+	width: 95%;
 	text-align: center;
 	padding: 10px;
-	margin-left: 70px;
+	margin-left: 5px;
 	/*margin-top: 10px; */
 	color: teal;
 	  /*background-color: teal;*/
@@ -178,13 +188,13 @@ label {
     text-align: left;
 }
 table{
-	width: 80%;
-	 margin: 80px;
+	width: 95%;
+	 margin: 20px;
 
 }
 
 table, th, td{
-	border: 1px solid black;
+	border: 2px solid teal;
 	padding: 5px;
 	font-family: sans-serif;
   font-size: 30px;
@@ -198,17 +208,62 @@ td{
 tbody{
 	height: 200px;
 	overflow: auto;
+}
+
+.editButtons{
+	width: 80px;
+	padding: 5px;
+	text-align: center;
+	background-color: teal;
+	border-radius: 10px;
+	color: white;
+	border: 1px solid green;
+	font-size: 20px;
+	display: none;
+}
+#editOptionZone{
+	float: right;
+	margin-right: 10px;
+	margin-top: 10px;
+}
+
+#cancelId{
+	width: 40px;
+}
+
+.chk{
+	padding: 5px;
+	width: 30px;
+}
+
+
+
+.newInput{
+	padding: 3px;
+	width: 170px;
+	font-size: 20px;
+}
+.newInput:focus{
+	padding: 1px;
+	background-color: gray;
+	width: 220px;
+	color: white;
+	height: 10px;
 
 }
 
 #dbTabletotalBottomId{
+	position: relative;
 	float: left;
-	margin-top: -80px;
+	margin-top: -20px;
 	margin-left: 580px;
-	color: black;
-	font-size: 20px;
-	border:1px solid teal;
-}
+	color: teal;
+	font-size: 25px;
+	/*border:2px solid teal;*/
+	padding: 5px;
+	font-weight: bolder;
+/*	width: 220px;
+*/}
 
 footer{
 	position: relative;
@@ -220,6 +275,12 @@ footer{
 	font-size: 20px;
 	text-align: center;
 	left: 100px;
+}
+
+#howToBlock{
+	border: 2px soid teal;
+	width: 100%;
+
 }
 
 

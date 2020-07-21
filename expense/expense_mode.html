@@ -52,6 +52,7 @@
 <div id="dashboardZone">
   <h3 id="dashboardTextId">Dashboard</h3>
   <div id='dashboardBody'>
+    <h3 id="dashboardBodyTableName"></h3>
     <h3 id='dashboardBodylastUpdate'></h3>
     <h3 id="dashboardTextTotal"></h3>
   </div>
@@ -63,11 +64,18 @@
 
 <!-- 4. TABLE ZONE-->
 
+
 <div id="dbTableViewerZone">
 	<h3 id="tableZoneTitle">Explorer</h3>
+  <div id="editOptionZone">
+  <input type='button' id='editId' value='Edit' class='editButtons' onclick="editRecord()">
+  <input type='button' id='saveId' value='Save' class='editButtons' style="display:none;" onclick="updateRecord()">
+  <input type='button' id='deleteId' value='Delete' class='editButtons' style="display:none;" onclick="deleteRecord()">
+  <input type='button' id='cancelId' value='X' class='editButtons' style="display:none;" onclick="cancelEdit()">
+</div>
 <div id='dbTableTitleId'></div>
-<div id="dbTableViewerblockId"></div>
-<div id="updatedOnblockId"></div> 
+<div class="dashBodyText" id="dbTableViewerblockId"></div>
+<div class="dashBodyText" id="updatedOnblockId"></div> 
 <div id='dbTabletotalBottomId'></div>
 
 </div>
