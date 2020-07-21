@@ -93,7 +93,7 @@ function findTable(){
 		var myDate=document.querySelector("#dateId").value;
 	 	var myItemTitle= document.querySelector("#titleId").value;
 	 	var myamount= document.querySelector("#amountId").value;
-			 	alert(myTable);
+// 			 	alert(myTable);
 
 
 	 	alert(myTable);
