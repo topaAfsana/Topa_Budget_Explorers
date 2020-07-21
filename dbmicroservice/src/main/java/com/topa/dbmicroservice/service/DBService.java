@@ -24,13 +24,13 @@ public class DBService {
         //Database Username
         String username = "root";
 
-//        RDS DB INFO
-//        String dbUrl = "jdbc:mysql://budget-explorer-db.ckult7yatbtp.us-east-1.rds.amazonaws.com:3306/TOPADB?serverTimezone=UTC";
-//        String password = "TOPADBRDS";
+        // 1.RDS DB INFO
+        String dbUrl = "jdbc:mysql://budget-explorer-db.ckult7yatbtp.us-east-1.rds.amazonaws.com:3306/TOPADB?serverTimezone=UTC";
+        String password = "TOPADBRDS";
 
-        //LOCAL DB INFO TO TEST
-         String dbUrl = "jdbc:mysql://192.168.0.14:3306/TOPADB?serverTimezone=UTC";
-         String password = "Tishan@2016";
+        //2.LOCAL DB INFO TO TEST
+//         String dbUrl = "jdbc:mysql://192.168.0.14:3306/TOPADB?serverTimezone=UTC";
+//         String password = "Tishan@2016";
 
 
         //LOAD MYSQL JDBC DRIVER
@@ -176,7 +176,7 @@ public class DBService {
 
 
 
-    //9. SERVICE: DELETE RECORD IN A TABLE
+    //10. SERVICE: DELETE RECORD IN A TABLE
     public String deleteRecordService(String tableNmae,int id) {
         jdbc.execute("DELETE FROM `TOPADB`.`"+tableNmae+"` WHERE `id` = "+id+";");
         return "ROW/RECORD DELETED FROM THE TABLE"; }
