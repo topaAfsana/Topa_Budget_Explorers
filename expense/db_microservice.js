@@ -89,7 +89,7 @@ function findTable(){
 	// 4.
 
 	function addRecord(){
-	 	var myTable= document.querySelector("#myTableId").value;
+	 	var myTable= document.querySelector("#myTableId").value.toUpperCase();
 		var myDate=document.querySelector("#dateId").value;
 	 	var myItemTitle= document.querySelector("#titleId").value;
 	 	var myamount= document.querySelector("#amountId").value;
