@@ -1,5 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
+header("Content-Type: text/javascript; charset=utf-8");
+
 session_start();
 
 if(isset($SESSION['user_id'])){

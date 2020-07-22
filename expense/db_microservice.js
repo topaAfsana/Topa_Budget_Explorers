@@ -312,7 +312,8 @@ function createProfile(){
 function validateProfile(){
 	var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
 	var myPass=document.querySelector("#myPassId").value;
-
+	
+var globalHoldProf=myProfName;
 
 
 					if (myProfName == "") {
@@ -321,12 +322,8 @@ function validateProfile(){
         		 	if (myPass == "") {
 	 					alert ("Please enter Password");
         				return false;
-    							}	
-localStorage.setItem("storageProf",myProfName);
-    				
+    							}	    				
         		
-			
-        
         	var xmlhttp_validateProfile= new XMLHttpRequest();
 			var validateProfileUrl= host+'/authenticate_profile';
 
@@ -338,20 +335,61 @@ localStorage.setItem("storageProf",myProfName);
 				var response=xmlhttp_validateProfile.responseText;
 
 				alert(response);
+				// ====
+			var xmlhttp_holdProfile= new XMLHttpRequest();
+			var holdProfileUrl= host+'/hold_profile';
+
+			var param="profileName="+myProfName+"";
+
+			xmlhttp_holdProfile.onreadystatechange = function() {
+				if(xmlhttp_holdProfile.readyState===4 & xmlhttp_holdProfile.status===200){
+				
+				var Hresponse=xmlhttp_holdProfile.responseText;
+				globalHoldProf=Hresponse;
+
+				alert("HRESPONSE "+Hresponse);
+				// return Hresponse;
+				
+
+							}}
+
+	 		xmlhttp_holdProfile.open("GET",holdProfileUrl+"?"+param,true);
+			xmlhttp_holdProfile.setRequestHeader('Content-Type', 'application/json');
+			xmlhttp_holdProfile.send(null);
+
+					// ====
 				if(response==="PROFILE FOUND"){
-
 				document.getElementById("expense").click();
+				alert("WELCOME TO EXPENSE PAGE");
 
-				// checkProfile(prof);				
+				alert("GLOBAL RESPONSE PROF "+globalHoldProf);
+
+				alert("BUTTON VAL"+document.querySelector("#userId").value);
+
+				
+
+				// document.querySelector("#userId").innerHTML=myProfName;
+				// // document.querySelector("#userId").value="TESTER ME";
+				// document.querySelector("#userId").innerHTML=globalHoldProf;
+
+
+					// alert(holdprofile(myProfName));
+
+					
+
+
 			}
 				else{alert("Unable to Log in,Please Register First to Log in");}
 			}}
-			inner();
 
 	 		xmlhttp_validateProfile.open("GET",validateProfileUrl+"?"+param,true);
 			xmlhttp_validateProfile.setRequestHeader('Content-Type', 'application/json');
 			xmlhttp_validateProfile.send(null);
-			return myProfName;
+			
+				document.querySelector("#userId").innerHTML=myProfName;
+				document.querySelector("#userId").innerHTML=globalHoldProf;
+
+
 }
 
 
@@ -364,6 +402,59 @@ function checkProfile(prof){
 	console.log("MY PROFILE"+prof);
 	document.querySelector("#userId").innerHTML="MY PROFILE "+ prof;
 }
+
+function holdprofile(myProfName){
+	// var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+
+				
+        		
+        	var xmlhttp_holdProfile= new XMLHttpRequest();
+			var holdProfileUrl= host+'/hold_profile';
+
+			var param="profileName="+myProfName+"";
+
+			xmlhttp_holdProfile.onreadystatechange = function() {
+				if(xmlhttp_holdProfile.readyState===4 & xmlhttp_holdProfile.status===200){
+				
+				var response=xmlhttp_holdProfile.responseText;
+
+				// alert(response);
+				return response;
+							}}
+
+	 		xmlhttp_holdProfile.open("GET",holdProfileUrl+"?"+param,true);
+			xmlhttp_holdProfile.setRequestHeader('Content-Type', 'application/json');
+			xmlhttp_holdProfile.send(null);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -397,36 +488,36 @@ function checkProfile(prof){
 
 //B.
 
-//1
-$(function(){
+// //1
+// $(document).ready(function(){
 
 
-//2
-	$("#logInBtnId").click(function(){
-		// $("#logInBtnId").hide();
-		// $("#logInloadId").innerHTML("LOADING");
-		var profilename= $("#myProfileId").val();
-		var password= $("#myPassId").val();
-$.post("login.php",{profilename: profilename,password:password})
-// 3
-.done(function( data ) {
-	window.location= "expense/expense_mode.html";
+// //2
+// 	$("#logInBtnId").click(function(){
+// 		// $("#logInBtnId").hide();
+// 		// $("#logInloadId").innerHTML("LOADING");
+// 		var profilename= $("#myProfileId").val();
+// 		var password= $("#myPassId").val();
+// $.post("login.php",{profilename: profilename,password:password})
+// // 3
+// .done(function( data ) {
+// 	window.location= "expense/expense_mode.html";
 
-	// 3
-});
-// 3
+// 	// 3
+// });
+// // 3
 
-// else{$("#logInBtnId").text("LOG IN FAILED");
-// 				$("#logInBtnId").show();}
+// // else{$("#logInBtnId").text("LOG IN FAILED");
+// // 				$("#logInBtnId").show();}
 
 
 
-//2
-	});
-	//2
-//1	
-});
-//1
+// //2
+// 	});
+// 	//2
+// //1	
+// });
+// //1
 
 
 

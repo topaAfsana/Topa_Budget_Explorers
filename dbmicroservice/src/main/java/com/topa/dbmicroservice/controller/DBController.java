@@ -77,6 +77,12 @@ public class DBController {
     public String authenticateProfile(@RequestParam() String profileName, String  pass)throws ClassNotFoundException, SQLException{
         return dbService.authenticateProfileService(profileName,pass); }
 
+    //10. url sample: http://localhost:8080/hold_profile?profileName=yourName
+    @RequestMapping(value = "/hold_profile", method = RequestMethod.GET)
+    public String holdProfile(@RequestParam() String profileName){
+        return dbService.holdProfileService(profileName); }
+
+
 
 //    //11. url sample: http://localhost:8080/get_profile_tables?profileName=yourName
 //    @RequestMapping(value = "/get_profile_tables", method = RequestMethod.GET)

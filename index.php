@@ -5,6 +5,7 @@
 
 <title>BUDGET EXPLORER-HOME PAGE</title>
 	<link rel="styleSheet" href="index.css">
+<script src="jquery.js"></script>
 </head>
 <body>
 
@@ -32,7 +33,7 @@
 	<p> <strong>ASSET MODE</strong> ALLOWS YOU TO SORT THE ASSET ITEMS AND PROVIDE THE AMOUNT OF TOTAL ASSET. NOTE:IT DOES NOT STORE ANY DATA, ITS VIEW ONLY FEATURE.</p>
 </div>
 
-<div id=logInZone>deletable
+<!-- <div id=logInZone>deletable
 	<h4>Please Log in</h4>
 	<form>
   <label>Profile Name: </label> <input type="text" placeholder="Ex: Enter your Profile "id="myProfileId"></input>
@@ -43,10 +44,10 @@
    <button type="button" onclick="createProfile()"><label class='formButtons'>Register</label></button>
 </form>
 </div>
+ -->
 
 
-
-<!--  <div id=logInZone>
+ <div id=logInZone>
 	<h4>Please Log in</h4>
 	<form>
   <label>Profile Name: </label> <input type="text" placeholder="Ex: Enter your Profile "id="myProfileId"></input>
@@ -54,12 +55,12 @@
   <label> Password: </label> <input type="text" placeholder="Enter your password"id="myPassId"></input>
     <button type="button" id="logInBtnId"><label class='formButtons' >LOGIN</label></button>
 
-  <button type="button" id="logInBtnId"><label class='formButtons' onclick="logIn()">LOGIN</label></button>
-  <div id="logInloadId"><span> </span></div>
+<!--   <button type="button" id="logInBtnId"><label class='formButtons' onclick="logIn()">LOGIN</label></button>
+ -->  <div id="logInloadId"><span> </span></div>
 
    <button type="button" ><label class='formButtons'>Register</label></button>
 </form>
-</div> -->
+</div>
 
 
 

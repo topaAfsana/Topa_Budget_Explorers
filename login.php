@@ -1,4 +1,7 @@
-<?phpheader('Access-Control-Allow-Origin: *');
+<?php
+header('Access-Control-Allow-Origin: *');
+header("Content-Type: text/javascript; charset=utf-8");
+
 if(isset($_POST['myProfileId']) && isset($_POST['myPassId'])) {
 
 $profilename= $_POST['myProfileId'];
