@@ -500,6 +500,14 @@ function displayEditOptions(){
 
 
 
+function authenticateLogIn(){
+	var logInValue=document.querySelector("#profHoldId").value;
+	document.querySelector("#logInZone").style.display="none";
+	document.querySelector("#hideId").style.display="block";
+	document.querySelector("#userId").innerHTML= logInValue;
+}
+
+
 
 
 
