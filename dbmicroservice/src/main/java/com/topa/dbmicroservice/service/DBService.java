@@ -25,12 +25,12 @@ public class DBService {
         String username = "root";
 
         // 1.RDS DB INFO
-        String dbUrl = "jdbc:mysql://budget-explorer-db.ckult7yatbtp.us-east-1.rds.amazonaws.com:3306/TOPADB?serverTimezone=UTC";
-        String password = "TOPADBRDS";
+//        String dbUrl = "jdbc:mysql://budget-explorer-db.ckult7yatbtp.us-east-1.rds.amazonaws.com:3306/TOPADB?serverTimezone=UTC";
+//        String password = "TOPADBRDS";
 
         //2.LOCAL DB INFO TO TEST
-//         String dbUrl = "jdbc:mysql://192.168.0.14:3306/TOPADB?serverTimezone=UTC";
-//         String password = "Tishan@2016";
+         String dbUrl = "jdbc:mysql://192.168.0.14:3306/TOPADB?serverTimezone=UTC";
+         String password = "Tishan@2016";
 
 
         //LOAD MYSQL JDBC DRIVER
@@ -180,6 +180,62 @@ public class DBService {
     public String deleteRecordService(String tableNmae,int id) {
         jdbc.execute("DELETE FROM `TOPADB`.`"+tableNmae+"` WHERE `id` = "+id+";");
         return "ROW/RECORD DELETED FROM THE TABLE"; }
+
+
+
+
+
+    //11. SERVICE: CREATE PROFILE
+    public String createProfileService(String profileName,String pass){
+        jdbc.execute("INSERT INTO `TOPADB`.`USERS_TABLE`(`id`,`profileName`,`pass`)\n" +
+                "VALUES(id,\""+profileName+"\",\""+pass+"\");");
+        return "PROFILE IS SUCCESSFULLY CREATED";
+    }
+
+
+    //12. SERVICE: AUTHENTICATE PROFILE
+    public String authenticateProfileService(String profileName,String pass) throws ClassNotFoundException, SQLException{
+        Connection con=createDBConnection();
+        Statement stmt = con.createStatement();
+        String query = "SELECT count(id) FROM `TOPADB`.`USERS_TABLE` where profileName=\""+profileName+"\" And pass=\""+pass+"\"";
+        ResultSet rs = stmt.executeQuery(query);
+        while (rs.next()) {
+            int rowNum=rs.getInt(1);
+            System.out.println("MY ROWS "+rowNum);
+            if (rowNum == 1){
+                return  "PROFILE FOUND";
+            }
+            else if (rowNum == 0){
+                return  "PROFILE NOT FOUND";
+            }
+        }
+        con.close();
+        return null;
+    }
+
+
+    //13. SERVICE: CREATE A PROFILE TABLE TO HOLD THE TABLE NAME CREATED BY THE PROFILE NAME
+
+//    CREATE TABLE `TOPADB`.`PROFILE_TABLE` (
+//            `id` INT NOT NULL AUTO_INCREMENT, `profile_tables` VARCHAR(45) NOT NULL,PRIMARY KEY (`id`),
+//    UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,UNIQUE INDEX `profile_tables_UNIQUE` (`profile_tables` ASC) VISIBLE);
+
+
+
+    public String createProfileTableService(String tableName) {
+        //THIS METHOD USED SPRING BOOT JDBC TEMPLATE
+        if(findTableService(tableName)=="TABLE FOUND"){return "TABLE ALREADY EXISTED";}
+        else{jdbc.execute(" CREATE TABLE `TOPADB`.`" + tableName + "` (\n" +
+                "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
+                "  `date` VARCHAR(45) NULL,\n" +
+                "  `title` VARCHAR(45) NOT NULL,\n" +
+                "  `amount` FLOAT(100,2) NOT NULL,\n" +
+                "  PRIMARY KEY (`id`),\n" +
+                "  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);\n");
+            addTableToUpdatedOnService(tableName);
+            return "TABLE IS SUCCESSFULLY CREATED";}
+    }
+
 
 
 }

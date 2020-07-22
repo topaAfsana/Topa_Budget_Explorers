@@ -70,6 +70,16 @@ public class DBController {
         return dbService.deleteRecordService(tableName,id); }
 
 
+    //10. url sample: http://localhost:8080/create_profile?profileName=yourName&pass=yourPass
+    @RequestMapping(value = "/create_profile", method = RequestMethod.POST)
+    public String createProfile(@RequestParam() String profileName,String  pass) {
+        return dbService.createProfileService(profileName,pass); }
+
+
+    //11. url sample: http://localhost:8080/authenticate_profile?profileName=yourName&pass=yourPass
+    @RequestMapping(value = "/authenticate_profile", method = RequestMethod.GET)
+    public String authenticateProfile(@RequestParam() String profileName, String  pass)throws ClassNotFoundException, SQLException{
+        return dbService.authenticateProfileService(profileName,pass); }
 
 
 

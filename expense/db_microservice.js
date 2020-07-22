@@ -4,10 +4,10 @@ var tbltop=`<table class="dbTable">
 				<tr><th>Item</th><th>Date</th><th>Title</th><th>Amount</th><th class="chk"></th></tr>`;
 var tbl;
 
-// var host="http://localhost:8080";
+var host="http://localhost:8080";
 // var host="https://192.168.0.14:8443";
 // var host="https://52.91.249.153:8443";
-var host="http://52.91.249.153:8080";
+// var host="http://52.91.249.153:8080";
 
 
 //1.
@@ -548,12 +548,10 @@ function createProfile(){
 
 
 //14.//VALIDATE WAY 1
-function validateProfile(){
+function authenticateProfile(){
 	var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
 	var myPass=document.querySelector("#myPassId").value;
 	
-var globalHoldProf=myProfName;
-
 
 					if (myProfName == "") {
 	 					alert ("Please enter Profile name");
@@ -561,43 +559,38 @@ var globalHoldProf=myProfName;
         		 	if (myPass == "") {
 	 					alert ("Please enter Password");
         				return false;
-    							}	    				
+    							}	
+    							alert(myProfName);   
+    							alert(myPass);     				
         		
-        	var xmlhttp_validateProfile= new XMLHttpRequest();
-			var validateProfileUrl= host+'/authenticate_profile';
+        	var xmlhttp_authProfile= new XMLHttpRequest();
+			var authProfileUrl= host+'/authenticate_profile';
+
+
 
 			var param="profileName="+myProfName+"&pass="+myPass+"";
 
-			xmlhttp_validateProfile.onreadystatechange = function() {
-				if(xmlhttp_validateProfile.readyState===4 & xmlhttp_validateProfile.status===200){
+			xmlhttp_authProfile.onreadystatechange = function() {
+				if(xmlhttp_authProfile.readyState===4 & xmlhttp_authProfile.status===200){
 				
-				var response=xmlhttp_validateProfile.responseText;
+				var response=xmlhttp_authProfile.responseText;
 
-				alert(response);}}
-
+				alert(response);
 
 				if(response==="PROFILE FOUND"){
-			
-				alert("WELCOME TO EXPENSE PAGE");
-
 				var logInValue=document.querySelector("#myProfileId").value;
 				document.querySelector("#logInZone").style.display="none";
 				document.querySelector("#hideId").style.display="block";
 				document.querySelector("#userId").innerHTML= logInValue;
 
-}
-				else{alert("Unable to Log in,Please Register First to Log in");}
-			
+				}else{alert("Unable to Log in,Please Register First to Log in");}
 
-	 		xmlhttp_validateProfile.open("GET",validateProfileUrl+"?"+param,true);
-			xmlhttp_validateProfile.setRequestHeader('Content-Type', 'application/json');
-			xmlhttp_validateProfile.send(null);
-			
-				document.querySelector("#userId").innerHTML=myProfName;
-				document.querySelector("#userId").innerHTML=globalHoldProf;
+			}}
 
-
-}
+	 		xmlhttp_authProfile.open("GET",authProfileUrl+"?"+param,true);
+			xmlhttp_authProfile.setRequestHeader('Content-Type', 'application/json');
+			xmlhttp_authProfile.send(null);
+		}
 
 
 
