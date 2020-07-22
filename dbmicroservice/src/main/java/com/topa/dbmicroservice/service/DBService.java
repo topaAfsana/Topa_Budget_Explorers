@@ -1,5 +1,6 @@
 package com.topa.dbmicroservice.service;
 
+import com.topa.dbmicroservice.model.ProfileTableItems;
 import com.topa.dbmicroservice.model.ResultHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -56,6 +57,7 @@ public class DBService {
                 "  PRIMARY KEY (`id`),\n" +
                 "  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);\n");
             addTableToUpdatedOnService(tableName);
+
             return "TABLE IS SUCCESSFULLY CREATED";}
     }
 
@@ -80,7 +82,7 @@ public class DBService {
 
         for(String mytab:list){
             if(mytab.equalsIgnoreCase(tableName)){
-                return "TABLE FOUND"; } }
+                return "TABLE FOUND IN DATABASE"; } }
         return null;
     }
 
@@ -215,27 +217,63 @@ public class DBService {
 
 
     //13. SERVICE: CREATE A PROFILE TABLE TO HOLD THE TABLE NAME CREATED BY THE PROFILE NAME
-
-//    CREATE TABLE `TOPADB`.`PROFILE_TABLE` (
-//            `id` INT NOT NULL AUTO_INCREMENT, `profile_tables` VARCHAR(45) NOT NULL,PRIMARY KEY (`id`),
-//    UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,UNIQUE INDEX `profile_tables_UNIQUE` (`profile_tables` ASC) VISIBLE);
-
-
-
-    public String createProfileTableService(String tableName) {
+    public String createProfileBasedTableService(String profileName) {
         //THIS METHOD USED SPRING BOOT JDBC TEMPLATE
-        if(findTableService(tableName)=="TABLE FOUND"){return "TABLE ALREADY EXISTED";}
-        else{jdbc.execute(" CREATE TABLE `TOPADB`.`" + tableName + "` (\n" +
-                "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
-                "  `date` VARCHAR(45) NULL,\n" +
-                "  `title` VARCHAR(45) NOT NULL,\n" +
-                "  `amount` FLOAT(100,2) NOT NULL,\n" +
-                "  PRIMARY KEY (`id`),\n" +
-                "  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);\n");
-            addTableToUpdatedOnService(tableName);
-            return "TABLE IS SUCCESSFULLY CREATED";}
+       jdbc.execute("CREATE TABLE `TOPADB`.`"+profileName+"_TABLE` (\n" +
+                "            `id` INT NOT NULL AUTO_INCREMENT, `profile_tables` VARCHAR(45) NOT NULL,PRIMARY KEY (`id`),\n" +
+                "    UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,UNIQUE INDEX `profile_tables_UNIQUE` (`profile_tables` ASC) VISIBLE);");
+            return "PROFILE BASED TABLE IS SUCCESSFULLY CREATED";
     }
 
 
+
+    // 14. SERVICE: INSERT TABLE NAME  IN THE PROFILE BASED TABLE
+    public String insertIntoProfileBasedTableService(String profileName,String tableName) {
+        jdbc.execute("INSERT INTO `TOPADB`.`"+profileName+"`\n" +
+                " (`id`,`profile_tables`)VALUES(id,\""+tableName+"\");");
+        return "ROW/RECORD INSERTED IN THE PROFILE BASED TABLE"; }
+
+
+    //15. SERVICE: SHOW ALL THE  TABLE NAME UNDER PROFILE BASED TABLE AS LIST
+    public List<ProfileTableItems> getTablesNamefromProfileBasedTableService(String profileName) throws ClassNotFoundException, SQLException {
+        Connection con=createDBConnection();
+        Statement stmt = con.createStatement();
+        String query = "SELECT * FROM `TOPADB`.`"+profileName+"_TABLE`;";
+        ResultSet rs = stmt.executeQuery(query);
+
+        List<ProfileTableItems> list = new ArrayList<>();
+        while (rs.next()) {
+            ProfileTableItems profileTableItems = new ProfileTableItems();
+            profileTableItems.setId(rs.getInt(1));
+            profileTableItems.setTableName(rs.getString(2));
+            list.add(profileTableItems); }
+        con.close();
+        return  list;
+    }
+
+
+
+
+    //2. SERVICE: VALIDATE TABLE NAME IN PROFILE BASED TABLE
+    public String validateTableFromProfileBasedTableService(@RequestParam() String profileName,String tableName) {
+        List<String> list= new ArrayList<>();
+        try{
+            Connection con=createDBConnection();
+            Statement stmt = con.createStatement();
+            String query = "SELECT * FROM `TOPADB`.`"+profileName+"_TABLE`;";
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String table = rs.getString(2);
+                list.add(table); }
+            con.close();
+        }
+        catch (ClassNotFoundException | SQLException sqlEx)
+        {System.out.println(sqlEx.getMessage());}
+
+        for(String dbtable:list){
+            if(dbtable.equalsIgnoreCase(tableName)){
+                return "TABLE NAME FOUND IN PROFILE BASED TABLE"; } }
+        return null;
+    }
 
 }

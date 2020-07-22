@@ -9,18 +9,13 @@
 <body>
 
 
-<!-- 1 -->
-<!-- <div id="logInZone">
-  <input type='text' id='profHoldId' style="display:inline-block;">
-  <input type='button' id='profHoldBtn' value='LogIn'  style="display:inline-block;" onclick="authenticateLogIn()">
-</div> -->
 
 
 
 
 
 
-<!-- 2 -->
+<!-- LOG IN ZONE -->
 <div id=logInZone>
   <h4>Please Log in</h4>
   <form>
@@ -32,13 +27,16 @@
    <button type="button" onclick="createProfile()"><label class='formButtons'>Register</label></button>
 </form>
 </div>
+<!-- LOG IN ZONE -->
 
 
 
 
-
-
+<!-- EXPENSE PAGE ZONE -->
 <div id="hideId" style="display:none;">
+
+
+
 <!-- 1. HEADER ZONE-->
 <div id="header">
   <h4 id="headerTextId">Expense Check</h4>
@@ -50,10 +48,18 @@
 
 
 
-<!-- 2. BODY-->
+<!-- 2. PAGE BODY-->
 <div id="container"> 
 
-  <h3 id="userId"><h3>
+  <h3 id="userId">USER:<h3>
+  <input type='button' id='showprofTableId' value='SHOW MY TABLES' onclick="showTablesFromProfileBasedTable()">
+  <!-- PROFILE TABLES ZONE -->
+
+<h3 id="profileTableTitleId"></h3>
+<div id="profileTableViewerblockId"></div>
+
+<!-- PROFILE TABLES ZONE -->
+
 
 
 
@@ -63,7 +69,7 @@
 <!-- <button type="button" onclick="getCurrentDate()"><label>CLEAR</label></button> -->
 <form>
   <label>Table Name: </label> <input type="text" placeholder="Ex: yourname_month "id="myTableId"></input>
-   <button type="button" onclick="findTable()"><label class='formButtons'>Find Table</label></button>
+   <button type="button" onclick="validateTableFromProfileBasedTable()"><label class='formButtons'>Find Table</label></button>
   <button type="button" onclick="createTable()"><label class='formButtons'>Create Table</label></button>
  <br></br>
   <label> Date: </label> <input type="text" placeholder="Enter Expense date"id="dateId"></input>
@@ -111,21 +117,19 @@
 <div id='dbTabletotalBottomId'></div>
 
 </div>
-
-
 <!-- 4. TABLE ZONE-->
 
+
+
+
+
+
+
+
+
+
 </div>
-
-
-
-
-
-
-
-
-
-
+<!-- EXPENSE PAGE ZONE -->
 
 
 

@@ -14,14 +14,10 @@ var host="http://localhost:8080";
 function createTable(){
 
 			var myCreatetable=document.querySelector("#myTableId").value.toUpperCase();
-					if (myCreatetable == "") {
-	 	alert ("Please enter Table name");
-        return false;
-    }
-	 
-
+			var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+			if (myCreatetable == "") {alert ("Please enter Table name");return false;}
+	
 			var xmlhttp_create= new XMLHttpRequest();
-
 			var createTableUrl= host+'/create_table';
 			var param="tableName="+myCreatetable+"";
 			
@@ -30,13 +26,13 @@ function createTable(){
 				var response = xmlhttp_create.responseText;	
 				alert(response);
 				if (response === "TABLE IS SUCCESSFULLY CREATED"){
+					inserIntoProfileBasedTable(myProfName,myCreatetable);
 					showRecords();
 				}
 			}}
 			xmlhttp_create.open("POST",createTableUrl+"?"+param,true);
 			xmlhttp_create.setRequestHeader('Content-Type', 'application/json');
 			xmlhttp_create.send(null);
-	 
 		}
 
 //=======
@@ -46,9 +42,7 @@ function createTable(){
 function findTable(){
 	var myQuerytable=document.querySelector("#myTableId").value.toUpperCase();
 			 if (myQuerytable == "") {
-	 				alert ("Please enter Table name");
-        			return false;}
-	
+	 				alert ("Please enter Table name");return false;}
 			var xmlhttp_find= new XMLHttpRequest();
 			var findTableUrl= host+'/find_table';
 			var param="tableName="+myQuerytable+"";
@@ -57,32 +51,29 @@ function findTable(){
 			if(xmlhttp_find.readyState===4 & xmlhttp_find.status===200){
 				var response=xmlhttp_find.responseText;
 				//test purpose uncomment
-				// alert(response);
-				if (response === "TABLE FOUND"){
+				alert(response);
+				if (response === "TABLE FOUND IN DATABASE"){
 					showRecords();
 					getupdatedDate(myQuerytable);
-				}
-					else { 
+				}else { 
 					clearTable();
 					alert("TABLE DOES NOT EXIST.PLEASE CRAETE THE TABLE;")};
 				}}
 			xmlhttp_find.open("GET",findTableUrl+"?"+param,true);
 			xmlhttp_find.setRequestHeader('Content-Type', 'application/json');
 			xmlhttp_find.send(null);
-			
-	 		
-		}
+	}
 
 		// ===
 
 	// 3.
 	function clearTable(){
-	
 	document.querySelector("#dbTableViewerblockId").innerHTML = '';
 	document.querySelector("#dbTabletotalBottomId").innerHTML ='';
 	document.querySelector("#dbTableTitleId").innerHTML ='';
 	document.querySelector("#dashboardTextTotal").innerHTML='';
 	document.querySelector("#dashboardBodylastUpdate").innerHTML ='';
+	document.querySelector("#dashboardBodyTableName").innerHTML ='';
 	}
 
 
@@ -139,8 +130,7 @@ function findTable(){
 	 		updateDateOn(myTable,today);
 	 		getupdatedDate(myTable);
 	 		// ===
-	 		
-	 		
+	
 	 		
 	 	}
 	 	else{alert("Failed to add Item,please enter all required value")}
@@ -156,7 +146,8 @@ function findTable(){
 	// 5.
 		function addAndLoad(){
 		addRecord();
-		findTable();
+		// findTable();
+		validateTableFromProfileBasedTable();
 
 	}
 
@@ -169,33 +160,23 @@ function showRecords() {
 
 			var myTable=document.querySelector("#myTableId").value.toUpperCase();
 			if (myTable == "") {
-	 			alert ("Please enter Table name");
-        		return false;}
-			
+	 			alert ("Please enter Table name");return false;}
+		
 		var baseurl= host+'/show_records';
 		var xmlhttp= new XMLHttpRequest();
 		var param="tableName="+myTable+"";
 		xmlhttp.open("GET",baseurl+"?"+param,true);
-
 		xmlhttp.onreadystatechange = function() {
 			if(xmlhttp.readyState===4 & xmlhttp.status===200){
 				var records = JSON.parse(xmlhttp.responseText);	
 			
 				var main= "";
 				var fetch_sum=0;
-
-				//for test purpose
-				// var dltButton="<input type='button' id='deleteId' value='delete' class='delete' onclick='"+deleteRecord()+">";
-				// var saveButton="<input type='button' id='saveId' value='Save' class='save' >";
-					
-
-				for (i=1;i<records.length;i++){
-
+				for (i=0;i<records.length;i++){
+						var j=i+1;
 				 trId=records[i].id;
-				
 				 var chkButton="<input type='checkbox' id='"+trId+"' class='chk' >";
-				 
-				main += "<tr id="+"row-"+trId+"><td>"+i+"</td><td id='date_col_row"+trId+"'>"+records[i].date+"</td><td id='title_col_row"+trId+"'>"+records[i].title+"</td><td id='amount_col_row"+trId+"'>"+records[i].amount+"</td><td>"
+				main += "<tr id="+"row-"+trId+"><td>"+j+"</td><td id='date_col_row"+trId+"'>"+records[i].date+"</td><td id='title_col_row"+trId+"'>"+records[i].title+"</td><td id='amount_col_row"+trId+"'>"+records[i].amount+"</td><td>"
 				+chkButton+"</td></tr>";
 				fetch_sum+=records[i].amount;}
 				var sum=Number(fetch_sum).toFixed(2);
@@ -203,15 +184,12 @@ function showRecords() {
 				var tblbottom= "</table>";
 				tbl=tbltop + main + tblbottom;
 				document.querySelector("#dashboardBodyTableName").innerHTML = "TABLE: "+myTable;
-
 				document.querySelector("#dbTableViewerblockId").innerHTML =tbl
 				document.querySelector("#dbTabletotalBottomId").innerHTML ="Total:"+sum;
 				document.querySelector("#dbTableTitleId").innerHTML = "<strong>TABLE</strong>: "+"<strong>"+myTable+"</strong>"
 				document.querySelector("#dashboardTextTotal").innerHTML="Total Amount: "+ sum;
 				displayEditOptions();
-
-
-		}}; xmlhttp.send();}
+}}; xmlhttp.send();}
 
 		// 7.
 	function clear(){
@@ -280,7 +258,7 @@ function getupdatedDate(myTable){
 
 
 
-
+//DEV TOOL
 // 12.
 function showTables() {
 	var dbtbl=`<table class="dbTable">
@@ -294,8 +272,9 @@ function showTables() {
 
 				var records = JSON.parse(xmlhttp_showTables.responseText);	
 				var main;
-		
-				console.log("TOPA TEST IS "+records);
+
+				// test purpose
+				// console.log("ALL TABLES IN THE DB: "+records);
 				for (i=0;i<records.length;i++){
 
 	
@@ -499,47 +478,24 @@ function displayEditOptions(){
 	 	}
 
 
-
-// function authenticateLogIn(){
-// 	var logInValue=document.querySelector("#profHoldId").value;
-// 	document.querySelector("#logInZone").style.display="none";
-// 	document.querySelector("#hideId").style.display="block";
-// 	document.querySelector("#userId").innerHTML= logInValue;
-// }
-
-
-
-
-
-
-
-
-
-
-// 13.DONE
+// 13.
 function createProfile(){
 	var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
 	var myPass=document.querySelector("#myPassId").value;
-
 					if (myProfName == "") {
-	 					alert ("Please enter Profile name");
-        				return false; }
+	 					alert ("Please enter Profile name");return false; }
         		 	if (myPass == "") {
-	 					alert ("Please enter Password");
-        				return false;
-    							}	
-	 
-
+	 					alert ("Please enter Password");return false;}
 			var xmlhttp_createProf= new XMLHttpRequest();
-
 			var createProfileTableUrl= host+'/create_profile';
-
 			var param="profileName="+myProfName+"&pass="+myPass+"";
-			
 			xmlhttp_createProf.onreadystatechange = function() {
 			if(xmlhttp_createProf.readyState===4 & xmlhttp_createProf.status===200){
 				var response = xmlhttp_createProf.responseText;	
 				alert(response);
+				if(response==="PROFILE IS SUCCESSFULLY CREATED"){
+					createProfileBasedTable(myProfName)
+				}
 			}}
 			xmlhttp_createProf.open("POST",createProfileTableUrl+"?"+param,true);
 			xmlhttp_createProf.setRequestHeader('Content-Type', 'application/json');
@@ -547,50 +503,154 @@ function createProfile(){
 }
 
 
-//14.//VALIDATE WAY 1
+//14.
 function authenticateProfile(){
 	var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
 	var myPass=document.querySelector("#myPassId").value;
-	
-
 					if (myProfName == "") {
-	 					alert ("Please enter Profile name");
-        				return false; }
+	 					alert ("Please enter Profile name");return false; }
         		 	if (myPass == "") {
-	 					alert ("Please enter Password");
-        				return false;
-    							}	
-    							alert(myProfName);   
-    							alert(myPass);     				
-        		
-        	var xmlhttp_authProfile= new XMLHttpRequest();
-			var authProfileUrl= host+'/authenticate_profile';
-
-
-
+	 					alert ("Please enter Password");return false;}	
+     	
+        	var xmlhttp_authenticateProfile= new XMLHttpRequest();
+			var authenticateProfileUrl= host+'/authenticate_profile';
 			var param="profileName="+myProfName+"&pass="+myPass+"";
-
-			xmlhttp_authProfile.onreadystatechange = function() {
-				if(xmlhttp_authProfile.readyState===4 & xmlhttp_authProfile.status===200){
-				
-				var response=xmlhttp_authProfile.responseText;
-
-				alert(response);
-
+			xmlhttp_authenticateProfile.onreadystatechange = function() {
+				if(xmlhttp_authenticateProfile.readyState===4 & xmlhttp_authenticateProfile.status===200){
+				var response=xmlhttp_authenticateProfile.responseText;
+				// test purpose
+				// alert(response);
 				if(response==="PROFILE FOUND"){
 				var logInValue=document.querySelector("#myProfileId").value;
 				document.querySelector("#logInZone").style.display="none";
 				document.querySelector("#hideId").style.display="block";
 				document.querySelector("#userId").innerHTML= logInValue;
-
-				}else{alert("Unable to Log in,Please Register First to Log in");}
-
+				}else{alert("User Not found ,Please Register First to Log in");}
 			}}
-
-	 		xmlhttp_authProfile.open("GET",authProfileUrl+"?"+param,true);
-			xmlhttp_authProfile.setRequestHeader('Content-Type', 'application/json');
-			xmlhttp_authProfile.send(null);
+	 		xmlhttp_authenticateProfile.open("GET",authenticateProfileUrl+"?"+param,true);
+			xmlhttp_authenticateProfile.setRequestHeader('Content-Type', 'application/json');
+			xmlhttp_authenticateProfile.send(null);
 		}
+
+
+// 15.
+function createProfileBasedTable(myProfName){
+	
+			var xmlhttp_createProfileBasedTable= new XMLHttpRequest();
+			var createProfileBasedTableUrl= host+'/create_profile_based_table';
+			var param="profileName="+myProfName+"";
+			xmlhttp_createProfileBasedTable.onreadystatechange = function() {
+			if(xmlhttp_createProfileBasedTable.readyState===4 & xmlhttp_createProfileBasedTable.status===200){
+				var response = xmlhttp_createProfileBasedTable.responseText;	
+				//test purpose
+				// alert(response);
+			}}
+			xmlhttp_createProfileBasedTable.open("POST",createProfileBasedTableUrl+"?"+param,true);
+			xmlhttp_createProfileBasedTable.setRequestHeader('Content-Type', 'application/json');
+			xmlhttp_createProfileBasedTable.send(null);
+}
+
+
+// 16.
+function inserIntoProfileBasedTable(myProfName,myCreatetable){
+	
+			var xmlhttp_insertIntoProfileBasedTable= new XMLHttpRequest();
+			var insertIntoProfileBasedTableUrl= host+'/insert_into_profile_based_table';
+			var param="profileName="+myProfName+"_TABLE&tableName="+myCreatetable+"";
+			xmlhttp_insertIntoProfileBasedTable.onreadystatechange = function() {
+			if(xmlhttp_insertIntoProfileBasedTable.readyState===4 & xmlhttp_insertIntoProfileBasedTable.status===200){
+				var response = xmlhttp_insertIntoProfileBasedTable.responseText;
+				//test purpose	
+				// alert(response);
+			}}
+			xmlhttp_insertIntoProfileBasedTable.open("POST",insertIntoProfileBasedTableUrl+"?"+param,true);
+			xmlhttp_insertIntoProfileBasedTable.setRequestHeader('Content-Type', 'application/json');
+			xmlhttp_insertIntoProfileBasedTable.send(null);
+}
+
+
+
+//17.
+function showTablesFromProfileBasedTable() {
+
+		var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+		var getTablesFromProfileBasedTableurl= host+'/get_tables_from_profile_based_table';
+		var xmlhttp_getTablesFromProfileBasedTable= new XMLHttpRequest();
+		var param="profileName="+myProfName+"";
+		xmlhttp_getTablesFromProfileBasedTable.open("GET",getTablesFromProfileBasedTableurl+"?"+param,true);
+		xmlhttp_getTablesFromProfileBasedTable.onreadystatechange = function() {
+			if(xmlhttp_getTablesFromProfileBasedTable.readyState===4 & xmlhttp_getTablesFromProfileBasedTable.status===200){
+				var records = JSON.parse(xmlhttp_getTablesFromProfileBasedTable.responseText);	
+				console.log(records);
+			var top=`<table>
+				<tr><th>#</th><th>Tables</th></tr>`;
+			var body= "";
+			for (i=0;i<records.length;i++){ var j=i+1;
+			var profileTrId=records[i].id;
+				body += "<tr id="+"row-"+profileTrId+"><td>"+j+"</td><td>"+records[i].tableName+"</td></tr>";}
+			var bottom= "</table>";
+			var profiletbl=top + body + bottom;
+				document.querySelector("#profileTableTitleId").innerHTML = "<strong>PROFILE</strong>: "+"<strong>"+myProfName+"</strong>";
+				document.querySelector("#profileTableViewerblockId").innerHTML =profiletbl;
+				//Future implementation
+				// displayEditOptions();
+}}; xmlhttp_getTablesFromProfileBasedTable.send();}
+
+
+
+//18. VALIDATE QUERIED TABLE NAME IN PROFILE BASED TABLE AND SHOW RECORD IF FOUND OTHERWISE DONT SHOW
+function validateTableFromProfileBasedTable() {
+		var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+		var myQuerytable= document.querySelector("#myTableId").value.toUpperCase();
+		var validateTablesFromProfileBasedTableurl= host+'/validate_table_from_profile_based_table';
+		var xmlhttp_validareTablesFromProfileBasedTable= new XMLHttpRequest();
+		var param="profileName="+myProfName+"&tableName="+myQuerytable+"";
+		xmlhttp_validareTablesFromProfileBasedTable.open("GET",validateTablesFromProfileBasedTableurl+"?"+param,true);
+		xmlhttp_validareTablesFromProfileBasedTable.onreadystatechange = function() {
+			if(xmlhttp_validareTablesFromProfileBasedTable.readyState===4 & xmlhttp_validareTablesFromProfileBasedTable.status===200){
+				var response = xmlhttp_validareTablesFromProfileBasedTable.responseText;	
+				//test purpose
+				// alert(response);
+			if(response === "TABLE NAME FOUND IN PROFILE BASED TABLE"){
+				// alert("YOUR TABLE FOUND");
+				showRecords();
+				getupdatedDate(myQuerytable);}
+			else{
+				// MODIFIED FIND BLOCK
+
+			var xmlhttp_find= new XMLHttpRequest();
+			var findTableUrl= host+'/find_table';
+			var param="tableName="+myQuerytable+"";
+			xmlhttp_find.onreadystatechange = function() {
+			if(xmlhttp_find.readyState===4 & xmlhttp_find.status===200){
+				var response=xmlhttp_find.responseText;
+				//test purpose uncomment
+				// alert(response);
+				if (response === "TABLE FOUND IN DATABASE"){
+					alert("YOU DONT HAVE ACCESS TO THE TABLE")
+				}else { 
+					clearTable();
+					alert("TABLE DOES NOT EXIST.PLEASE CRAETE NEW TABLE;")};
+				}}
+			xmlhttp_find.open("GET",findTableUrl+"?"+param,true);
+			xmlhttp_find.setRequestHeader('Content-Type', 'application/json');
+			xmlhttp_find.send(null);
+				// MODIFIED FIND BLOCK
+
+
+
+
+
+				// alert("TABLE NOT FOUND IN PROFILE BASED TABLE");
+				// clearTable();
+			}
+	}}; xmlhttp_validareTablesFromProfileBasedTable.send();}
+
+
+
+
+
+
 
 
 
