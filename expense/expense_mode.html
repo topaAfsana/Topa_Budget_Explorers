@@ -8,10 +8,35 @@
 </head>
 <body>
 
-<div id="logInZone">
+
+<!-- 1 -->
+<!-- <div id="logInZone">
   <input type='text' id='profHoldId' style="display:inline-block;">
   <input type='button' id='profHoldBtn' value='LogIn'  style="display:inline-block;" onclick="authenticateLogIn()">
+</div> -->
+
+
+
+
+
+
+<!-- 2 -->
+<div id=logInZone>
+  <h4>Please Log in</h4>
+  <form>
+  <label>Profile Name: </label> <input type="text" placeholder="Ex: Enter your Profile "id="myProfileId"></input>
+ <br></br>
+  <label> Password: </label> <input type="text" placeholder="Enter your password"id="myPassId"></input>
+  <button type="button"  onclick="validateProfile()"><label class='formButtons'>LOGIN</label></button>
+
+   <button type="button" onclick="createProfile()"><label class='formButtons'>Register</label></button>
+</form>
 </div>
+
+
+
+
+
 
 <div id="hideId" style="display:none;">
 <!-- 1. HEADER ZONE-->

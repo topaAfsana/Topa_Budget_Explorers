@@ -500,11 +500,103 @@ function displayEditOptions(){
 
 
 
-function authenticateLogIn(){
-	var logInValue=document.querySelector("#profHoldId").value;
-	document.querySelector("#logInZone").style.display="none";
-	document.querySelector("#hideId").style.display="block";
-	document.querySelector("#userId").innerHTML= logInValue;
+// function authenticateLogIn(){
+// 	var logInValue=document.querySelector("#profHoldId").value;
+// 	document.querySelector("#logInZone").style.display="none";
+// 	document.querySelector("#hideId").style.display="block";
+// 	document.querySelector("#userId").innerHTML= logInValue;
+// }
+
+
+
+
+
+
+
+
+
+
+// 13.DONE
+function createProfile(){
+	var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+	var myPass=document.querySelector("#myPassId").value;
+
+					if (myProfName == "") {
+	 					alert ("Please enter Profile name");
+        				return false; }
+        		 	if (myPass == "") {
+	 					alert ("Please enter Password");
+        				return false;
+    							}	
+	 
+
+			var xmlhttp_createProf= new XMLHttpRequest();
+
+			var createProfileTableUrl= host+'/create_profile';
+
+			var param="profileName="+myProfName+"&pass="+myPass+"";
+			
+			xmlhttp_createProf.onreadystatechange = function() {
+			if(xmlhttp_createProf.readyState===4 & xmlhttp_createProf.status===200){
+				var response = xmlhttp_createProf.responseText;	
+				alert(response);
+			}}
+			xmlhttp_createProf.open("POST",createProfileTableUrl+"?"+param,true);
+			xmlhttp_createProf.setRequestHeader('Content-Type', 'application/json');
+			xmlhttp_createProf.send(null);
+}
+
+
+//14.//VALIDATE WAY 1
+function validateProfile(){
+	var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+	var myPass=document.querySelector("#myPassId").value;
+	
+var globalHoldProf=myProfName;
+
+
+					if (myProfName == "") {
+	 					alert ("Please enter Profile name");
+        				return false; }
+        		 	if (myPass == "") {
+	 					alert ("Please enter Password");
+        				return false;
+    							}	    				
+        		
+        	var xmlhttp_validateProfile= new XMLHttpRequest();
+			var validateProfileUrl= host+'/authenticate_profile';
+
+			var param="profileName="+myProfName+"&pass="+myPass+"";
+
+			xmlhttp_validateProfile.onreadystatechange = function() {
+				if(xmlhttp_validateProfile.readyState===4 & xmlhttp_validateProfile.status===200){
+				
+				var response=xmlhttp_validateProfile.responseText;
+
+				alert(response);}}
+
+
+				if(response==="PROFILE FOUND"){
+			
+				alert("WELCOME TO EXPENSE PAGE");
+
+				var logInValue=document.querySelector("#myProfileId").value;
+				document.querySelector("#logInZone").style.display="none";
+				document.querySelector("#hideId").style.display="block";
+				document.querySelector("#userId").innerHTML= logInValue;
+
+}
+				else{alert("Unable to Log in,Please Register First to Log in");}
+			
+
+	 		xmlhttp_validateProfile.open("GET",validateProfileUrl+"?"+param,true);
+			xmlhttp_validateProfile.setRequestHeader('Content-Type', 'application/json');
+			xmlhttp_validateProfile.send(null);
+			
+				document.querySelector("#userId").innerHTML=myProfName;
+				document.querySelector("#userId").innerHTML=globalHoldProf;
+
+
 }
 
 
