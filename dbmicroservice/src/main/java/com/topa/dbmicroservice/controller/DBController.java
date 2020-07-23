@@ -1,6 +1,7 @@
 package com.topa.dbmicroservice.controller;
 
 
+import com.topa.dbmicroservice.model.ProfileTableItems;
 import com.topa.dbmicroservice.model.ResultHolder;
 import com.topa.dbmicroservice.service.DBService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +71,44 @@ public class DBController {
         return dbService.deleteRecordService(tableName,id); }
 
 
+    //10. url sample: http://localhost:8080/create_profile?profileName=yourName&pass=yourPass
+    @RequestMapping(value = "/create_profile", method = RequestMethod.POST)
+    public String createProfile(@RequestParam() String profileName,String  pass) {
+        return dbService.createProfileService(profileName,pass); }
 
 
+    //11. url sample: http://localhost:8080/authenticate_profile?profileName=yourName&pass=yourPass
+    @RequestMapping(value = "/authenticate_profile", method = RequestMethod.GET)
+    public String authenticateProfile(@RequestParam() String profileName, String  pass)throws ClassNotFoundException, SQLException{
+        return dbService.authenticateProfileService(profileName,pass); }
+
+
+
+
+    //12. url sample: http://localhost:8080/create_profile_based_table?profileName=yourName
+    @RequestMapping(value = "/create_profile_based_table", method = RequestMethod.POST)
+    public String createProfileBasedTable(@RequestParam() String profileName) {
+        return dbService.createProfileBasedTableService(profileName); }
+
+
+    //13. url sample: http://localhost:8080/insert_into_profile_based_table?profileName=yourName&tableName=yourTable
+    @RequestMapping(value = "/insert_into_profile_based_table", method = RequestMethod.POST)
+    public String insertIntoProfileBasedTable(@RequestParam() String profileName,String tableName) {
+        return dbService.insertIntoProfileBasedTableService(profileName,tableName); }
+
+
+
+    //14. url sample: http://localhost:8080/get_tables_from_profile_based_table?profileName=yourProfile
+    @RequestMapping("/get_tables_from_profile_based_table")
+    public List<ProfileTableItems> getTablesNamefromProfileBasedTable(@RequestParam() String profileName) throws ClassNotFoundException, SQLException {
+        return dbService.getTablesNamefromProfileBasedTableService(profileName); }
+
+
+
+    //15. url sample: http://localhost:8080/validate_table_from_profile_based_table?profileName=myProfile&tableName=yourTable
+    @RequestMapping(value = "/validate_table_from_profile_based_table", method = RequestMethod.GET)
+    public String validateTableFromProfileBasedTable(@RequestParam() String profileName,String tableName){
+        return dbService.validateTableFromProfileBasedTableService(profileName,tableName); }
 
 }
+
