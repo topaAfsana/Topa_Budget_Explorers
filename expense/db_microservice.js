@@ -394,7 +394,8 @@ function updateRecord(){
 			xmlhttp_updateRecord.setRequestHeader('Content-Type', 'application/json');
 			xmlhttp_updateRecord.send(null);
 
-			findTable();
+// 			findTable();
+			validateTableFromProfileBasedTable();
 
 
 			//CURRENT DATE TO UPDATE DATE
