@@ -641,6 +641,7 @@ function validateTableFromProfileBasedTable() {
 				//test purpose uncomment
 				// alert(response);
 				if (response === "TABLE FOUND IN DATABASE"){
+					clearTable();
 					alert("YOU DONT HAVE ACCESS TO THE TABLE")
 				}else { 
 					clearTable();
