@@ -55,7 +55,7 @@ function findTable(){
 				if (response === "TABLE FOUND IN DATABASE"){
 					showRecords();
 					getupdatedDate(myQuerytable);
-				}else { hideEditOptions();
+				}else { 
 					clearTable();
 					alert("TABLE DOES NOT EXIST.PLEASE CRAETE THE TABLE;")};
 				}}
@@ -68,6 +68,7 @@ function findTable(){
 
 	// 3.
 	function clearTable(){
+	hideEditOptions();
 	document.querySelector("#dbTableViewerblockId").innerHTML = '';
 	document.querySelector("#dbTabletotalBottomId").innerHTML ='';
 	document.querySelector("#dbTableTitleId").innerHTML ='';
@@ -645,10 +646,11 @@ function validateTableFromProfileBasedTable() {
 				//test purpose uncomment
 				// alert(response);
 				if (response === "TABLE FOUND IN DATABASE"){
-					hideEditOptions();
+// 					hideEditOptions();
 					clearTable();
 					alert("YOU DONT HAVE ACCESS TO THE TABLE")
-				}else { hideEditOptions();
+				}else { 
+// 					hideEditOptions();
 					clearTable();
 					alert("TABLE DOES NOT EXIST.PLEASE CRAETE NEW TABLE;")};
 				}}
