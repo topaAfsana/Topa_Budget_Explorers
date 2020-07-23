@@ -4,10 +4,10 @@ var tbltop=`<table class="dbTable">
 				<tr><th>Item</th><th>Date</th><th>Title</th><th>Amount</th><th class="chk"></th></tr>`;
 var tbl;
 
-// var host="http://localhost:8080";
+var host="http://localhost:8080";
 // var host="https://192.168.0.14:8443";
 // var host="https://52.91.249.153:8443";
-var host="http://52.91.249.153:8080";
+// var host="http://52.91.249.153:8080";
 
 
 //1.
@@ -38,7 +38,7 @@ function createTable(){
 //=======
 
 
-// 2.
+// 2.//find table from total db
 function findTable(){
 	var myQuerytable=document.querySelector("#myTableId").value.toUpperCase();
 			 if (myQuerytable == "") {
@@ -57,6 +57,7 @@ function findTable(){
 					getupdatedDate(myQuerytable);
 				}else { 
 					clearTable();
+					hideEditOptions();
 					alert("TABLE DOES NOT EXIST.PLEASE CRAETE THE TABLE;")};
 				}}
 			xmlhttp_find.open("GET",findTableUrl+"?"+param,true);
@@ -198,6 +199,7 @@ function showRecords() {
 	 		var myItemTitle= document.querySelector("#titleId").value='';
 	 		var myamount= document.querySelector("#amountId").value='';
 
+
 	}
 	// 8.
 	function setCurrentDate(){
@@ -321,8 +323,7 @@ function getSelectedCheckboxId() {
     checkboxes.forEach((checkbox) => {
         ids.push(checkbox.getAttribute("id"));
     });
-return ids;
-    }
+return ids; }
 
 // 15.
 function getSelectedCheckboxIdLength() {
@@ -331,11 +332,7 @@ function getSelectedCheckboxIdLength() {
     checkboxes.forEach((checkbox) => {
         ids.push(checkbox.getAttribute("id"));
     });
-    	return ids.length;
-
-   
-    
-    }
+    	return ids.length;}
 
 //16.
 function editRecord(){
@@ -394,7 +391,8 @@ function updateRecord(){
 			xmlhttp_updateRecord.setRequestHeader('Content-Type', 'application/json');
 			xmlhttp_updateRecord.send(null);
 
-			findTable();
+			// findTable();
+			validateTableFromProfileBasedTable();
 
 
 			//CURRENT DATE TO UPDATE DATE
@@ -475,6 +473,9 @@ function deleteRecord(){
 // 20.
 function displayEditOptions(){
 	 		document.getElementById("editId").style.display="block";
+	 	}
+	 	function hideEditOptions(){
+	 		document.getElementById("editId").style.display="none";
 	 	}
 
 
@@ -586,12 +587,15 @@ function showTablesFromProfileBasedTable() {
 				var records = JSON.parse(xmlhttp_getTablesFromProfileBasedTable.responseText);	
 				console.log(records);
 			var top=`<table class="profBasedTable">
-				<tr><th class="profBasedTh"></th><th class="profBasedTh">Tables</th></tr>`;
+				<tr><th class="profBasedTh">No</th><th class="profBasedTh">Tables</th><th></th></tr>`;
 			var body= "";
 			for (i=0;i<records.length;i++){ var j=i+1;
 			var profileTrId=records[i].id;
-				body += "<tr id="+"row-"+profileTrId+"><td>"+j+"</td><td>"+records[i].tableName+"</td></tr>";}
+			var chkButtonP="<input type='checkbox' id='"+profileTrId+"' class='chkProf' >";
+
+				body += "<tr id="+"row-"+profileTrId+"><td>"+j+"</td><td id='table"+profileTrId+"'>"+records[i].tableName+"</td><td>"+chkButtonP+"</td></tr>";}
 			var bottom= "</table>";
+			alert("table"+profileTrId+"");
 			var profiletbl=top + body + bottom;
 				document.querySelector("#profileTableTitleId").innerHTML = "<strong>PROFILE</strong>: "+"<strong>"+myProfName+"</strong>";
 				document.querySelector("#profileTableViewerblockId").innerHTML =profiletbl;
@@ -612,6 +616,7 @@ function closeTablesFromProfileBasedTable() {
 
 
 //18. VALIDATE QUERIED TABLE NAME IN PROFILE BASED TABLE AND SHOW RECORD IF FOUND OTHERWISE DONT SHOW
+// //find table from profile table
 function validateTableFromProfileBasedTable() {
 		var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
 		var myQuerytable= document.querySelector("#myTableId").value.toUpperCase();
@@ -640,24 +645,111 @@ function validateTableFromProfileBasedTable() {
 				//test purpose uncomment
 				// alert(response);
 				if (response === "TABLE FOUND IN DATABASE"){
+					clearTable();
+					hideEditOptions();
 					alert("YOU DONT HAVE ACCESS TO THE TABLE")
 				}else { 
 					clearTable();
+					hideEditOptions();
+
 					alert("TABLE DOES NOT EXIST.PLEASE CRAETE NEW TABLE;")};
 				}}
 			xmlhttp_find.open("GET",findTableUrl+"?"+param,true);
 			xmlhttp_find.setRequestHeader('Content-Type', 'application/json');
 			xmlhttp_find.send(null);
-				// MODIFIED FIND BLOCK
-
-
-
-
-
-				// alert("TABLE NOT FOUND IN PROFILE BASED TABLE");
-				// clearTable();
 			}
 	}}; xmlhttp_validareTablesFromProfileBasedTable.send();}
+
+
+
+
+
+//
+
+function getSelectedCheckboxIdForProfTables() {
+    const checkboxes = document.querySelectorAll('input[class="chkProf"]:checked');
+    let ids = [];
+    checkboxes.forEach((checkbox) => {
+        ids.push(checkbox.getAttribute("id"));
+    });
+    alert(ids);
+return ids; }
+
+// 
+function getSelectedCheckboxIdLengthOfProfTables() {
+    const checkboxes = document.querySelectorAll('input[class="chkProf"]:checked');
+    let ids = [];
+    checkboxes.forEach((checkbox) => {
+        ids.push(checkbox.getAttribute("id"));
+    });
+    	return ids.length;}
+
+
+// function editTableOfProfile(){
+// var id=getSelectedCheckboxIdForProfTables();
+// if(getSelectedCheckboxIdLengthOfProfTables()===1){
+// 	editTable(id);}
+// else{alert("SELECT SPECIFIC ITEM CHECKBOX AND THEN CLICK EDIT TO UPDATE");}}
+
+
+// function editTable(id){
+// 	document.getElementById("editTbId").style.display="none";
+//  	document.getElementById("saveTbId").style.display="inline-block";
+//  	document.getElementById("deleteTbId").style.display="inline-block";
+//  	document.getElementById("cancelEdId").style.display="inline-block";
+
+
+// 	var tableName=document.getElementById("table"+id+"");
+// 	var tableName_new=tableName.innerHTML;
+
+// 	tableName.innerHTML="<input type='text' class='newInput' id='new_table"+id+"' value='"+tableName_new+"'>";
+// }
+
+// function updateTable(){
+
+// 		var id=getSelectedCheckboxIdForProfTables();
+// 		var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+// 		var tableName_new=document.getElementById("new_table"+id).value;
+ 		
+//  		document.getElementById("table"+id).innerHTML=tableName_new;
+ 		
+// 	 			if (tableName_new == "") {
+// 	 			alert ("Please enter Table name");
+//         		return false;}
+// }
+
+
+function findTableDynamic(myQuerytable){
+			 if (myQuerytable == "") {
+	 				alert ("Please enter Table name");return false;}
+			var xmlhttp_find= new XMLHttpRequest();
+			var findTableUrl= host+'/find_table';
+			var param="tableName="+myQuerytable+"";
+			xmlhttp_find.onreadystatechange = function() {
+			var tableDiv= document.querySelector("div").innerHTML;
+			if(xmlhttp_find.readyState===4 & xmlhttp_find.status===200){
+				var response=xmlhttp_find.responseText;
+				//test purpose uncomment
+				alert(response);
+				if (response === "TABLE FOUND IN DATABASE"){
+					showRecords();
+					getupdatedDate(myQuerytable);
+				}else { 
+					clearTable();
+					hideEditOptions();
+					alert("TABLE DOES NOT EXIST.PLEASE CRAETE THE TABLE;")};
+				}}
+			xmlhttp_find.open("GET",findTableUrl+"?"+param,true);
+			xmlhttp_find.setRequestHeader('Content-Type', 'application/json');
+			xmlhttp_find.send(null);
+	}
+function showSelectedTableItem(){
+	var id=getSelectedCheckboxIdForProfTables();
+	var tableName=document.getElementById("table"+id).value;
+	alert("table"+id);
+	alert("table name of selected "+tableName);
+	findTableDynamic(tableName);
+}
 
 
 
