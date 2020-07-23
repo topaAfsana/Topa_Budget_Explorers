@@ -4,10 +4,10 @@ var tbltop=`<table class="dbTable">
 				<tr><th>Item</th><th>Date</th><th>Title</th><th>Amount</th><th class="chk"></th></tr>`;
 var tbl;
 
-var host="http://localhost:8080";
+// var host="http://localhost:8080";
 // var host="https://192.168.0.14:8443";
 // var host="https://52.91.249.153:8443";
-// var host="http://52.91.249.153:8080";
+var host="http://52.91.249.153:8080";
 
 
 //1.
@@ -521,8 +521,9 @@ function authenticateProfile(){
 				// test purpose
 				// alert(response);
 				if(response==="PROFILE FOUND"){
-				var logInValue=document.querySelector("#myProfileId").value;
+				var logInValue=document.querySelector("#myProfileId").value.toUpperCase();
 				document.querySelector("#logInZone").style.display="none";
+				document.querySelector("#logInHeaderZone").style.display="none";
 				document.querySelector("#hideId").style.display="block";
 				document.querySelector("#userId").innerHTML= logInValue;
 				}else{alert("User Not found ,Please Register First to Log in");}
@@ -572,6 +573,8 @@ function inserIntoProfileBasedTable(myProfName,myCreatetable){
 
 //17.
 function showTablesFromProfileBasedTable() {
+	document.querySelector("#showprofTableId").style.display='none';
+
 
 		var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
 		var getTablesFromProfileBasedTableurl= host+'/get_tables_from_profile_based_table';
@@ -582,8 +585,8 @@ function showTablesFromProfileBasedTable() {
 			if(xmlhttp_getTablesFromProfileBasedTable.readyState===4 & xmlhttp_getTablesFromProfileBasedTable.status===200){
 				var records = JSON.parse(xmlhttp_getTablesFromProfileBasedTable.responseText);	
 				console.log(records);
-			var top=`<table>
-				<tr><th>#</th><th>Tables</th></tr>`;
+			var top=`<table class="profBasedTable">
+				<tr><th class="profBasedTh"></th><th class="profBasedTh">Tables</th></tr>`;
 			var body= "";
 			for (i=0;i<records.length;i++){ var j=i+1;
 			var profileTrId=records[i].id;
@@ -594,7 +597,17 @@ function showTablesFromProfileBasedTable() {
 				document.querySelector("#profileTableViewerblockId").innerHTML =profiletbl;
 				//Future implementation
 				// displayEditOptions();
-}}; xmlhttp_getTablesFromProfileBasedTable.send();}
+}}; xmlhttp_getTablesFromProfileBasedTable.send();
+document.querySelector("#closeprofTableId").style.display='inline-block';
+document.querySelector("#tableViewerZone").style.display='inline-block';
+}
+
+//17.
+function closeTablesFromProfileBasedTable() {
+	document.querySelector("#showprofTableId").style.display='inline-block';
+	document.querySelector("#closeprofTableId").style.display='none';
+	document.querySelector("#tableViewerZone").style.display='none';
+}
 
 
 

@@ -16,17 +16,28 @@
 
 
 <!-- LOG IN ZONE -->
+<!-- 1. HEADER ZONE-->
+<div id="logInHeaderZone">
+<div id="header" >
+  <h4 id="headerTextId">LOG IN PAGE</h4>
+ <ul> <li><a id="homeLink" href="../index.html">Home</a></li></ul>
+ <ul> <li><a id="howToLink" href="../howto.html">How to use this feature</a></li></ul>
+</div>
+</div>
+<!-- 1. HEADER ZONE-->
 <div id=logInZone>
   <h4>Please Log in</h4>
   <form>
   <label>Profile Name: </label> <input type="text" placeholder="Ex: Enter your Profile "id="myProfileId"></input>
  <br></br>
   <label> Password: </label> <input type="text" placeholder="Enter your password"id="myPassId"></input>
-  <button type="button"  onclick="authenticateProfile()"><label class='formButtons'>LOGIN</label></button>
+  <button type="button"  onclick="authenticateProfile()"><label class='formButtons'>LogIn</label></button>
 
    <button type="button" onclick="createProfile()"><label class='formButtons'>Register</label></button>
 </form>
 </div>
+
+
 <!-- LOG IN ZONE -->
 
 
@@ -42,6 +53,7 @@
   <h4 id="headerTextId">Expense Check</h4>
  <ul> <li><a id="homeLink" href="../index.html">Home</a></li></ul>
  <ul> <li><a id="howToLink" href="../howto.html">How to use this feature</a></li></ul>
+ <div id="profName" style="display:inline-block;">PROFILE:  <h4 id="userId"  style="display:inline-block;"></h4></div>
 </div>
 <!-- 1. HEADER ZONE-->
 
@@ -51,12 +63,15 @@
 <!-- 2. PAGE BODY-->
 <div id="container"> 
 
-  <h3 id="userId">USER:<h3>
-  <input type='button' id='showprofTableId' value='SHOW MY TABLES' onclick="showTablesFromProfileBasedTable()">
+  
   <!-- PROFILE TABLES ZONE -->
+ <input type='button' id='showprofTableId' class='showTableButton' value='SHOW MY TABLES' onclick="showTablesFromProfileBasedTable()">
+ <input type='button' id='closeprofTableId' class='showTableButton' value='CLOSE' style="display:none"; onclick="closeTablesFromProfileBasedTable()">
 
-<h3 id="profileTableTitleId"></h3>
-<div id="profileTableViewerblockId"></div>
+<div id="tableViewerZone" style="display:none";>
+  <h3 id="profileTableTitleId"></h3>
+  <div id="profileTableViewerblockId"></div>
+</div>
 
 <!-- PROFILE TABLES ZONE -->
 
@@ -125,6 +140,9 @@
 
 
 
+<!-- 5. FOOTER ZONE-->
+<footer id="footer"><p id="footerText">copy_right@AfsanaKhanTopaCreation_2020</p></footer>
+<!-- 5. FOOTER ZONE-->
 
 
 
@@ -135,9 +153,6 @@
 
 
 
-<!-- 5. FOOTER ZONE-->
-<footer id="footer"><p id="footerText">copy_right@AfsanaKhanTopaCreation_2020</p></footer>
-<!-- 5. FOOTER ZONE-->
 
 
 

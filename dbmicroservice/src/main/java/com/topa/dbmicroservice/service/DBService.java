@@ -26,12 +26,12 @@ public class DBService {
         String username = "root";
 
         // 1.RDS DB INFO
-//        String dbUrl = "jdbc:mysql://budget-explorer-db.ckult7yatbtp.us-east-1.rds.amazonaws.com:3306/TOPADB?serverTimezone=UTC";
-//        String password = "TOPADBRDS";
+        String dbUrl = "jdbc:mysql://budget-explorer-db.ckult7yatbtp.us-east-1.rds.amazonaws.com:3306/TOPADB?serverTimezone=UTC";
+        String password = "TOPADBRDS";
 
         //2.LOCAL DB INFO TO TEST
-         String dbUrl = "jdbc:mysql://192.168.0.14:3306/TOPADB?serverTimezone=UTC";
-         String password = "Tishan@2016";
+//         String dbUrl = "jdbc:mysql://192.168.0.14:3306/TOPADB?serverTimezone=UTC";
+//         String password = "Tishan@2016";
 
 
         //LOAD MYSQL JDBC DRIVER
@@ -48,7 +48,7 @@ public class DBService {
     //1. SERVICE: CREATE TABLE
     public String createTableService(String tableName) {
         //THIS METHOD USED SPRING BOOT JDBC TEMPLATE
-        if(findTableService(tableName)=="TABLE FOUND"){return "TABLE ALREADY EXISTED";}
+        if(findTableService(tableName)=="TABLE FOUND IN DATABASE"){return "TABLE ALREADY EXISTS";}
         else{jdbc.execute(" CREATE TABLE `TOPADB`.`" + tableName + "` (\n" +
                 "  `id` INT NOT NULL AUTO_INCREMENT,\n" +
                 "  `date` VARCHAR(45) NULL,\n" +
@@ -254,7 +254,7 @@ public class DBService {
 
 
 
-    //2. SERVICE: VALIDATE TABLE NAME IN PROFILE BASED TABLE
+    //16. SERVICE: VALIDATE TABLE NAME IN PROFILE BASED TABLE
     public String validateTableFromProfileBasedTableService(@RequestParam() String profileName,String tableName) {
         List<String> list= new ArrayList<>();
         try{
