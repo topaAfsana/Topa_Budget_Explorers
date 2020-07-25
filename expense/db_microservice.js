@@ -4,10 +4,10 @@ var tbltop=`<table class="dbTable">
 				<tr><th>Item</th><th>Date</th><th>Title</th><th>Amount</th><th class="chk"></th></tr>`;
 var tbl;
 
-// var host="http://localhost:8080";
+var host="http://localhost:8080";
 // var host="https://192.168.0.14:8443";
 // var host="https://52.91.249.153:8443";
-var host="http://52.91.249.153:8080";
+// var host="http://52.91.249.153:8080";
 
 
 //1.
@@ -16,8 +16,27 @@ function createTable(){
 			var myCreatetable=document.querySelector("#myTableId").value.toUpperCase();
 			var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
 			if (myCreatetable == "") {alert ("Please enter Table name");return false;}
-	
-			var xmlhttp_create= new XMLHttpRequest();
+
+		 	for(var i=0;i<myCreatetable.length;i++){
+		 		var currentChar=myCreatetable[i];
+		 		// alert(myCreatetable[i]);
+
+		 		if (currentChar==" "){
+		 			alert ("Please Remove space between Words");
+		 			alert("Please enter Table name without any space or dash. Due to this issue TABLE NOT CREATED!Please Try again!");
+		 			alert("Enter Word like : YourTableName  OR Your_Table" );
+
+		 			return false;
+		 		}
+		 		if(currentChar=="-"){
+		 			alert ("Please Remove dash between Words");
+		 			alert("Please enter Table name without any space or dash. Due to this issue TABLE NOT CREATED!Please Try again!");
+		 			alert("Enter Word like : YourTableName  OR Your_Table" );
+		 				 			return false;}}
+
+
+		 	if(!(currentChar == " ") && !(currentChar == "-")){
+		 	var xmlhttp_create= new XMLHttpRequest();
 			var createTableUrl= host+'/create_table';
 			var param="tableName="+myCreatetable+"";
 			
@@ -26,17 +45,24 @@ function createTable(){
 				var response = xmlhttp_create.responseText;	
 				alert(response);
 				if (response === "TABLE IS SUCCESSFULLY CREATED"){
+					inserIntoProfileBasedTable(myProfName,myCreatetable);
+					showRecords();
 					if(document.querySelector("#tableViewerZone").style.display=="inline-block"){
 					showTablesFromProfileBasedTable();
 					}
-					inserIntoProfileBasedTable(myProfName,myCreatetable);
-					showRecords();
 				}
 			}}
 			xmlhttp_create.open("POST",createTableUrl+"?"+param,true);
 			xmlhttp_create.setRequestHeader('Content-Type', 'application/json');
 			xmlhttp_create.send(null);
-			showTablesFromProfileBasedTable();
+			// showTablesFromProfileBasedTable();
+		 		}
+		 	else{aler("PLEASE ENTER NAME WITHOUT SPACE OR DASH.DUE TO THAT TABLE NOT CREATED!PLEASE TRY AGAIN");}
+
+
+
+	
+			
 
 		}
 
