@@ -807,6 +807,8 @@ function deleteSelectedTable(){
 				// alert(response);
 				if(response==="TABLE DELETED FROM THE DB,UPDATED_ON AND PROFILE TABLE"){
 					alert("TABLE DELETED");
+					showTablesFromProfileBasedTable();
+
 				}
 				else{alert("FAILED:EXCEPTION OCCURED");}
 			}}
