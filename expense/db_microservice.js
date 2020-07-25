@@ -584,33 +584,9 @@ for(var i=0;i<myProfName.length;i++){
 			xmlhttp_authenticateProfile.send(null);
 			//VALIDATE
 
-			
-
-
-
 		}
 }
 
-function validateProfileNotExist(){
-     	//VALIDATE
-        	var xmlhttp_authenticateProfile= new XMLHttpRequest();
-			var authenticateProfileUrl= host+'/authenticate_profile';
-			var param="profileName="+myProfName+"&pass="+myPass+"";
-			xmlhttp_authenticateProfile.onreadystatechange = function() {
-				if(xmlhttp_authenticateProfile.readyState===4 & xmlhttp_authenticateProfile.status===200){
-				var response=xmlhttp_authenticateProfile.responseText;
-				// test purpose
-				// alert(response);
-				if(response==="PROFILE FOUND"){
-				alert("PROFILE NAME ALREADY CREATED")
-				}else{alert("User Not found,Please Register to Log in");}
-			}}
-	 		xmlhttp_authenticateProfile.open("GET",authenticateProfileUrl+"?"+param,true);
-			xmlhttp_authenticateProfile.setRequestHeader('Content-Type', 'application/json');
-			xmlhttp_authenticateProfile.send(null);
-			//VALIDATE
-
-}
 
 
 //14.
