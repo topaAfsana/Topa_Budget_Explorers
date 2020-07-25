@@ -27,7 +27,7 @@ function createTable(){
 				alert(response);
 				if (response === "TABLE IS SUCCESSFULLY CREATED"){
 					if(document.querySelector("#tableViewerZone").style.display=="inline-block"){
-						showTablesFromProfileBasedTable();
+					showTablesFromProfileBasedTable();
 					}
 					inserIntoProfileBasedTable(myProfName,myCreatetable);
 					showRecords();
@@ -36,7 +36,7 @@ function createTable(){
 			xmlhttp_create.open("POST",createTableUrl+"?"+param,true);
 			xmlhttp_create.setRequestHeader('Content-Type', 'application/json');
 			xmlhttp_create.send(null);
-				showTablesFromProfileBasedTable();
+			showTablesFromProfileBasedTable();
 
 		}
 
@@ -806,9 +806,8 @@ function deleteSelectedTable(){
 				//test purpose	
 				// alert(response);
 				if(response==="TABLE DELETED FROM THE DB,UPDATED_ON AND PROFILE TABLE"){
-					alert("TABLE DELETED");
 					showTablesFromProfileBasedTable();
-
+					alert("TABLE DELETED");
 				}
 				else{alert("FAILED:EXCEPTION OCCURED");}
 			}}
