@@ -545,7 +545,24 @@ for(var i=0;i<myProfName.length;i++){
 
 		 	if(!(currentChar == " ") && !(currentChar == "-")){
 
-			var xmlhttp_createProf= new XMLHttpRequest();
+
+
+
+		 		//VALIDATE
+        	var xmlhttp_authenticateProfile= new XMLHttpRequest();
+			var authenticateProfileUrl= host+'/authenticate_profile';
+			var param="profileName="+myProfName+"&pass="+myPass+"";
+			xmlhttp_authenticateProfile.onreadystatechange = function() {
+				if(xmlhttp_authenticateProfile.readyState===4 & xmlhttp_authenticateProfile.status===200){
+				var response=xmlhttp_authenticateProfile.responseText;
+				// test purpose
+				// alert(response);
+				if(response== "PROFILE FOUND"){
+				alert("PROFILE NAME ALREADY CREATED")
+				}
+
+              if(response==="PROFILE NOT FOUND"){
+				var xmlhttp_createProf= new XMLHttpRequest();
 			var createProfileTableUrl= host+'/create_profile';
 			var param="profileName="+myProfName+"&pass="+myPass+"";
 			xmlhttp_createProf.onreadystatechange = function() {
@@ -558,8 +575,18 @@ for(var i=0;i<myProfName.length;i++){
 			}}
 			xmlhttp_createProf.open("POST",createProfileTableUrl+"?"+param,true);
 			xmlhttp_createProf.setRequestHeader('Content-Type', 'application/json');
-			xmlhttp_createProf.send(null);}
+			xmlhttp_createProf.send(null);
 }
+
+			}}
+	 		xmlhttp_authenticateProfile.open("GET",authenticateProfileUrl+"?"+param,true);
+			xmlhttp_authenticateProfile.setRequestHeader('Content-Type', 'application/json');
+			xmlhttp_authenticateProfile.send(null);
+			//VALIDATE
+
+		}
+}
+
 
 
 //14.
@@ -877,7 +904,7 @@ function cancelEditProf(){
  			document.getElementById("cancelIdProf").style.display="none";
 			document.getElementById("showSelectedTableId").style.display="inline-block";
 			document.getElementById("deleteIdProf").style.display="inline-block"; 	
-					showTablesFromProfileBasedTable();	
+			showTablesFromProfileBasedTable();	
 }
 
 // EDIT OPTIONS FOR PROFILE TABLE-END
