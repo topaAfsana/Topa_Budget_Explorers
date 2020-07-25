@@ -522,6 +522,29 @@ function createProfile(){
 	 					alert ("Please enter Profile name");return false; }
         		 	if (myPass == "") {
 	 					alert ("Please enter Password");return false;}
+
+
+
+for(var i=0;i<myProfName.length;i++){
+		 		var currentChar=myProfName[i];
+		 		// alert(myCreatetable[i]);
+
+		 		if (currentChar==" "){
+		 			alert ("Please Remove space between Name");
+		 			alert("Please enter Profile name without any space or dash. Due to this issue PROFILE NOT CREATED!Please Try again!");
+		 			alert("Enter Profile like : FirstnameLastName  OR oneName. Ex.AfsanaTopa OR Topa" );
+
+		 			return false;
+		 		}
+		 		if(currentChar=="-"){
+		 			alert ("Please Remove dash between Name");
+		 			alert("Please enter Profile name without any space or dash. Due to this issue PROFILE NOT CREATED!Please Try again!");
+		 			alert("Enter Profile like : FirstnameLastName  OR oneName. Ex.AfsanaTopa OR Topa" );
+		 				 			return false;}}
+
+
+		 	if(!(currentChar == " ") && !(currentChar == "-")){
+
 			var xmlhttp_createProf= new XMLHttpRequest();
 			var createProfileTableUrl= host+'/create_profile';
 			var param="profileName="+myProfName+"&pass="+myPass+"";
@@ -535,7 +558,7 @@ function createProfile(){
 			}}
 			xmlhttp_createProf.open("POST",createProfileTableUrl+"?"+param,true);
 			xmlhttp_createProf.setRequestHeader('Content-Type', 'application/json');
-			xmlhttp_createProf.send(null);
+			xmlhttp_createProf.send(null);}
 }
 
 
