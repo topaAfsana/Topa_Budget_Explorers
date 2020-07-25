@@ -179,8 +179,8 @@ public class DBService {
 
 
     //10. SERVICE: DELETE RECORD IN A TABLE
-    public String deleteRecordService(String tableNmae,int id) {
-        jdbc.execute("DELETE FROM `TOPADB`.`"+tableNmae+"` WHERE `id` = "+id+";");
+    public String deleteRecordService(String tableName,int id) {
+        jdbc.execute("DELETE FROM `TOPADB`.`"+tableName+"` WHERE `id` = "+id+";");
         return "ROW/RECORD DELETED FROM THE TABLE"; }
 
 
@@ -219,7 +219,7 @@ public class DBService {
     //13. SERVICE: CREATE A PROFILE TABLE TO HOLD THE TABLE NAME CREATED BY THE PROFILE NAME
     public String createProfileBasedTableService(String profileName) {
         //THIS METHOD USED SPRING BOOT JDBC TEMPLATE
-       jdbc.execute("CREATE TABLE `TOPADB`.`"+profileName+"_TABLE` (\n" +
+       jdbc.execute("CREATE TABLE `TOPADB`.`"+profileName+"_PROFILE` (\n" +
                 "            `id` INT NOT NULL AUTO_INCREMENT, `profile_tables` VARCHAR(45) NOT NULL,PRIMARY KEY (`id`),\n" +
                 "    UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,UNIQUE INDEX `profile_tables_UNIQUE` (`profile_tables` ASC) VISIBLE);");
             return "PROFILE BASED TABLE IS SUCCESSFULLY CREATED";
@@ -238,7 +238,7 @@ public class DBService {
     public List<ProfileTableItems> getTablesNamefromProfileBasedTableService(String profileName) throws ClassNotFoundException, SQLException {
         Connection con=createDBConnection();
         Statement stmt = con.createStatement();
-        String query = "SELECT * FROM `TOPADB`.`"+profileName+"_TABLE`;";
+        String query = "SELECT * FROM `TOPADB`.`"+profileName+"_PROFILE`;";
         ResultSet rs = stmt.executeQuery(query);
 
         List<ProfileTableItems> list = new ArrayList<>();
@@ -260,7 +260,7 @@ public class DBService {
         try{
             Connection con=createDBConnection();
             Statement stmt = con.createStatement();
-            String query = "SELECT * FROM `TOPADB`.`"+profileName+"_TABLE`;";
+            String query = "SELECT * FROM `TOPADB`.`"+profileName+"_PROFILE`;";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 String table = rs.getString(2);
@@ -276,4 +276,62 @@ public class DBService {
         return null;
     }
 
+    //17. SERVICE: DELETE TABLE NAME ON UPDATED TABLE
+    public String deleteRecordFromUpdatedOnTableService(String tableName) {
+        jdbc.execute("DELETE FROM `TOPADB`.`UPDATED_ON` WHERE `tableName` =\""+tableName+"\";");
+        return "ROW/RECORD DELETED FROM THE TABLE"; }
+
+    //18. SERVICE: DELETE TABLE NAME ON PROFILE TABLE
+    public String deleteRecordFromProfileTableService(String profileName, String tableName) {
+        jdbc.execute("DELETE FROM `TOPADB`.`"+profileName+"_PROFILE` WHERE `profile_tables` = \""+tableName+"\";");
+        return "ROW/RECORD DELETED FROM THE TABLE"; }
+
+    //19. SERVICE: DELETE A TABLE FROM A DB,UPDATED ON AND PROFILE TABLE
+    public String deleteTableService(String profileName,String tableName) {
+        jdbc.execute("DROP TABLE TOPADB."+tableName+";");
+        deleteRecordFromUpdatedOnTableService(tableName);
+        deleteRecordFromProfileTableService(profileName,tableName);
+        return "TABLE DELETED FROM THE DB,UPDATED_ON AND PROFILE TABLE"; }
+
+
+
+
+    //20. SERVICE: RENAME TABLE NAME IN UPDATED ON TABLE
+    public String reNameTableNameOnUpdatedTableService( String  newTableName,String oldTableName) {
+        jdbc.execute(" UPDATE TOPADB.UPDATED_ON SET tableName = '"+newTableName+"' WHERE tableName= '"+oldTableName+"';");
+        return "TABLE NAME ON UPDATED ON TABLE RENAMED"; }
+
+    //21. SERVICE: RENAME TABLE NAME IN PROFILE ON TABLE
+    public String reNameTableNameOnProfileTableService(String profileName,String  newTableName,String oldTableName) {
+        jdbc.execute(" UPDATE TOPADB."+profileName+"_PROFILE SET profile_tables = '"+newTableName+"' WHERE profile_tables= '"+oldTableName+"';");
+        return "TABLE NAME ON PROFILE RENAMED"; }
+
+
+    //22. SERVICE: RENAME TABLE IN A DB,UPDATED ON AND PROFILE TABLE
+    public String renameTableService(String profileName,String newTableName,String oldTableName) {
+        jdbc.execute("ALTER TABLE `TOPADB`.`"+oldTableName+"`\n" +
+                "RENAME TO  `TOPADB`.`"+newTableName+"` ;");
+        reNameTableNameOnUpdatedTableService(newTableName,oldTableName);
+        reNameTableNameOnProfileTableService(profileName,newTableName,oldTableName);
+        return "TABLE RENAMED ON THE DB,UPDATED_ON AND PROFILE TABLE"; }
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

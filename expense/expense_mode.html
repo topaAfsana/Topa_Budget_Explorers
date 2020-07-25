@@ -15,7 +15,7 @@
 
 
 
-<!-- LOG IN ZONE -->
+<!-- A)LOG IN ZONE -->
 <!-- 1. HEADER ZONE-->
 <div id="logInHeaderZone">
 <div id="header" >
@@ -43,7 +43,7 @@
 
 
 
-<!-- EXPENSE PAGE ZONE -->
+<!--B)EXPENSE PAGE ZONE -->
 <div id="hideId" style="display:none;">
 
 
@@ -65,11 +65,24 @@
 
   
   <!-- PROFILE TABLES ZONE -->
- <input type='button' id='showprofTableId' class='showTableButton' value='SHOW MY TABLES' onclick="showTablesFromProfileBasedTable()">
+  <div id="showTableOptionZone">
+ <input type='button' id='showprofTableId' class='showTableButton' value='MY TABLES' onclick="showTablesFromProfileBasedTable()">
  <input type='button' id='closeprofTableId' class='showTableButton' value='CLOSE' style="display:none"; onclick="closeTablesFromProfileBasedTable()">
+ 
+</div>
 
 <div id="tableViewerZone" style="display:none";>
-  <h3 id="profileTableTitleId"></h3>
+  <h5 id="profileTableTitleId"></h5>
+  <div id="editOptionZoneProfileTable">
+ <input type='button' id='showSelectedTableId' class='editButtonsProf' value='View' style="display:none;"; 
+ onclick="viewSelectedTableItem()">
+ <input type='button' id='deleteIdProf' value='Delete' class='editButtonsProf' style="display:none;" onclick="deleteSelectedTable()">
+  <input type='button' id='editIdProf' value='Edit' class='editButtonsProf' style="display:none;" 
+  onclick="editTableOfProfile()">
+  <input type='button' id='saveIdProf' value='Save' class='editButtonsProf' style="display:none;" onclick="renameTable()">
+  
+  <input type='button' id='cancelIdProf' value='X' class='editButtonsProf' style="display:none;" onclick="cancelEditProf()">
+</div>
   <div id="profileTableViewerblockId"></div>
 </div>
 

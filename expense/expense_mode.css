@@ -222,6 +222,24 @@ tbody{
 	font-size: 20px;
 	display: none;
 }
+.editButtonsProf{
+	width: 80px;
+	padding: 5px;
+	text-align: center;
+	background-color: green;
+	border-radius: 10px;
+	color: white;
+	border: 1px solid green;
+	font-size: 20px;
+	display: inline-block;
+}
+
+#editOptionZoneProfileTable{
+	width: 100%;
+	display: inline-block;
+	margin-left: 23px;
+	margin-bottom: -30px;
+}
 #editOptionZone{
 	float: right;
 	margin-right: 10px;
@@ -260,7 +278,7 @@ tbody{
 	margin-left: 580px;
 	color: teal;
 	font-size: 25px;
-	/*border:2px solid teal;*/
+	/*border:2px solid teal;
 	padding: 5px;
 	font-weight: bolder;
 /*	width: 220px;
@@ -311,8 +329,8 @@ footer{
 
 }
 .showTableButton{
-width: 300px;
-	padding: 8px;
+	width: 170px;
+	padding: 5px;
 	text-align: center;
 	background-color: teal;
 	border-radius: 10px;
@@ -320,10 +338,22 @@ width: 300px;
 	border: 5px solid green;	
 	text-align: center;
 	font-size: 28px;
+	margin-bottom: -40px;
+	margin: 20px;
 }
 #profName{
 	float: right;
 	margin-top: -40px;
+}
+
+
+#profileTableTitleId{
+	width: 30%;
+	border: 3px solid black;
+	margin-left: 10px;
+	margin-bottom: 0px;
+	padding-left: 30px;
+	color: teal;
 }
 
 

@@ -26,6 +26,9 @@ function createTable(){
 				var response = xmlhttp_create.responseText;	
 				alert(response);
 				if (response === "TABLE IS SUCCESSFULLY CREATED"){
+					if(document.querySelector("#tableViewerZone").style.display=="inline-block"){
+						showTablesFromProfileBasedTable();
+					}
 					inserIntoProfileBasedTable(myProfName,myCreatetable);
 					showRecords();
 				}
@@ -38,7 +41,7 @@ function createTable(){
 //=======
 
 
-// 2.
+// 2.//find table from total db
 function findTable(){
 	var myQuerytable=document.querySelector("#myTableId").value.toUpperCase();
 			 if (myQuerytable == "") {
@@ -51,13 +54,16 @@ function findTable(){
 			if(xmlhttp_find.readyState===4 & xmlhttp_find.status===200){
 				var response=xmlhttp_find.responseText;
 				//test purpose uncomment
-				alert(response);
 				if (response === "TABLE FOUND IN DATABASE"){
+					if(document.querySelector("#tableViewerZone").style.display=="inline-block"){
+						closeTablesFromProfileBasedTable();
+					}
 					showRecords();
 					getupdatedDate(myQuerytable);
 				}else { 
 					clearTable();
-					alert("TABLE DOES NOT EXIST.PLEASE CRAETE THE TABLE;")};
+					alert("TABLE DOES NOT EXIST.PLEASE CRAETE THE TABLE;")
+					showTablesFromProfileBasedTable();};
 				}}
 			xmlhttp_find.open("GET",findTableUrl+"?"+param,true);
 			xmlhttp_find.setRequestHeader('Content-Type', 'application/json');
@@ -147,7 +153,6 @@ function findTable(){
 	// 5.
 		function addAndLoad(){
 		addRecord();
-		// findTable();
 		validateTableFromProfileBasedTable();
 
 	}
@@ -199,6 +204,7 @@ function showRecords() {
 	 		var myItemTitle= document.querySelector("#titleId").value='';
 	 		var myamount= document.querySelector("#amountId").value='';
 
+
 	}
 	// 8.
 	function setCurrentDate(){
@@ -241,7 +247,6 @@ var xmlhttp_updateDate= new XMLHttpRequest();
 
 // 11.
 function getupdatedDate(myTable){
-	var myTable= document.querySelector("#myTableId").value.toUpperCase();
 	var getUpdatedDateUrl= host+'/get_updated_date';
 	var xmlhttp_getUpdatedDate= new XMLHttpRequest();
 	var param="tableName="+myTable+"";
@@ -252,7 +257,6 @@ function getupdatedDate(myTable){
 			  var updatedDateresponse=xmlhttp_getUpdatedDate.responseText;
 			  //test purpose uncomment
 			  // alert(updatedDateresponse);
-			  	// document.querySelector("#dashboardBodyTableName").innerHTML = "TABLE: "+myTable;
 				document.querySelector("#dashboardBodylastUpdate").innerHTML = "Last Updated: "+updatedDateresponse;
 			}}; xmlhttp_getUpdatedDate.send();
 }
@@ -289,7 +293,7 @@ function showTables() {
 
 
 
-//EDIT OPTIONS
+//TABLE RECORDS EDIT OPTIONS-START
 
 //13.
 function editRow(id){
@@ -322,8 +326,7 @@ function getSelectedCheckboxId() {
     checkboxes.forEach((checkbox) => {
         ids.push(checkbox.getAttribute("id"));
     });
-return ids;
-    }
+return ids; }
 
 // 15.
 function getSelectedCheckboxIdLength() {
@@ -332,11 +335,7 @@ function getSelectedCheckboxIdLength() {
     checkboxes.forEach((checkbox) => {
         ids.push(checkbox.getAttribute("id"));
     });
-    	return ids.length;
-
-   
-    
-    }
+    	return ids.length;}
 
 //16.
 function editRecord(){
@@ -395,7 +394,6 @@ function updateRecord(){
 			xmlhttp_updateRecord.setRequestHeader('Content-Type', 'application/json');
 			xmlhttp_updateRecord.send(null);
 
-// 			findTable();
 			validateTableFromProfileBasedTable();
 
 
@@ -437,8 +435,7 @@ function deleteRow(){
 	 		xmlhttp_deleteRecord.open("POST",deleteRecordUrl+"?"+param,true);
 			xmlhttp_deleteRecord.setRequestHeader('Content-Type', 'application/json');
 			xmlhttp_deleteRecord.send(null);
-			findTable();
-
+			validateTableFromProfileBasedTable();
 
 			//CURRENT DATE TO UPDATE DATE
 	 		var today = new Date();
@@ -478,11 +475,16 @@ function deleteRecord(){
 function displayEditOptions(){
 	 		document.getElementById("editId").style.display="block";
 	 	}
+
 function hideEditOptions(){
 	 		document.getElementById("editId").style.display="none";
 	 	}
 
+//TABLE RECORDS EDIT OPTIONS-END
 
+
+
+// PROFILE BASED FEATURE-START
 
 // 13.
 function createProfile(){
@@ -532,7 +534,7 @@ function authenticateProfile(){
 				document.querySelector("#logInHeaderZone").style.display="none";
 				document.querySelector("#hideId").style.display="block";
 				document.querySelector("#userId").innerHTML= logInValue;
-				}else{alert("User Not found ,Please Register First to Log in");}
+				}else{alert("User Not found,Please Register to Log in");}
 			}}
 	 		xmlhttp_authenticateProfile.open("GET",authenticateProfileUrl+"?"+param,true);
 			xmlhttp_authenticateProfile.setRequestHeader('Content-Type', 'application/json');
@@ -563,7 +565,7 @@ function inserIntoProfileBasedTable(myProfName,myCreatetable){
 	
 			var xmlhttp_insertIntoProfileBasedTable= new XMLHttpRequest();
 			var insertIntoProfileBasedTableUrl= host+'/insert_into_profile_based_table';
-			var param="profileName="+myProfName+"_TABLE&tableName="+myCreatetable+"";
+			var param="profileName="+myProfName+"_PROFILE&tableName="+myCreatetable+"";
 			xmlhttp_insertIntoProfileBasedTable.onreadystatechange = function() {
 			if(xmlhttp_insertIntoProfileBasedTable.readyState===4 & xmlhttp_insertIntoProfileBasedTable.status===200){
 				var response = xmlhttp_insertIntoProfileBasedTable.responseText;
@@ -592,32 +594,44 @@ function showTablesFromProfileBasedTable() {
 				var records = JSON.parse(xmlhttp_getTablesFromProfileBasedTable.responseText);	
 				console.log(records);
 			var top=`<table class="profBasedTable">
-				<tr><th class="profBasedTh"></th><th class="profBasedTh">Tables</th></tr>`;
+				<tr><th class="profBasedTh">No</th><th class="profBasedTh">Tables</th><th></th></tr>`;
 			var body= "";
 			for (i=0;i<records.length;i++){ var j=i+1;
 			var profileTrId=records[i].id;
-				body += "<tr id="+"row-"+profileTrId+"><td>"+j+"</td><td>"+records[i].tableName+"</td></tr>";}
+			var chkButtonP="<input type='checkbox' id='"+profileTrId+"' class='chkProf' >";
+
+				body += "<tr id="+"row-"+profileTrId+"><td>"+j+"</td><td id='table"+profileTrId+"'>"+records[i].tableName+"</td><td>"+chkButtonP+"</td></tr>";}
 			var bottom= "</table>";
 			var profiletbl=top + body + bottom;
-				document.querySelector("#profileTableTitleId").innerHTML = "<strong>PROFILE</strong>: "+"<strong>"+myProfName+"</strong>";
+				document.querySelector("#profileTableTitleId").innerHTML = "<strong>TABLES OF</strong> "+"<strong>"+myProfName+"</strong>";
 				document.querySelector("#profileTableViewerblockId").innerHTML =profiletbl;
 				//Future implementation
 				// displayEditOptions();
 }}; xmlhttp_getTablesFromProfileBasedTable.send();
 document.querySelector("#closeprofTableId").style.display='inline-block';
+document.querySelector("#editIdProf").style.display='inline-block';
+document.querySelector("#deleteIdProf").style.display='inline-block';
+document.querySelector("#showSelectedTableId").style.display='inline-block';
 document.querySelector("#tableViewerZone").style.display='inline-block';
+
+
 }
 
-//17.
+//18.
 function closeTablesFromProfileBasedTable() {
 	document.querySelector("#showprofTableId").style.display='inline-block';
+	document.querySelector("#editIdProf").style.display='none';
 	document.querySelector("#closeprofTableId").style.display='none';
 	document.querySelector("#tableViewerZone").style.display='none';
+	document.querySelector("#deleteIdProf").style.display='none';
+	document.querySelector("#showSelectedTableId").style.display='none';
+
 }
 
 
 
-//18. VALIDATE QUERIED TABLE NAME IN PROFILE BASED TABLE AND SHOW RECORD IF FOUND OTHERWISE DONT SHOW
+//19. VALIDATE QUERIED TABLE NAME IN PROFILE BASED TABLE AND SHOW RECORD IF FOUND OTHERWISE DONT SHOW
+// //find table from profile table
 function validateTableFromProfileBasedTable() {
 		var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
 		var myQuerytable= document.querySelector("#myTableId").value.toUpperCase();
@@ -632,6 +646,9 @@ function validateTableFromProfileBasedTable() {
 				// alert(response);
 			if(response === "TABLE NAME FOUND IN PROFILE BASED TABLE"){
 				// alert("YOUR TABLE FOUND");
+				if(document.querySelector("#tableViewerZone").style.display=="inline-block"){
+						closeTablesFromProfileBasedTable();
+					}
 				showRecords();
 				getupdatedDate(myQuerytable);}
 			else{
@@ -646,29 +663,172 @@ function validateTableFromProfileBasedTable() {
 				//test purpose uncomment
 				// alert(response);
 				if (response === "TABLE FOUND IN DATABASE"){
-// 					hideEditOptions();
 					clearTable();
 					alert("YOU DONT HAVE ACCESS TO THE TABLE")
 				}else { 
-// 					hideEditOptions();
 					clearTable();
 					alert("TABLE DOES NOT EXIST.PLEASE CRAETE NEW TABLE;")};
 				}}
 			xmlhttp_find.open("GET",findTableUrl+"?"+param,true);
 			xmlhttp_find.setRequestHeader('Content-Type', 'application/json');
 			xmlhttp_find.send(null);
-				// MODIFIED FIND BLOCK
-
-
-
-
-
-				// alert("TABLE NOT FOUND IN PROFILE BASED TABLE");
-				// clearTable();
 			}
 	}}; xmlhttp_validareTablesFromProfileBasedTable.send();}
 
 
+	// PROFILE BASED VALIDATION FEATURE-END
+
+
+
+// EDIT OPTIONS FOR PROFILE TABLE-START
+
+//20.
+function getSelectedCheckboxIdForProfTables() {
+    const checkboxes = document.querySelectorAll('input[class="chkProf"]:checked');
+    let ids = [];
+    checkboxes.forEach((checkbox) => {
+        ids.push(checkbox.getAttribute("id"));
+    });
+return ids; }
+
+//21.
+function getSelectedCheckboxIdLengthOfProfTables() {
+    const checkboxes = document.querySelectorAll('input[class="chkProf"]:checked');
+    let ids = [];
+    checkboxes.forEach((checkbox) => {
+        ids.push(checkbox.getAttribute("id"));
+    });
+    	return ids.length;}
+
+
+
+//22.
+function editTableOfProfile(){
+var id=getSelectedCheckboxIdForProfTables();
+if(getSelectedCheckboxIdLengthOfProfTables()===1){
+	editTable(id);}
+else{alert("SELECT SPECIFIC ITEM CHECKBOX AND THEN CLICK EDIT TO UPDATE");}}
+
+//23.
+function editTable(id){
+	document.getElementById("editIdProf").style.display="none";
+	document.getElementById("showSelectedTableId").style.display="none";
+	document.getElementById("deleteIdProf").style.display="none";
+ 	document.getElementById("saveIdProf").style.display="inline-block";
+ 	document.getElementById("cancelIdProf").style.display="inline-block";
+	var old_tableName=document.getElementById("table"+id);
+	var new_tableName=old_tableName.innerHTML;
+	old_tableName.innerHTML="<input type='text' class='"+new_tableName+"' id='new_table"+id+"' value='"+new_tableName+"'>";
+}
+
+
+//24.
+function renameTable(){
+
+		var id=getSelectedCheckboxIdForProfTables();
+		var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+		var old_tableName=document.getElementById("new_table"+id).getAttribute("class");	
+		var new_tableName=document.getElementById("new_table"+id).value;
+ 		document.getElementById("table"+id).innerHTML=new_tableName;
+
+	 			if (new_tableName == "") {
+	 			alert ("Please enter Table name");
+        		return false;}
+        		
+        	var xmlhttp_renameTable= new XMLHttpRequest();
+			var renameTableUrl= host+'/rename_table';
+			var param="profileName="+myProfName+"&newTableName="+new_tableName+"&oldTableName="+old_tableName+"";
+
+			xmlhttp_renameTable.onreadystatechange = function() {
+				if(xmlhttp_renameTable.readyState===4 & xmlhttp_renameTable.status===200){
+					var response=xmlhttp_renameTable.responseText;
+				// test purpose use
+				// alert(response);
+				if (response=="TABLE RENAMED ON THE DB,UPDATED_ON AND PROFILE TABLE"){
+					alert("SUCCESSFULLY UPDATED THE TABLE");
+					showTablesFromProfileBasedTable();
+
+				}
+				else{alert("FAILED EXCEPTION OCCURED")
+			 			showTablesFromProfileBasedTable();}
+			}}
+
+	 		xmlhttp_renameTable.open("POST",renameTableUrl+"?"+param,true);
+			xmlhttp_renameTable.setRequestHeader('Content-Type', 'application/json');
+			xmlhttp_renameTable.send(null);
+
+			//CURRENT DATE TO UPDATE DATE
+	 		var today = new Date();
+			var dd = String(today.getDate()).padStart(2, '0');
+			var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+			var yyyy = today.getFullYear();
+
+			var today = mm + '/' + dd + '/' + yyyy;
+	 		// ====
+	 		var myTable=document.getElementById("table"+id).innerText;
+	 		updateDateOn(myTable,today);
+	 		getupdatedDate(myTable);
+	 		// ===
+	 		document.getElementById("saveIdProf").style.display="none";
+ 			document.getElementById("cancelIdProf").style.display="none";
+	 		document.getElementById("editIdProf").style.display="block";
+ 			document.getElementById("showSelectedTableId").style.display="inline-block";
+			document.getElementById("deleteIdProf").style.display="inline-block";
+ 			showTablesFromProfileBasedTable();
+
+}
+
+//25.
+function viewSelectedTableItem(){
+	if(getSelectedCheckboxIdLengthOfProfTables()===1){
+	var id=getSelectedCheckboxIdForProfTables();
+	var selectedTableName=document.getElementById("table"+id).innerText;
+	document.querySelector("#myTableId").value=selectedTableName;
+	findTable();}
+else{alert("SELECT SPECIFIC ITEM CHECKBOX AND THEN CLICK VIEW");}}
+
+
+//26.
+function deleteSelectedTable(){
+	if(getSelectedCheckboxIdLengthOfProfTables()===1){
+			var id=getSelectedCheckboxIdForProfTables();
+	var selectedTableName=document.getElementById("table"+id).innerText;
+	var tableName=selectedTableName.toUpperCase();
+	var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+	var xmlhttp_deleteTable= new XMLHttpRequest();
+			var deleteTableUrl= host+'/delete_table';
+			var param="profileName="+myProfName+"&tableName="+tableName+"";
+			xmlhttp_deleteTable.onreadystatechange = function() {
+			if(xmlhttp_deleteTable.readyState===4 & xmlhttp_deleteTable.status===200){
+				var response = xmlhttp_deleteTable.responseText;
+				//test purpose	
+				// alert(response);
+				if(response==="TABLE DELETED FROM THE DB,UPDATED_ON AND PROFILE TABLE"){
+					alert("TABLE DELETED");
+				}
+				else{alert("FAILED:EXCEPTION OCCURED");}
+			}}
+			xmlhttp_deleteTable.open("POST",deleteTableUrl+"?"+param,true);
+			xmlhttp_deleteTable.setRequestHeader('Content-Type', 'application/json');
+			xmlhttp_deleteTable.send(null);
+			showTablesFromProfileBasedTable();
+		}
+			else{alert("SELECT SPECIFIC ITEM CHECKBOX AND THEN CLICK DELETE");}
+	}
+
+
+
+//27.
+function cancelEditProf(){
+			document.getElementById("editIdProf").style.display="block";
+ 			document.getElementById("saveIdProf").style.display="none";
+ 			document.getElementById("cancelIdProf").style.display="none";
+			document.getElementById("showSelectedTableId").style.display="inline-block";
+			document.getElementById("deleteIdProf").style.display="inline-block"; 	
+					showTablesFromProfileBasedTable();	
+}
+
+// EDIT OPTIONS FOR PROFILE TABLE-END
 
 
 
