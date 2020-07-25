@@ -36,6 +36,8 @@ function createTable(){
 			xmlhttp_create.open("POST",createTableUrl+"?"+param,true);
 			xmlhttp_create.setRequestHeader('Content-Type', 'application/json');
 			xmlhttp_create.send(null);
+				showTablesFromProfileBasedTable();
+
 		}
 
 //=======
