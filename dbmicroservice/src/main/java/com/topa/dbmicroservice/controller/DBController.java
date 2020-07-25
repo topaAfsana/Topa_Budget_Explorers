@@ -110,5 +110,16 @@ public class DBController {
     public String validateTableFromProfileBasedTable(@RequestParam() String profileName,String tableName){
         return dbService.validateTableFromProfileBasedTableService(profileName,tableName); }
 
+    //16. url sample: http://localhost:8080/delete_table?profileName=yourName&tableName=yourTable
+    @RequestMapping(value = "/delete_table", method = RequestMethod.POST)
+    public String deleteTable(@RequestParam() String profileName,String tableName) {
+        return dbService.deleteTableService(profileName,tableName); }
+
+    //17. url sample: http://localhost:8080/rename_table?profileName=yourName&newTableName=newTable&oldTableName=oldTable
+    @RequestMapping(value = "/rename_table", method = RequestMethod.POST)
+    public String renameTable(@RequestParam() String profileName,String newTableName,String oldTableName) {
+        return dbService.renameTableService(profileName,newTableName,oldTableName); }
+
+
 }
 
