@@ -26,12 +26,12 @@ public class DBService {
         String username = "root";
 
         // 1.RDS DB INFO
-//        String dbUrl = "jdbc:mysql://budget-explorer-db.ckult7yatbtp.us-east-1.rds.amazonaws.com:3306/TOPADB?serverTimezone=UTC";
-//        String password = "TOPADBRDS";
+        String dbUrl = "jdbc:mysql://budget-explorer-db.ckult7yatbtp.us-east-1.rds.amazonaws.com:3306/TOPADB?serverTimezone=UTC";
+        String password = "TOPADBRDS";
 
         //2.LOCAL DB INFO TO TEST
-         String dbUrl = "jdbc:mysql://192.168.0.14:3306/TOPADB?serverTimezone=UTC";
-         String password = "Tishan@2016";
+//         String dbUrl = "jdbc:mysql://192.168.0.14:3306/TOPADB?serverTimezone=UTC";
+//         String password = "Tishan@2016";
 
 
         //LOAD MYSQL JDBC DRIVER
