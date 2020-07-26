@@ -492,8 +492,10 @@ function deleteRow(){
 // 19.
 function deleteRecord(){
 	 		if(getSelectedCheckboxIdLength()===1){
-	 			confirm('Are you sure you want to delete this item?')
-			deleteRow();}
+var x = confirm("Are you sure you want to delete this table?");
+      if (x== true){deleteRow();}
+      else{			validateTableFromProfileBasedTable();
+}}
 			else{alert("Select specific checkbox and click Delete");}
 	 	}
 
@@ -885,8 +887,11 @@ function deleteSelectedTable(){
 	if(getSelectedCheckboxIdLengthOfProfTables()>1){
 	alert("Please select one checkbox at a time");
 } else{if(getSelectedCheckboxIdLengthOfProfTables()===1){
-	confirm('Are you sure you want to delete this table?')
-			var id=getSelectedCheckboxIdForProfTables();
+
+
+var x = confirm("Are you sure you want to delete this table?");
+      if (x== true){
+      	var id=getSelectedCheckboxIdForProfTables();
 	var selectedTableName=document.getElementById("table"+id).innerText;
 	var tableName=selectedTableName.toUpperCase();
 	var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
@@ -909,7 +914,15 @@ function deleteSelectedTable(){
 			xmlhttp_deleteTable.send(null);
 			showTablesFromProfileBasedTable();
 		}
-			else{alert("Select specific checkbox and click Delete");}};
+		else{showTablesFromProfileBasedTable();
+}
+			
+      }
+      else{alert("Select specific checkbox and click Delete");}
+         
+
+			
+		};
 	
 	}
 
