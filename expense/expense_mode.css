@@ -359,3 +359,17 @@ footer{
 }
 
 
+.editButtons4Record{
+	width: 80px;
+	padding: 5px;
+	text-align: center;
+	background-color: teal;
+	border-radius: 10px;
+	color: white;
+	border: 1px solid green;
+	font-size: 20px;
+	display: none;
+	margin-right: 6px;
+}
+
+
