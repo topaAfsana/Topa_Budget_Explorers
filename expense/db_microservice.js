@@ -492,6 +492,7 @@ function deleteRow(){
 // 19.
 function deleteRecord(){
 	 		if(getSelectedCheckboxIdLength()===1){
+	 			confirm('Are you sure you want to delete this item?')
 			deleteRow();}
 			else{alert("Select specific checkbox and click Delete");}
 	 	}
@@ -884,6 +885,7 @@ function deleteSelectedTable(){
 	if(getSelectedCheckboxIdLengthOfProfTables()>1){
 	alert("Please select one checkbox at a time");
 } else{if(getSelectedCheckboxIdLengthOfProfTables()===1){
+	confirm('Are you sure you want to delete this table?')
 			var id=getSelectedCheckboxIdForProfTables();
 	var selectedTableName=document.getElementById("table"+id).innerText;
 	var tableName=selectedTableName.toUpperCase();
