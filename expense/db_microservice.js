@@ -818,7 +818,7 @@ function renameTable(){
 		var id=getSelectedCheckboxIdForProfTables();
 		var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
 		var old_tableName=document.getElementById("new_table"+id).getAttribute("class");	
-		var new_tableName=document.getElementById("new_table"+id).value;
+		var new_tableName=document.getElementById("new_table"+id).value.toUpperCase();
  		document.getElementById("table"+id).innerHTML=new_tableName;
 
 	 			if (new_tableName == "") {
