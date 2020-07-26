@@ -18,22 +18,16 @@ function createTable(){
 			if (myCreatetable == "") {alert ("Please enter Table name");return false;}
 
 		 	for(var i=0;i<myCreatetable.length;i++){
-		 		var currentChar=myCreatetable[i];
-		 		// alert(myCreatetable[i]);
-
-		 		if (currentChar==" "){
-		 			alert ("Please Remove space between Words");
-		 			alert("Please enter Table name without any space or dash. Due to this issue TABLE NOT CREATED!Please Try again!");
-		 			alert("Enter Word like : YourTableName  OR Your_Table" );
-
+					var currentChar=myCreatetable[i];
+		 			if (currentChar==" "){
+		 			alert ("Please Remove space between Words. Enter Word like : YourTableName  OR Your_Table");
+		 			alert("TABLE NOT CREATED!Please Try again!");
 		 			return false;
 		 		}
 		 		if(currentChar=="-"){
-		 			alert ("Please Remove dash between Words");
-		 			alert("Please enter Table name without any space or dash. Due to this issue TABLE NOT CREATED!Please Try again!");
-		 			alert("Enter Word like : YourTableName  OR Your_Table" );
-		 				 			return false;}}
-
+		 			alert ("Please Remove dash between Words. Enter Word like : YourTableName  OR Your_Table" );
+		 			alert("TABLE NOT CREATED! Please Try again!");
+		 			return false;}}
 
 		 	if(!(currentChar == " ") && !(currentChar == "-")){
 		 	var xmlhttp_create= new XMLHttpRequest();
@@ -55,16 +49,10 @@ function createTable(){
 			xmlhttp_create.open("POST",createTableUrl+"?"+param,true);
 			xmlhttp_create.setRequestHeader('Content-Type', 'application/json');
 			xmlhttp_create.send(null);
-			// showTablesFromProfileBasedTable();
+
 		 		}
 		 	else{aler("TABLE NOT CREATED!TRY AGAIN! Please Enter Table Name with no space or Dash.");}
-
-
-
-	
-			
-
-		}
+	}
 
 //=======
 
@@ -824,8 +812,26 @@ function renameTable(){
 	 			if (new_tableName == "") {
 	 			alert ("Please enter Table name");
         		return false;}
-        		
-        	var xmlhttp_renameTable= new XMLHttpRequest();
+
+        		for(var i=0;i<new_tableName.length;i++){
+		 		var currentChar=new_tableName[i];
+		 		// alert(myCreatetable[i]);
+
+		 		if (currentChar==" "){
+		 			alert ("Please Remove space between Words.Enter Word like : YourTableName  OR Your_Table");
+		 			alert("TABLE NOT UPDATED! Please Try again!");
+		 			cancelEditProf();
+		 			return false;
+		 		}
+		 		if(currentChar=="-"){
+		 			alert ("Please Remove space between Words.Enter Word like : YourTableName  OR Your_Table");
+		 			alert("TABLE NOT UPDATED! Please Try again!");
+					cancelEditProf();
+		 			return false;}
+		 		}
+
+		if(!(currentChar == " ") && !(currentChar == "-")){
+		 			var xmlhttp_renameTable= new XMLHttpRequest();
 			var renameTableUrl= host+'/rename_table';
 			var param="profileName="+myProfName+"&newTableName="+new_tableName+"&oldTableName="+old_tableName+"";
 
@@ -836,11 +842,9 @@ function renameTable(){
 				// alert(response);
 				if (response=="TABLE RENAMED ON THE DB,UPDATED_ON AND PROFILE TABLE"){
 					alert("SUCCESSFULLY UPDATED THE TABLE");
-					showTablesFromProfileBasedTable();
-
-				}
+					showTablesFromProfileBasedTable();}
 				else{alert("FAILED EXCEPTION OCCURED")
-			 			showTablesFromProfileBasedTable();}
+			 		showTablesFromProfileBasedTable();}
 			}}
 
 	 		xmlhttp_renameTable.open("POST",renameTableUrl+"?"+param,true);
@@ -865,7 +869,8 @@ function renameTable(){
  			document.getElementById("showSelectedTableId").style.display="inline-block";
 			document.getElementById("deleteIdProf").style.display="inline-block";
  			showTablesFromProfileBasedTable();
-
+}
+else{ showTablesFromProfileBasedTable();}
 }
 
 //25.
