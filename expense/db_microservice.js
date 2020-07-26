@@ -57,7 +57,7 @@ function createTable(){
 			xmlhttp_create.send(null);
 			// showTablesFromProfileBasedTable();
 		 		}
-		 	else{aler("PLEASE ENTER NAME WITHOUT SPACE OR DASH.DUE TO THAT TABLE NOT CREATED!PLEASE TRY AGAIN");}
+		 	else{aler("TABLE NOT CREATED!TRY AGAIN! Please Enter Table Name with no space or Dash.");}
 
 
 
@@ -368,9 +368,15 @@ function getSelectedCheckboxIdLength() {
 //16.
 function editRecord(){
 var id=getSelectedCheckboxId();
-if(getSelectedCheckboxIdLength()===1){
+if (getSelectedCheckboxIdLength()>1){
+	alert("Select one checkbox at a time");
+}
+else{
+	if(getSelectedCheckboxIdLength()===1){
 	editRow(id);}
-else{alert("SELECT SPECIFIC ITEM CHECKBOX AND THEN CLICK EDIT TO UPDATE");}}
+else{alert("Select specific checkbox and click Edit");}
+}
+}
 
 
 
@@ -487,7 +493,7 @@ function deleteRow(){
 function deleteRecord(){
 	 		if(getSelectedCheckboxIdLength()===1){
 			deleteRow();}
-			else{alert("SELECT SPECIFIC ITEM CHECKBOX AND THEN CLICK EDIT TO DELETE");}
+			else{alert("Select specific checkbox and click Delete");}
 	 	}
 
 	function cancelEdit(){
@@ -783,9 +789,12 @@ function getSelectedCheckboxIdLengthOfProfTables() {
 //22.
 function editTableOfProfile(){
 var id=getSelectedCheckboxIdForProfTables();
-if(getSelectedCheckboxIdLengthOfProfTables()===1){
+if(getSelectedCheckboxIdLengthOfProfTables()>1){
+	alert("Please select one checkbox at a time");
+}else{if(getSelectedCheckboxIdLengthOfProfTables()===1){
 	editTable(id);}
-else{alert("SELECT SPECIFIC ITEM CHECKBOX AND THEN CLICK EDIT TO UPDATE");}}
+else{alert("Select specific checkbox and click Edit");}}
+}
 
 //23.
 function editTable(id){
@@ -858,17 +867,23 @@ function renameTable(){
 
 //25.
 function viewSelectedTableItem(){
-	if(getSelectedCheckboxIdLengthOfProfTables()===1){
+	if(getSelectedCheckboxIdLengthOfProfTables()>1){
+	alert("Please select one checkbox at a time");
+} 
+else{if(getSelectedCheckboxIdLengthOfProfTables()===1){
 	var id=getSelectedCheckboxIdForProfTables();
 	var selectedTableName=document.getElementById("table"+id).innerText;
 	document.querySelector("#myTableId").value=selectedTableName;
 	findTable();}
-else{alert("SELECT SPECIFIC ITEM CHECKBOX AND THEN CLICK VIEW");}}
+else{alert("Select specific checkbox and click View");}}
+	}
 
 
 //26.
 function deleteSelectedTable(){
-	if(getSelectedCheckboxIdLengthOfProfTables()===1){
+	if(getSelectedCheckboxIdLengthOfProfTables()>1){
+	alert("Please select one checkbox at a time");
+} else{if(getSelectedCheckboxIdLengthOfProfTables()===1){
 			var id=getSelectedCheckboxIdForProfTables();
 	var selectedTableName=document.getElementById("table"+id).innerText;
 	var tableName=selectedTableName.toUpperCase();
@@ -892,7 +907,8 @@ function deleteSelectedTable(){
 			xmlhttp_deleteTable.send(null);
 			showTablesFromProfileBasedTable();
 		}
-			else{alert("SELECT SPECIFIC ITEM CHECKBOX AND THEN CLICK DELETE");}
+			else{alert("Select specific checkbox and click Delete");}};
+	
 	}
 
 
