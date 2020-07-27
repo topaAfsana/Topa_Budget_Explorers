@@ -16,7 +16,8 @@ var host="http://52.91.249.153:8080";
 function createTable(){
 
 			var myCreatetable=document.querySelector("#myTableId").value.toUpperCase();
-			var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+			// var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+			var myProfName=document.querySelector("#userId").innerHTML;
 			if (myCreatetable == "") {alert ("Please enter Table name");return false;}
 
 		 	for(var i=0;i<myCreatetable.length;i++){
@@ -614,6 +615,9 @@ function authenticateProfile(){
 				document.querySelector("#myProfileId").value='';
 				document.querySelector("#myPassId").value='';
 				document.querySelector("#myTableId").value='';
+				clearTable();
+				closeTablesFromProfileBasedTable();
+
 
 
 				}else{alert("User Not found,Please Register to Log in");}
@@ -817,7 +821,9 @@ function editTable(id){
 function renameTable(){
 
 		var id=getSelectedCheckboxIdForProfTables();
-		var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+		// var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+		var myProfName=document.querySelector("#userId").innerHTML;
+		// var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
 		var old_tableName=document.getElementById("new_table"+id).getAttribute("class");	
 		var new_tableName=document.getElementById("new_table"+id).value.toUpperCase();
  		document.getElementById("table"+id).innerHTML=new_tableName;
@@ -912,7 +918,8 @@ var x = confirm("Are you sure you want to delete this table?");
       	var id=getSelectedCheckboxIdForProfTables();
 	var selectedTableName=document.getElementById("table"+id).innerText;
 	var tableName=selectedTableName.toUpperCase();
-	var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+	// var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+	var myProfName=document.querySelector("#userId").innerHTML;
 	var xmlhttp_deleteTable= new XMLHttpRequest();
 			var deleteTableUrl= host+'/delete_table';
 			var param="profileName="+myProfName+"&tableName="+tableName+"";
@@ -979,6 +986,10 @@ function cancelProfSettings(){
 	document.querySelector("#logInZone").style.display="none";
 	document.querySelector("#logInHeaderZone").style.display="none";
 	document.querySelector("#myTableId").value='';
+	clearTable();
+	closeTablesFromProfileBasedTable();
+
+
 
 }
 
@@ -987,7 +998,9 @@ function cancelProfSettings(){
 function updateProfPass(){
 
 	var xmlhttp_updatePass= new XMLHttpRequest();
-			var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+			// var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+			var myProfName=document.querySelector("#userId").innerHTML;
+
 			var newPass=document.querySelector("#myNewPassId").value;
 			var updatePassdUrl= host+'/update_pass';
 			var param="profileName="+myProfName+"&newPass="+newPass+"";
