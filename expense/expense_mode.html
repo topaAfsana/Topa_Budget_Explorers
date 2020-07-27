@@ -27,7 +27,7 @@
   <form>
   <!-- <label>Profile Name: </label> <input type="text" placeholder="Ex: Enter your Profile "id="myProfileId"></input>
  <br></br> -->
-  <label> Password: </label> <input type="text" placeholder="Your New password"id="myNewPassId"></input>
+  <label> Password: </label> <input type="password" placeholder="Your New password"id="myNewPassId"></input>
   <!-- <button type="button"  onclick="updateProfPass()"><label class='formButtons'>Change Password</label></button> -->
   <li><a onclick="updateProfPass()">Change Password</a></li>
   <li><a onclick="cancelProfSettings()">Cancel</a></li>
@@ -55,7 +55,7 @@
   <form>
   <label>Profile Name: </label> <input type="text" placeholder="Ex: Enter your Profile "id="myProfileId"></input>
  <br></br>
-  <label> Password: </label> <input type="text" placeholder="Enter your password"id="myPassId"></input>
+  <label> Password: </label> <input type="password" placeholder="Enter your password"id="myPassId"></input>
   <button type="button"  onclick="authenticateProfile()"><label class='formButtons'>LogIn</label></button>
 
    <button type="button" onclick="createProfile()"><label class='formButtons'>Register</label></button>
@@ -96,7 +96,7 @@
   <div id="showTableOptionZone">
  <button type='button' id='showprofTableId' class='showTableButton' value='MY TABLES' onclick="showTablesFromProfileBasedTable()">My Tables</button>
  <button type='button' id='closeprofTableId' class='showTableButton' value='CLOSE' style="display:none"; onclick="closeTablesFromProfileBasedTable()">Close</button>
- 
+ <div id="currentDayZone"><h5 id="currentDayId"></h5></div>
 </div>
 
 <div id="tableViewerZone" style="display:none";>
@@ -186,6 +186,7 @@
 <!-- 5. FOOTER ZONE-->
 <footer id="footer"><p id="footerText">copy_right@AfsanaKhanTopaCreation_2020</p></footer>
 <!-- 5. FOOTER ZONE-->
+
 
 
 

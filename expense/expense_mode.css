@@ -391,3 +391,7 @@ footer{
 	margin-top: -10px;
 }
 
+#currentDayZone{
+	float: right;
+	margin-top: -30px;
+}
