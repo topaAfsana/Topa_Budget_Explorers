@@ -1031,6 +1031,8 @@ function logout(){
 	document.querySelector("#logInZone").style.display="block";
 	document.querySelector("#logInHeaderZone").style.display="block";
 	document.querySelector("#logInBtn").style.display="inline-block";}
+	else{cancelProfSettings();}
+
 }
 
 
