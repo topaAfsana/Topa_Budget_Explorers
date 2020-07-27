@@ -613,6 +613,8 @@ function authenticateProfile(){
 				document.querySelector("#userId").innerHTML= logInValue;
 				document.querySelector("#myProfileId").value='';
 				document.querySelector("#myPassId").value='';
+				document.querySelector("#myTableId").value='';
+
 
 				}else{alert("User Not found,Please Register to Log in");}
 			}}
@@ -718,6 +720,7 @@ function closeTablesFromProfileBasedTable() {
 function validateTableFromProfileBasedTable() {
 		// var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
 		var myProfName=document.querySelector("#userId").innerHTML;
+		// alert(myProfName);
 
 		var myQuerytable= document.querySelector("#myTableId").value.toUpperCase();
 		var validateTablesFromProfileBasedTableurl= host+'/validate_table_from_profile_based_table';
@@ -975,6 +978,7 @@ function cancelProfSettings(){
 	document.querySelector("#bodyHideId").style.display="block";
 	document.querySelector("#logInZone").style.display="none";
 	document.querySelector("#logInHeaderZone").style.display="none";
+	document.querySelector("#myTableId").value='';
 
 }
 
@@ -1008,27 +1012,6 @@ function logout(){
 	document.querySelector("#logInHeaderZone").style.display="block";
 
 }
-
-
-
-// // 9.
-// 	function getCurrentDay(){
-// 		var today = new Date();
-// 		// var dd = String(today.getDate()).padStart(2, '0');
-// 		var dd = String(today.getDay()).padStart(2, '0');
-
-// 		var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-// 		var yyyy = today.getFullYear();
-
-// 		var today = mm + '/' + dd + '/' + yyyy;
-// 		alert(today)
-// 			return today;}
-
-
-
-
-
-			
 
 
 
