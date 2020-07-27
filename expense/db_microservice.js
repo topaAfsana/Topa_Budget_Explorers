@@ -1025,11 +1025,12 @@ function updateProfPass(){
 }
 
 function logout(){
-	document.querySelector("#bodyHideId").style.display="none";
+	var x = confirm("Are you sure you want to Log out?");
+      if (x== true){
+     document.querySelector("#bodyHideId").style.display="none";
 	document.querySelector("#logInZone").style.display="block";
 	document.querySelector("#logInHeaderZone").style.display="block";
-	document.querySelector("#logInBtn").style.display="inline-block";
-
+	document.querySelector("#logInBtn").style.display="inline-block";}
 }
 
 
