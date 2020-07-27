@@ -121,5 +121,11 @@ public class DBController {
         return dbService.renameTableService(profileName,newTableName,oldTableName); }
 
 
+
+    //18. url sample: http://localhost:8080/update_pass?profileName=yourName&newPass=newPass
+    @RequestMapping(value = "/update_pass", method = RequestMethod.POST)
+    public String updateProfPass(@RequestParam() String profileName,String newPass) {
+        return dbService.updateProfPassService(profileName,newPass); }
+
 }
 

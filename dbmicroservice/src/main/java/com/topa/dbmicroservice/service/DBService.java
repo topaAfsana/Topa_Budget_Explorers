@@ -26,12 +26,12 @@ public class DBService {
         String username = "root";
 
         // 1.RDS DB INFO
-        String dbUrl = "jdbc:mysql://budget-explorer-db.ckult7yatbtp.us-east-1.rds.amazonaws.com:3306/TOPADB?serverTimezone=UTC";
-        String password = "TOPADBRDS";
+//        String dbUrl = "jdbc:mysql://budget-explorer-db.ckult7yatbtp.us-east-1.rds.amazonaws.com:3306/TOPADB?serverTimezone=UTC";
+//        String password = "TOPADBRDS";
 
         //2.LOCAL DB INFO TO TEST
-//         String dbUrl = "jdbc:mysql://192.168.0.14:3306/TOPADB?serverTimezone=UTC";
-//         String password = "Tishan@2016";
+         String dbUrl = "jdbc:mysql://192.168.0.14:3306/TOPADB?serverTimezone=UTC";
+         String password = "Tishan@2016";
 
 
         //LOAD MYSQL JDBC DRIVER
@@ -316,6 +316,17 @@ public class DBService {
         return "TABLE RENAMED ON THE DB,UPDATED_ON AND PROFILE TABLE"; }
 
 
+
+
+
+
+
+    //23. SERVICE: CHNAGE PASSWORD OPF ANY PROFILE
+    public String updateProfPassService(String profileName,String newPass) {
+        jdbc.execute("UPDATE `TOPADB`.`USERS_TABLE`\n" +
+                "    SET `pass` = \""+newPass+"\"\n" +
+                "    WHERE `profileName` = \""+profileName+"\";");
+        return "PASS UPDATED"; }
 
 }
 
