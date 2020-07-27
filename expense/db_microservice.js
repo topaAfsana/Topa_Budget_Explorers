@@ -607,6 +607,7 @@ function authenticateProfile(){
 				// test purpose
 				// alert(response);
 				if(response==="PROFILE FOUND"){
+				
 				var logInValue=document.querySelector("#myProfileId").value.toUpperCase();
 				document.querySelector("#logInZone").style.display="none";
 				document.querySelector("#logInHeaderZone").style.display="none";
@@ -681,7 +682,7 @@ function showTablesFromProfileBasedTable() {
 		xmlhttp_getTablesFromProfileBasedTable.onreadystatechange = function() {
 			if(xmlhttp_getTablesFromProfileBasedTable.readyState===4 & xmlhttp_getTablesFromProfileBasedTable.status===200){
 				var records = JSON.parse(xmlhttp_getTablesFromProfileBasedTable.responseText);	
-				console.log(records);
+				// console.log(records);
 			var top=`<table class="profBasedTable">
 				<tr><th class="profBasedTh">No</th><th class="profBasedTh">Tables</th><th></th></tr>`;
 			var body= "";
@@ -727,6 +728,9 @@ function validateTableFromProfileBasedTable() {
 		// alert(myProfName);
 
 		var myQuerytable= document.querySelector("#myTableId").value.toUpperCase();
+
+		if (myQuerytable == "") {
+	 				alert ("Please enter Table name");return false;}
 		var validateTablesFromProfileBasedTableurl= host+'/validate_table_from_profile_based_table';
 		var xmlhttp_validareTablesFromProfileBasedTable= new XMLHttpRequest();
 		var param="profileName="+myProfName+"&tableName="+myQuerytable+"";
@@ -1023,7 +1027,6 @@ function logout(){
 	document.querySelector("#bodyHideId").style.display="none";
 	document.querySelector("#logInZone").style.display="block";
 	document.querySelector("#logInHeaderZone").style.display="block";
-
 }
 
 
@@ -1035,7 +1038,7 @@ function logout(){
 		var monthName=today.toLocaleString('default', { month: 'long' });
 		var DayName=today.toLocaleDateString('default', { weekday: 'long' });
 
-		var dateIs= DayName+', '+date+' '+monthName+','+year;
+		var dateIs= DayName+', '+date+' '+monthName+', '+year;
 		// alert(dateIs);
 		document.querySelector("#currentDayId").innerHTML=dateIs;
 }
