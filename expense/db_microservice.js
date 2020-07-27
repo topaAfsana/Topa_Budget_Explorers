@@ -667,7 +667,7 @@ function showTablesFromProfileBasedTable() {
 		// var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
 				var myProfName=document.querySelector("#userId").innerHTML;
 
-		alert(myProfName);
+		// alert(myProfName);
 		var getTablesFromProfileBasedTableurl= host+'/get_tables_from_profile_based_table';
 		var xmlhttp_getTablesFromProfileBasedTable= new XMLHttpRequest();
 		var param="profileName="+myProfName+"";
