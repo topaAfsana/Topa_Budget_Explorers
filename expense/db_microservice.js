@@ -607,7 +607,7 @@ function authenticateProfile(){
 				var logInValue=document.querySelector("#myProfileId").value.toUpperCase();
 				document.querySelector("#logInZone").style.display="none";
 				document.querySelector("#logInHeaderZone").style.display="none";
-				document.querySelector("#hideId").style.display="block";
+				document.querySelector("#bodyHideId").style.display="block";
 				document.querySelector("#userId").innerHTML= logInValue;
 				}else{alert("User Not found,Please Register to Log in");}
 			}}
@@ -944,6 +944,53 @@ function cancelEditProf(){
 }
 
 // EDIT OPTIONS FOR PROFILE TABLE-END
+
+
+function clearTableField(){
+	document.querySelector("#myTableId").value='';
+}
+
+
+
+function goProfileSettings(){
+	document.querySelector("#profileSettingsZone").style.display="block";
+	document.querySelector("#bodyHideId").style.display="none";
+	document.querySelector("#logInZone").style.display="none";
+	document.querySelector("#logInHeaderZone").style.display="none";
+
+}
+
+function cancelProfSettings(){
+	document.querySelector("#profileSettingsZone").style.display="none";
+	document.querySelector("#bodyHideId").style.display="block";
+	document.querySelector("#logInZone").style.display="none";
+	document.querySelector("#logInHeaderZone").style.display="none";
+
+}
+
+
+
+function updateProfPass(){
+
+	var xmlhttp_updatePass= new XMLHttpRequest();
+			var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+			var newPass=document.querySelector("#myNewPassId").value;
+			var updatePassdUrl= host+'/update_pass';
+			var param="profileName="+myProfName+"&newPass="+newPass+"";
+			xmlhttp_updatePass.onreadystatechange = function() {
+				if(xmlhttp_updatePass.readyState===4 & xmlhttp_updatePass.status===200){
+				// test purpose use
+				alert(xmlhttp_updatePass.responseText);
+			}}
+
+	 		xmlhttp_updatePass.open("POST",updatePassdUrl+"?"+param,true);
+			xmlhttp_updatePass.setRequestHeader('Content-Type', 'application/json');
+			xmlhttp_updatePass.send(null);
+			document.querySelector("#myNewPassId").value='';
+			cancelProfSettings();
+
+
+}
 
 
 

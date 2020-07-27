@@ -203,7 +203,7 @@ public class DBService {
         ResultSet rs = stmt.executeQuery(query);
         while (rs.next()) {
             int rowNum=rs.getInt(1);
-            System.out.println("MY ROWS "+rowNum);
+//            System.out.println("MY ROWS "+rowNum);
             if (rowNum == 1){
                 return  "PROFILE FOUND";
             }
@@ -316,6 +316,17 @@ public class DBService {
         return "TABLE RENAMED ON THE DB,UPDATED_ON AND PROFILE TABLE"; }
 
 
+
+
+
+
+
+    //23. SERVICE: CHNAGE PASSWORD OPF ANY PROFILE
+    public String updateProfPassService(String profileName,String newPass) {
+        jdbc.execute("UPDATE `TOPADB`.`USERS_TABLE`\n" +
+                "    SET `pass` = \""+newPass+"\"\n" +
+                "    WHERE `profileName` = \""+profileName+"\";");
+        return "PASS UPDATED"; }
 
 }
 
