@@ -618,6 +618,7 @@ function authenticateProfile(){
 				document.querySelector("#myTableId").value='';
 				clearTable();
 				closeTablesFromProfileBasedTable();
+				document.querySelector("#logInBtn").style.display="none";
 
 
 
@@ -1027,6 +1028,8 @@ function logout(){
 	document.querySelector("#bodyHideId").style.display="none";
 	document.querySelector("#logInZone").style.display="block";
 	document.querySelector("#logInHeaderZone").style.display="block";
+	document.querySelector("#logInBtn").style.display="inline-block";
+
 }
 
 
