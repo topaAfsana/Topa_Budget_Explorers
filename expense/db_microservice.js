@@ -1,5 +1,7 @@
 
-
+window.onload = function() {
+  getCurrentDay();
+};
 var tbltop=`<table class="dbTable">
 				<tr><th>Item</th><th>Date</th><th>Title</th><th>Amount</th><th class="chk"></th></tr>`;
 var tbl;
@@ -662,7 +664,10 @@ function showTablesFromProfileBasedTable() {
 	document.querySelector("#showprofTableId").style.display='none';
 
 
-		var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+		// var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+				var myProfName=document.querySelector("#userId").innerHTML;
+
+		alert(myProfName);
 		var getTablesFromProfileBasedTableurl= host+'/get_tables_from_profile_based_table';
 		var xmlhttp_getTablesFromProfileBasedTable= new XMLHttpRequest();
 		var param="profileName="+myProfName+"";
@@ -1001,6 +1006,44 @@ function logout(){
 	document.querySelector("#logInHeaderZone").style.display="block";
 
 }
+
+
+
+// // 9.
+// 	function getCurrentDay(){
+// 		var today = new Date();
+// 		// var dd = String(today.getDate()).padStart(2, '0');
+// 		var dd = String(today.getDay()).padStart(2, '0');
+
+// 		var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+// 		var yyyy = today.getFullYear();
+
+// 		var today = mm + '/' + dd + '/' + yyyy;
+// 		alert(today)
+// 			return today;}
+
+
+
+
+
+			
+
+
+
+	function getCurrentDay(){
+		const today = new Date()
+		var date = String(today.getDate()).padStart(2, '0');
+		var year = today.getFullYear();
+		var monthName=today.toLocaleString('default', { month: 'long' });
+		var DayName=today.toLocaleDateString('default', { weekday: 'long' });
+
+		var dateIs= DayName+', '+date+' '+monthName+','+year;
+		// alert(dateIs);
+		document.querySelector("#currentDayId").innerHTML=dateIs;
+}
+
+
+
 
 
 
