@@ -373,3 +373,20 @@ footer{
 }
 
 
+
+#profSetBody{
+	border: 10px solid teal;
+	padding: 20px;
+	margin: 20px;
+	margin-top: 200px;
+}
+
+#userId{
+	margin-top: 10px;
+	padding: 10px;
+}
+
+#profName{
+	margin-top: -20px;
+}
+

@@ -11,12 +11,37 @@
 
 
 
+<!-- C) PRFILE SETTINGS PAGE -->
 
+<div id="profileSettingsZone" style="display:none;" >
+  <!-- PROFILE SETTINGS HEADER ZONE-->
+<div id="profHeaderZone">
+<div id="header" >
+  <h4 id="headerTextId">PROFILE SETTINGS PAGE</h4>
+ <ul> <li><a id='cancelProfSettingsId'  onclick="cancelProfSettings()">Expense Page</a></li></ul>
+</div>
+</div>
+<!-- PROFILE SETTINGS HEADER ZONE-->
+<div id="profSetBody">
+  <h4>UPDATE PASSWORD</h4>
+  <form>
+  <!-- <label>Profile Name: </label> <input type="text" placeholder="Ex: Enter your Profile "id="myProfileId"></input>
+ <br></br> -->
+  <label> Password: </label> <input type="text" placeholder="Your New password"id="myNewPassId"></input>
+  <!-- <button type="button"  onclick="updateProfPass()"><label class='formButtons'>Change Password</label></button> -->
+  <li><a onclick="updateProfPass()">Change Password</a></li>
+  <li><a onclick="cancelProfSettings()">Cancel</a></li>
+</form>
+</div>
+
+</div>
+
+<!-- PRFILE SETTINGS PAGE -->
 
 
 
 <!-- A)LOG IN ZONE -->
-<!-- 1. HEADER ZONE-->
+<!-- 1. LOG IN HEADER ZONE-->
 <div id="logInHeaderZone">
 <div id="header" >
   <h4 id="headerTextId">LOG IN PAGE</h4>
@@ -24,7 +49,7 @@
  <ul> <li><a id="howToLink" href="../howto.html">How to use this feature</a></li></ul>
 </div>
 </div>
-<!-- 1. HEADER ZONE-->
+<!-- 1. LOG IN HEADER ZONE-->
 <div id=logInZone>
   <h4>Please Log in</h4>
   <form>
@@ -44,7 +69,7 @@
 
 
 <!--B)EXPENSE PAGE ZONE -->
-<div id="hideId" style="display:none;">
+<div id="bodyHideId" style="display:none;">
 
 
 
@@ -53,9 +78,12 @@
   <h4 id="headerTextId">Expense Check</h4>
  <ul> <li><a id="homeLink" href="../index.html">Home</a></li></ul>
  <ul> <li><a id="howToLink" href="../howto.html">How to use this feature</a></li></ul>
- <div id="profName" style="display:inline-block;">PROFILE:  <h4 id="userId"  style="display:inline-block;"></h4></div>
+ <div id="profName" style="display:inline-block;">PROFILE:  <li><a id="userId"  style="display:inline-block;" onclick="goProfileSettings()"></a></li></div>
 </div>
 <!-- 1. HEADER ZONE-->
+
+
+
 
 
 
@@ -96,8 +124,8 @@
 <!-- 3. FORM ZONE-->
 <div id ="formZone">
 <h3>Expense Form</h3>
-<!--   <h6 id='clearBtnId' onclick="clearTableField()">Clear</h6>
- --><form>
+<!--   <h6 id='clearBtnId' onclick="clearTableField()">Clear</h6>-->
+ <form>
   <label>Table Name: </label> <input type="text" placeholder="Ex: yourname_month "id="myTableId"></input>
    <button type="button" onclick="validateTableFromProfileBasedTable()"><label class='formButtons'>Find Table</label></button>
   <button type="button" onclick="createTable()"><label class='formButtons'>Create Table</label></button>
