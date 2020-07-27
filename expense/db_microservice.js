@@ -716,7 +716,9 @@ function closeTablesFromProfileBasedTable() {
 //19. VALIDATE QUERIED TABLE NAME IN PROFILE BASED TABLE AND SHOW RECORD IF FOUND OTHERWISE DONT SHOW
 // //find table from profile table
 function validateTableFromProfileBasedTable() {
-		var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+		// var myProfName=document.querySelector("#myProfileId").value.toUpperCase();
+		var myProfName=document.querySelector("#userId").innerHTML;
+
 		var myQuerytable= document.querySelector("#myTableId").value.toUpperCase();
 		var validateTablesFromProfileBasedTableurl= host+'/validate_table_from_profile_based_table';
 		var xmlhttp_validareTablesFromProfileBasedTable= new XMLHttpRequest();
