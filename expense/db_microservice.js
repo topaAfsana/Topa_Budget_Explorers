@@ -609,6 +609,9 @@ function authenticateProfile(){
 				document.querySelector("#logInHeaderZone").style.display="none";
 				document.querySelector("#bodyHideId").style.display="block";
 				document.querySelector("#userId").innerHTML= logInValue;
+				document.querySelector("#myProfileId").value='';
+				document.querySelector("#myPassId").value='';
+
 				}else{alert("User Not found,Please Register to Log in");}
 			}}
 	 		xmlhttp_authenticateProfile.open("GET",authenticateProfileUrl+"?"+param,true);
@@ -991,6 +994,14 @@ function updateProfPass(){
 
 
 }
+
+function logout(){
+	document.querySelector("#bodyHideId").style.display="none";
+	document.querySelector("#logInZone").style.display="block";
+	document.querySelector("#logInHeaderZone").style.display="block";
+
+}
+
 
 
 
