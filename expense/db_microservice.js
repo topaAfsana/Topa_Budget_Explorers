@@ -616,6 +616,9 @@ function authenticateProfile(){
 				document.querySelector("#myProfileId").value='';
 				document.querySelector("#myPassId").value='';
 				document.querySelector("#myTableId").value='';
+				document.querySelector("#titleId").value='';
+	 			document.querySelector("#amountId").value='';
+				document.querySelector("#dateId").value='';
 				clearTable();
 				closeTablesFromProfileBasedTable();
 				document.querySelector("#logInBtn").style.display="none";
