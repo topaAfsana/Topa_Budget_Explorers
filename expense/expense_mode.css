@@ -400,10 +400,10 @@ footer{
 	height: 20px;
 	padding: 2px;
 	text-align: center;
-	background-color: white;
+	background-color: teal;
 	border-radius: 3px;
-	color: teal;
-	border: 1px solid teal;
+	color: white;
+	border: 1px solid green;
 	font-size: 15px;
 	display: inline-block;
 	margin-left: -5px;
