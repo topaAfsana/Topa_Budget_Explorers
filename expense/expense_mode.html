@@ -123,9 +123,10 @@
 
 <!-- 3. FORM ZONE-->
 <div id ="formZone">
-<h3>Expense Form</h3>
+<h3>Expense Form <button id="collapsId" class="collapsButton" onclick="collapseExpenseForm()" style="display:inline-block;">^</button> <button id="expandId" class="collapsButton"  onclick="expandExpenseForm()" style="display:none;">v</button></h3>
+
 <!--   <h6 id='clearBtnId' onclick="clearTableField()">Clear</h6>-->
- <form>
+ <form id="expenseForm">
   <label>Table Name: </label> <input type="text" placeholder="Ex: yourname_month "id="myTableId"></input>
    <button type="button" onclick="validateTableFromProfileBasedTable()"><label class='formButtons'>Find Table</label></button>
   <button type="button" onclick="createTable()"><label class='formButtons'>Create Table</label></button>

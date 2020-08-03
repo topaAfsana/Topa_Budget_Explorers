@@ -1053,6 +1053,20 @@ function logout(){
 }
 
 
+ function collapseExpenseForm(){
+ 	document.querySelector("#expenseForm").style.display='none';
+ 	document.querySelector("#expandId").style.display='inline-block';
+ 	document.querySelector("#collapsId").style.display='none';
+ 	
+ }
+ function expandExpenseForm(){
+ 	document.querySelector("#expenseForm").style.display='inline-block';
+ 	document.querySelector("#collapsId").style.display='inline-block';
+ 	 	document.querySelector("#expandId").style.display='none';
+
+ }
+
+
 
 
 
