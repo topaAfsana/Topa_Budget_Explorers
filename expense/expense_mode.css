@@ -18,9 +18,7 @@ button{
 }
 .formButtons{
 	text-align: center;
-		font-size: 28px;
-
-}
+		font-size: 28px;}
 
 
 
@@ -394,4 +392,19 @@ footer{
 #currentDayZone{
 	float: right;
 	margin-top: -30px;
+}
+
+
+.collapsButton{
+	width: 15px;
+	height: 20px;
+	padding: 2px;
+	text-align: center;
+	background-color: white;
+	border-radius: 3px;
+	color: teal;
+	border: 1px solid teal;
+	font-size: 15px;
+	display: inline-block;
+	margin-left: -5px;
 }
