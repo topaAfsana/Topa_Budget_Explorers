@@ -100,6 +100,7 @@ function findTable(){
 	document.querySelector("#dashboardTextTotal").innerHTML='';
 	document.querySelector("#dashboardBodylastUpdate").innerHTML ='';
 	document.querySelector("#dashboardBodyTableName").innerHTML ='';
+	document.querySelector("#dashboardTextGroupTotal").innerHTML='';
 	}
 
 
@@ -320,6 +321,7 @@ function editRow(id){
  	document.getElementById("saveId").style.display="inline-block";
  	document.getElementById("deleteId").style.display="inline-block";
  	document.getElementById("cancelId").style.display="inline-block";
+ 	document.getElementById("groupId").style.display="none";
 
 
 	var date=document.getElementById("date_col_row"+id+"");
@@ -433,10 +435,11 @@ function updateRecord(){
 	 		updateDateOn(myTable,today);
 	 		getupdatedDate(myTable);
 	 		// ===
-	 		document.getElementById("editId").style.display="block";
+	 		document.getElementById("editId").style.display="inline-block";
  			document.getElementById("saveId").style.display="none";
  			document.getElementById("deleteId").style.display="none";
  			document.getElementById("cancelId").style.display="none";
+ 			document.getElementById("groupId").style.display="inline-block";
 	 		}
 	 	else{alert("Failed to Update Item,please enter all required value")}
 	}
@@ -473,7 +476,8 @@ function deleteRow(){
 	 		updateDateOn(myTable,today);
 	 		getupdatedDate(myTable);
 	 		// ==
-	 		document.getElementById("editId").style.display="block";
+	 		document.getElementById("editId").style.display="inline-block";
+	 		document.getElementById("groupId").style.display="inline-block";
  			document.getElementById("saveId").style.display="none";
  			document.getElementById("deleteId").style.display="none";
  			document.getElementById("cancelId").style.display="none";
@@ -491,7 +495,8 @@ var x = confirm("Are you sure you want to delete this table?");
 	 	}
 
 	function cancelEdit(){
-		document.getElementById("editId").style.display="block";
+		document.getElementById("editId").style.display="inline-block";
+		document.getElementById("groupId").style.display="inline-block";
  			document.getElementById("saveId").style.display="none";
  			document.getElementById("deleteId").style.display="none";
  			document.getElementById("cancelId").style.display="none";
@@ -501,11 +506,14 @@ var x = confirm("Are you sure you want to delete this table?");
 
 // 20.
 function displayEditOptions(){
-	 		document.getElementById("editId").style.display="block";
+	 		document.getElementById("editId").style.display="inline-block";
+	 		document.getElementById("groupId").style.display="inline-block";
 	 	}
 
 function hideEditOptions(){
 	 		document.getElementById("editId").style.display="none";
+	 		document.getElementById("groupId").style.display="none";
+
 	 	}
 
 //TABLE RECORDS EDIT OPTIONS-END
@@ -1067,6 +1075,41 @@ function logout(){
  }
 
 
+ function getSelectedCheckboxIds() {
+    const checkboxes = document.querySelectorAll('input[class="chk"]:checked');
+    let ids = [];
+    checkboxes.forEach((checkbox) => {
+        ids.push(checkbox.getAttribute("id"));
+    });
+return ids; }
+
+
+function groupSum(){
+	var ids = getSelectedCheckboxIds();
+	var fetch_sum=0;
+	ids.forEach((id) => {
+        var current_amount=document.getElementById("amount_col_row"+id+"").innerHTML;
+        var amount=Number(current_amount);
+        fetch_sum+=amount;
+    });
+    var sum=Number(fetch_sum).toFixed(2);
+// alert("SUM IS: "+sum);
+var groupName1 = prompt("Please enter your Group name")
+var groupName=toTitleCase(groupName1);
+
+document.querySelector("#dashboardTextGroupTotal").innerHTML="Total expense of "+groupName +": "+ sum;
+
+}
+
+
+function toTitleCase(str) {
+        return str.replace(
+            /\w\S*/g,
+            function(txt) {
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            }
+        );
+    }
 
 
 
