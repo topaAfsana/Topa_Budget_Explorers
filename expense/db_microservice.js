@@ -1096,8 +1096,8 @@ function groupSum(){
 // alert("SUM IS: "+sum);
 var groupName1 = prompt("Please enter your Group name")
 var groupName=toTitleCase(groupName1);
-
-document.querySelector("#dashboardTextGroupTotal").innerHTML="Total expense of "+groupName +": "+ sum;
+showRecords();
+document.querySelector("#dashboardTextGroupTotal").innerHTML="Total "+groupName +": "+ sum;
 
 }
 
