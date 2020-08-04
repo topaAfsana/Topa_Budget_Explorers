@@ -6,10 +6,10 @@ var tbltop=`<table class="dbTable">
 				<tr><th>Item</th><th>Date</th><th>Title</th><th>Amount</th><th class="chk"></th></tr>`;
 var tbl;
 
-// var host="http://localhost:8080";
+var host="http://localhost:8080";
 // var host="https://192.168.0.14:8443";
 // var host="https://52.91.249.153:8443";
-var host="http://52.91.249.153:8080";
+// var host="http://52.91.249.153:8080";
 
 
 //1.
@@ -1096,8 +1096,8 @@ function groupSum(){
 // alert("SUM IS: "+sum);
 var groupName1 = prompt("Please enter your Group name")
 var groupName=toTitleCase(groupName1);
-
-document.querySelector("#dashboardTextGroupTotal").innerHTML="Total expense of "+groupName +": "+ sum;
+showRecords();
+document.querySelector("#dashboardTextGroupTotal").innerHTML="Total "+groupName +": "+ sum;
 
 }
 
