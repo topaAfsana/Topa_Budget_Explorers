@@ -113,7 +113,7 @@ margin-top: 10px;}
 	border: 10px solid gray;
 	margin: 20px;
 	width: 90%;
-	height: 250px;
+	height: 330px;
 
 
 }
@@ -407,4 +407,13 @@ footer{
 	font-size: 15px;
 	display: inline-block;
 	margin-left: -5px;
+}
+
+
+#dashboardTextTotal{
+	color: red;
+}
+
+#dashboardTextGroupTotal{
+	color: purple;
 }
