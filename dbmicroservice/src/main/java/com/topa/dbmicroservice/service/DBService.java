@@ -199,7 +199,7 @@ public class DBService {
     public String authenticateProfileService(String profileName,String pass) throws ClassNotFoundException, SQLException{
         Connection con=createDBConnection();
         Statement stmt = con.createStatement();
-        String query = "SELECT count(id) FROM `TOPADB`.`USERS_TABLE` where profileName=\""+profileName+"\" And pass=\""+pass+"\"";
+        String query = "SELECT count(id) FROM `TOPADB`.`USERS_TABLE` where profileName=\""+profileName+"\" And c=\""+pass+"\"";
         ResultSet rs = stmt.executeQuery(query);
         while (rs.next()) {
             int rowNum=rs.getInt(1);
